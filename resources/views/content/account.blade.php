@@ -6,7 +6,7 @@
     @elseif(session()->has('error'))
         {{session()->get('fail')}}
     @endif
-<example-component></example-component>
+
     <table class="table table-bordered">
         <h1>Мои задачи</h1>
 
@@ -42,7 +42,7 @@
                 <td style="border-bottom: 2px solid black; border-right: 1px solid black">{{ $task->key }}</td>
             </tr>
         @empty
-            <td colspan="4">данные отсутсвтуют</td>
+            <td colspan="4">данные отсутствуют</td>
     @endforelse
     {{$myTasks->links()}}
 

@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Good;
 use App\Models\PublishedGood;
 
 class PublishedGoodController extends Controller
 {
 
-    public function index()
+    public function siteIndex()
     {
-        //
+        $publishedGoods = PublishedGood::all();
+        return view('content/siteGoods', ['publishedGoods' => $publishedGoods]);
     }
 
     public function parserIndex()
@@ -27,6 +27,12 @@ class PublishedGoodController extends Controller
     {
         $publishedGood = PublishedGood::findOrFail($id);
         return view('content/oneGood', ['publishedGood' => $publishedGood]);
+    }
+
+    public function siteOneGood(int $id)
+    {
+        $publishedGood = PublishedGood::findOrFail($id);
+        return view('content/siteOneGood', ['publishedGood' => $publishedGood]);
     }
 
     public function createGood()
@@ -50,7 +56,7 @@ class PublishedGoodController extends Controller
         //
     }
 
-    public function destroy($id)
+    public function destroy(int $id)
     {
         //
     }

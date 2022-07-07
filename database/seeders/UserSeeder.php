@@ -19,15 +19,15 @@ class UserSeeder extends Seeder
     {
         $users = [
             [
-                'name' => 'Kirill',
-                'email' => 'kirill@mail.ru',
+                'name' => 'Ivan',
+                'email' => 'ivan@mail.ru',
                 'email_verified_at' => now(),
                 'password' => Hash::make('12345678'), // password
                 'remember_token' => Str::random(10),
             ],
             [
-                'name' => 'Kostya',
-                'email' => 'kostya@mail.ru',
+                'name' => 'Maria',
+                'email' => 'maria@mail.ru',
                 'email_verified_at' => now(),
                 'password' => Hash::make('12345678'), // password
                 'remember_token' => Str::random(10),

@@ -6,5 +6,7 @@
         <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{{ route('create') }}">Создать задачу</a>
         <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{{ route('goods') }}">Результаты парсинга</a>
         <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{{ route('showPublishedGoods') }}">Опубликованные товары</a>
+        <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{{ route('users') }}">Пользователи</a>
+        <a class="list-group-item list-group-item-action list-group-item-light p-3" href="{{ route('siteIndex') }}">Сторона пользователя</a>
     </div>
 </div>

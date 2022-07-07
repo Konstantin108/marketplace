@@ -1,4 +1,4 @@
-@extends('layouts.main')
+@extends('layouts.site')
 @section('content')
 
 
@@ -18,6 +18,10 @@
         <th style="border: 2px solid black">size</th>
         <th style="border: 2px solid black">sale</th>
         <th style="border: 2px solid black">img</th>
+
+
+
+
     </tr>
     </thead>
     <tbody>
@@ -36,12 +40,18 @@
         <td style="border-bottom: 2px solid black; border-right: 1px solid black">{{ $publishedGood->size }}</td>
         <td style="border-bottom: 2px solid black; border-right: 1px solid black">{{ $publishedGood->sale }}</td>
         <td style="border-bottom: 2px solid black; border-right: 1px solid black">{{ $publishedGood->img }}</td>
+
+
+
     </tr>
     </tbody>
+
 </table>
+
+
 {{--<a href="{{route('edit', ['id' => $publishedGood->id])}}">Редактировать</a>--}}
 {{--<a href="{{ route('delete', ['id' => $publishedGood->id]) }}">Удалить</a>--}}
-<a href="{{route('showPublishedGoods')}}">Назад</a>
+<a href="{{route('siteIndex')}}">Назад</a>
 
 
 @endsection

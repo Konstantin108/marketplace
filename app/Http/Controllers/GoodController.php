@@ -3,9 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Good;
-use App\Models\Number;
 use App\Models\PublishedGood;
-use App\Models\Vehicle;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -46,8 +44,6 @@ class GoodController extends Controller
      */
     public function delete(int $id): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
     {
-//        $vehicle = (new Vehicle())->getVehicleById($id);
-//        return view('show', ['vehicle' => $vehicle]);
         $good = Good::findOrFail($id);
         $good->delete();
         $goods = Good::select()->get();
@@ -62,8 +58,6 @@ class GoodController extends Controller
      */
     public function showGood(int $id): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
     {
-//        $vehicle = (new Vehicle())->getVehicleById($id);
-//        return view('show', ['vehicle' => $vehicle]);
         $good = Good::findOrFail($id);
         return view('content/show', ['good' => $good]);
     }
@@ -161,7 +155,7 @@ class GoodController extends Controller
      * @param int $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, $id): \Illuminate\Http\RedirectResponse
+    public function update(Request $request, int $id): \Illuminate\Http\RedirectResponse
     {
         $data = $request->only([
             'table_id',

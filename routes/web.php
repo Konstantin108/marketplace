@@ -3,9 +3,10 @@
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\GoodController;
 use App\Http\Controllers\ParserController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PublishedGoodController;
 use App\Http\Controllers\TaskController;
-use \App\Http\Controllers\UserController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,113 +20,151 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+//Роуты для авторизованных пользователей
 Route::group(['middleware' => 'auth'], function () {
 
-    //Методы для работы с тасками и пользователями
+//Роуты для админов
+    Route::group(['middleware' => 'admin'], function () {
 
-    Route::get('/', AccountController::class)
-        ->name('myTasks');
+        //Роуты для работы с тасками и пользователями
+        Route::get('/create', [TaskController::class, 'create'])
+            ->name('create');
 
-    Route::get('/myTasks/{userId}', AccountController::class)
-        ->where('userId', '\d+')
-        ->name('myTasks');
+        Route::get('/myTasks', AccountController::class);
 
-    Route::get('/index/{filter}', [TaskController::class, 'index'])
-        ->where('filter', '\d+')
-        ->name('index');
+        Route::get('/myTasks/{userId}', AccountController::class)
+            ->where('userId', '\d+')
+            ->name('myTasks');
 
-    Route::get('/filterTasks/{filter}', [TaskController::class, 'filterTasks'])
-        ->where('filter', '\d+')
-        ->name('filterTasks');
+        Route::get('/index/{filter}', [TaskController::class, 'index'])
+            ->where('filter', '\d+')
+            ->name('index');
 
-    Route::get('/create', [TaskController::class, 'create'])
-        ->name('create');
+        Route::get('/filterTasks/{filter}', [TaskController::class, 'filterTasks'])
+            ->where('filter', '\d+')
+            ->name('filterTasks');
 
-    Route::post('/store', [TaskController::class, 'store'])
-        ->name('store');
+        Route::post('/store', [TaskController::class, 'store'])
+            ->name('store');
 
-    Route::get('show/{id}/{link}/{filter}', [TaskController::class, 'show'])
-        ->where('id', '\d+')
-        ->where('link', '\d+')
-        ->where('filter', '\d+')
-        ->name('show');
+        Route::get('show/{id}/{link}/{filter}', [TaskController::class, 'show'])
+            ->where('id', '\d+')
+            ->where('link', '\d+')
+            ->where('filter', '\d+')
+            ->name('show');
 
-    Route::get('back/{link}/{filter}', [TaskController::class, 'back'])
-        ->where('link', '\d+')
-        ->where('filter', '\d+')
-        ->name('back');
+        Route::get('back/{link}/{filter}', [TaskController::class, 'back'])
+            ->where('link', '\d+')
+            ->where('filter', '\d+')
+            ->name('back');
 
-    Route::get('delete/{id}/{link}/{filter}', [TaskController::class, 'delete'])
-        ->where('id', '\d+')
-        ->where('link', '\d+')
-        ->where('filter', '\d+')
-        ->name('delete');
+        Route::get('delete/{id}/{link}/{filter}', [TaskController::class, 'delete'])
+            ->where('id', '\d+')
+            ->where('link', '\d+')
+            ->where('filter', '\d+')
+            ->name('delete');
 
-    Route::put('taskEdit/{id}/{link}/{filter}', [TaskController::class, 'taskEdit'])
-        ->where('id', '\d+')
-        ->where('link', '\d+')
-        ->where('filter', '\d+')
-        ->name('taskEdit');
+        Route::put('taskEdit/{id}/{link}/{filter}', [TaskController::class, 'taskEdit'])
+            ->where('id', '\d+')
+            ->where('link', '\d+')
+            ->where('filter', '\d+')
+            ->name('taskEdit');
 
-    Route::get('destroy/{id}/{link}/{filter}', [TaskController::class, 'destroy'])
-        ->where('id', '\d+')
-        ->where('link', '\d+')
-        ->where('filter', '\d+')
-        ->name('destroy');
+        Route::get('destroy/{id}/{link}/{filter}', [TaskController::class, 'destroy'])
+            ->where('id', '\d+')
+            ->where('link', '\d+')
+            ->where('filter', '\d+')
+            ->name('destroy');
 
-    //Методы парсинга
+        //Роуты парсинга
+        Route::get('/parsing', ParserController::class)
+            ->name('parsing');;
 
-    Route::get('/parsing', ParserController::class)
-        ->name('parsing');;
+        Route::get('parserIndex', [GoodController::class, 'parserIndex'])
+            ->name('parserIndex');
 
-    Route::get('parserIndex', [GoodController::class, 'parserIndex'])
-        ->name('parserIndex');
+        //Роуты для товаров
+        Route::get('goods', [GoodController::class, 'index'])
+            ->name('goods');
 
-    //Методы для товаров
+        Route::get('showGood/{id}', [GoodController::class, 'showGood'])
+            ->where('id', '\d+')
+            ->name('showGood');
 
-    Route::get('goods', [GoodController::class, 'index'])
-        ->name('goods');
+        Route::get('showGood/delete/{id}', [GoodController::class, 'delete'])
+            ->where('id', '\d+')
+            ->name('delete');
 
-    Route::get('showGood/{id}', [GoodController::class, 'showGood'])
-        ->where('id', '\d+')
-        ->name('showGood');
+        Route::get('edit/{id}', [GoodController::class, 'edit'])
+            ->where('id', '\d+')
+            ->name('edit');
 
-    Route::get('showGood/delete/{id}', [GoodController::class, 'delete'])
-        ->where('id', '\d+')
-        ->name('delete');
+        Route::get(uri: 'goods/createGood', action: [GoodController::class, 'createGood'])
+            ->name('createGood');
 
-    Route::get('edit/{id}', [GoodController::class, 'edit'])
-        ->where('id', '\d+')
-        ->name('edit');
+        Route::post('/storeGood', [GoodController::class, 'storeGood'])
+            ->name('storeGood');
 
-    Route::get(uri: 'goods/createGood', action: [GoodController::class, 'createGood'])
-        ->name('createGood');
+        Route::post('update/{id}', [GoodController::class, 'update'])
+            ->where('id', '\d+')
+            ->name('update');
 
-    Route::post('/storeGood', [GoodController::class, 'storeGood'])
-        ->name('storeGood');
+        //Роуты для опубликованных товаров
+        Route::get('publishedGoods', [GoodController::class, 'publishedGoods'])
+            ->name('publishedGoods');
 
-    Route::post('update/{id}', [GoodController::class, 'update'])
-        ->where('id', '\d+')
-        ->name('update');
+        Route::get('showPublishedGoods', [GoodController::class, 'showPublishedGoods'])
+            ->name('showPublishedGoods');
 
-    //Методы для опубликованных товаров
+        Route::get('oneGood/{id}', [PublishedGoodController::class, 'oneGood'])
+            ->where('id', '\d+')
+            ->name('oneGood');
 
-    Route::get('publishedGoods', [GoodController::class, 'publishedGoods'])
-        ->name('publishedGoods');
+        //Роуты для работы с пользователями
+        Route::get('users', [UserController::class, 'users'])
+            ->name('users');
 
-    Route::get('showPublishedGoods', [GoodController::class, 'showPublishedGoods'])
-        ->name('showPublishedGoods');
+        Route::get('user/{id}', [UserController::class, 'user'])
+            ->where('id', '\d+')
+            ->name('user');
 
-    Route::get('oneGood/{id}', [PublishedGoodController::class, 'oneGood'])
-        ->where('id', '\d+')
-        ->name('oneGood');
+        Route::get('deleteUser/{id}', [UserController::class, 'deleteUser'])
+            ->where('id', '\d+')
+            ->name('deleteUser');
 
-    //Методы для пользователей
+        Route::get('editUser/{id}', [UserController::class, 'editUser'])
+            ->where('id', '\d+')
+            ->name('editUser');
 
-    Route::get('users', [UserController::class, 'users'])
-        ->name('users');
+        Route::get('createUser', [UserController::class, 'createUser'])
+            ->name('createUser');
 
+        Route::post('updateUser/{id}', [UserController::class, 'updateUser'])
+            ->where('id', '\d+')
+            ->name('updateUser');
+
+        Route::post('storeUser', [UserController::class, 'storeUser'])
+            ->name('storeUser');
+    });
+
+//Роуты для авторизованных посетителей
+    Route::get('myProfile', [ProfileController::class, 'myProfile'])
+        ->name('myProfile');
+
+    Route::get('editProfile', [ProfileController::class, 'editProfile'])
+        ->name('editProfile');
+
+    Route::post('updateProfile', [ProfileController::class, 'updateProfile'])
+        ->name('updateProfile');
 });
+
+//Роуты для неавторизованных посетителей
+Route::get('/', [PublishedGoodController::class, 'siteIndex'])
+    ->name('siteIndex');
+
+Route::get('siteOneGood/{id}', [PublishedGoodController::class, 'siteOneGood'])
+    ->where('id', '\d+')
+    ->name('siteOneGood');
 
 Auth::routes();
 

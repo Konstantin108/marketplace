@@ -1,11 +1,8 @@
-@extends('layouts.main')
+@extends('layouts.site')
 @section('content')
 
     <table class="table table-bordered">
-        <h1>СПИСОК ОПУБЛИКОВАННЫХ ТОВАРОВ</h1>
-{{--        <a href="{{route('parsing')}}">ПАРСИНГ</a>--}}
-{{--        <div style="width: 30px; height: 30px;"></div>--}}
-{{--        <a href="{{route('createGood')}}">Добавить</a>--}}
+        <h1>СПИСОК ТОВАРОВ</h1>
         <thead style="border-bottom: 2px solid black; border-right: 1px solid black">
         <tr style="border: 2px solid black">
             <th style="border: 2px solid black">#ID</th>
@@ -28,7 +25,7 @@
             <tr style="border-bottom: 2px solid black; border-right: 1px solid black">
                 <td style="border-bottom: 2px solid black; border-right: 1px solid black">{{ $publishedGood->id }}</td>
                 <td style="border-bottom: 2px solid black; border-right: 1px solid black">
-                    <a href="{{route('oneGood', ['id' => $publishedGood->id])}}">
+                    <a href="{{route('siteOneGood', ['id' => $publishedGood->id])}}">
                         перейти
                     </a>
                 </td>

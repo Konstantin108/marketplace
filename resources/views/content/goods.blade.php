@@ -2,7 +2,7 @@
 @section('content')
 
     <table class="table table-bordered">
-        <h1>Список всех автомобилей</h1>
+        <h1>Список всех товаров</h1>
         <div style="display: flex; justify-content: space-between; width: 200px;">
             <a href="{{route('parsing')}}">ПАРСИНГ</a>
             <a href="{{route('publishedGoods')}}">ОПУБЛИКОВАТЬ</a>
@@ -50,8 +50,7 @@
                 <td style="border-bottom: 2px solid black; border-right: 1px solid black">{{ $good->img }}</td>
             </tr>
         @empty
-            <td colspan="4">данные отсутсвтуют</td>
-            <h2>пожалуйста, выполните команду <i>php artisan myparser {path}</i></h2>
+            <td colspan="4">данные отсутствуют</td>
         @endforelse
         </tbody>
     </table>
