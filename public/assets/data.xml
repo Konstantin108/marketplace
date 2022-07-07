@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<goods>
+    <good>
+        <id>1323</id>
+        <name>Красная блузка</name>
+        <price>4990</price>
+        <info>Отличная блузка из легкой ткани</info>
+        <counter>1</counter>
+        <category>Футболки</category>
+        <brand>Адидас</brand>
+        <designer>Иван Смирнов</designer>
+        <size>XXL</size>
+        <sale>0</sale>
+        <img>no_img</img>
+    </good>
+    <good>
+        <id>12366</id>
+        <name>Серый свитер с начесом</name>
+        <price>5200</price>
+        <info>Свитер из шерсти</info>
+        <counter>1</counter>
+        <category>Свитера и трикотаж</category>
+        <brand>Лакост</brand>
+        <designer>Иван Смирнов</designer>
+        <size>XL</size>
+        <sale>1</sale>
+        <img>no_img</img>
+    </good>
+    <good>
+        <id>655</id>
+        <name>Большая сумка</name>
+        <price>7980</price>
+        <info>Отличная сумка, кожа, Италия</info>
+        <counter>1</counter>
+        <category>Сумки</category>
+        <brand>Рибок</brand>
+        <designer>Иван Смирнов</designer>
+        <size>L</size>
+        <sale>0</sale>
+        <img>no_img</img>
+    </good>
+    <good>
+        <id>3456</id>
+        <name>Товар 1</name>
+        <price>7990</price>
+        <info>Отличная сумка, кожа, Италия</info>
+        <counter>1</counter>
+        <category>Сумки</category>
+        <brand>Адидас</brand>
+        <designer>Иван Смирнов</designer>
+        <size>L</size>
+        <sale>0</sale>
+        <img>no_img</img>
+    </good>
+    <good>
+        <id>987</id>
+        <name>Товар 2</name>
+        <price>7990</price>
+        <info>Отличная сумка, кожа, Италия</info>
+        <counter>1</counter>
+        <category>Сумки</category>
+        <brand>Адидас</brand>
+        <designer>Иван Смирнов</designer>
+        <size>L</size>
+        <sale>0</sale>
+        <img>no_img</img>
+    </good>
+    <good>
+        <id>3244</id>
+        <name>Большая сумка из кожи</name>
+        <price>7990</price>
+        <info>Отличная сумка, кожа, Италия</info>
+        <counter>1</counter>
+        <category>Сумки</category>
+        <brand>Адидас</brand>
+        <designer>Иван Смирнов</designer>
+        <size>L</size>
+        <sale>0</sale>
+        <img>no_img</img>
+    </good>
+    <good>
+        <id>465</id>
+        <name>Большая сумка из кожи</name>
+        <price>7990</price>
+        <info>Отличная сумка, кожа, Италия</info>
+        <counter>1</counter>
+        <category>Сумки</category>
+        <brand>Адидас</brand>
+        <designer>Иван Смирнов</designer>
+        <size>L</size>
+        <sale>0</sale>
+        <img>no_img</img>
+    </good>
+    <good>
+        <id>345</id>
+        <name>Большая сумка из кожи</name>
+        <price>7990</price>
+        <info>Отличная сумка, кожа, Италия</info>
+        <counter>1</counter>
+        <category>Сумки</category>
+        <brand>Адидас</brand>
+        <designer>Иван Смирнов</designer>
+        <size>L</size>
+        <sale>0</sale>
+        <img>no_img</img>
+    </good>
+</goods>
