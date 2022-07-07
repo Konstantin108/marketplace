@@ -6,7 +6,7 @@
     @elseif(session()->has('error'))
         {{session()->get('fail')}}
     @endif
-
+<example-component></example-component>
     <table class="table table-bordered">
         <h1>Мои задачи</h1>
 
