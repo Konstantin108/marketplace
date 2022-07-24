@@ -1,6 +1,12 @@
 @extends('layouts.main')
 @section('content')
 
+    @if(session()->has('success'))
+        {{session()->get('success')}}
+    @elseif(session()->has('error'))
+        {{session()->get('fail')}}
+    @endif
+
     <table class="table table-bordered">
         <h1>Список всех товаров</h1>
         <div style="display: flex; justify-content: space-between; width: 200px;">
@@ -23,7 +29,7 @@
             <th style="border: 2px solid black">designer</th>
             <th style="border: 2px solid black">size</th>
             <th style="border: 2px solid black">sale</th>
-            <th style="border: 2px solid black">img</th>
+            <th style="border: 2px solid black; width: 60px;">img</th>
         </tr>
         </thead>
         <tbody>
@@ -47,7 +53,14 @@
                 <td style="border-bottom: 2px solid black; border-right: 1px solid black">{{ $good->designer }}</td>
                 <td style="border-bottom: 2px solid black; border-right: 1px solid black">{{ $good->size }}</td>
                 <td style="border-bottom: 2px solid black; border-right: 1px solid black">{{ $good->sale }}</td>
-                <td style="border-bottom: 2px solid black; border-right: 1px solid black">{{ $good->img }}</td>
+                <td style="width: 60px; border-bottom: 2px solid black; border-right: 1px solid black">
+                    @if($good->img)
+                        <img src="{{ \Storage::disk('public')->url( $good->img) }}" alt="avatar"
+                             style="width: 50px; border-radius: 50%">
+                    @else
+                        <img src="/img/no_photo.jpg" alt="avatar" style="width: 50px; border-radius: 50%">
+                    @endif
+                </td>
             </tr>
         @empty
             <td colspan="4">данные отсутствуют</td>

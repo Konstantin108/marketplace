@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\TaskEditRequest;
 use App\Http\Requests\TaskRequest;
 use App\Models\Task;
 use Illuminate\Http\Request;
@@ -37,7 +36,7 @@ class TaskController extends Controller
 
         $msg = '';
 
-        return view('content.tasksIndex', [
+        return view('content/tasks/tasksIndex', [
             'tasks' => $tasks,
             'msg' => $msg,
             'filter' => $filter
@@ -51,7 +50,7 @@ class TaskController extends Controller
      */
     public function create()
     {
-        return view('content.create-task');
+        return view('content/tasks/create-task');
     }
 
     /**
@@ -109,7 +108,7 @@ class TaskController extends Controller
             $task->save();
             $date = now();
             $msg = "${date} - задача принята в работу, статус обновлён";
-            return view('content.oneTask',
+            return view('content/tasks/oneTask',
                 [
                     'task' => $task,
                     'msg' => $msg,
@@ -117,7 +116,7 @@ class TaskController extends Controller
                     'filter' => $filter
                 ]);
         }
-        return view('content.oneTask',
+        return view('content/tasks/oneTask',
             [
                 'task' => $task,
                 'msg' => '',
@@ -132,16 +131,12 @@ class TaskController extends Controller
         $userId = Auth::user()->id;
         $commentValue = $request->input('comment');
         $data['comment'] = $commentValue;
-        $find = "ERROR: ";
-        $pos = strpos($commentValue, $find);
-        $error = 'задача выполнена';
-        if ($pos !== false) {
-            $error = "присутствует ошибка: {$commentValue}";
-            $data['status'] = 'ошибка';
-        } else {
+        {
             if ($request->input('status') == '1') {
                 $data['status'] = 'выполнена';
-            } else {
+            }elseif ($request->input('status') == '2'){
+                $data['status'] = 'ошибка';
+            }else {
                 $data['status'] = 'в работе';
             }
         }
@@ -150,10 +145,10 @@ class TaskController extends Controller
         if ($newStatus->save()) {
             if ($link == '1') {
                 return redirect()->route('index', ['filter' => $filter])
-                    ->with('success', "Статус задачи обновлен! {$error}");
+                    ->with('success', "Статус задачи обновлен!");
             } elseif ($link == '2') {
                 return redirect()->route('myTasks', ['userId' => $userId])
-                    ->with('success', "Статус задачи обновлен {$error}");
+                    ->with('success', "Статус задачи обновлен!");
             }
         }
         return back()
@@ -183,10 +178,10 @@ class TaskController extends Controller
         //
     }
 
-    public function delete($id, $link, $filter)
+    public function deleteTask($id, $link, $filter)
     {
         $task = Task::findOrFail($id);
-        return view('content.delete', [
+        return view('content/tasks/deleteTask', [
             'task' => $task,
             'link' => $link,
             'filter' => $filter
@@ -233,7 +228,7 @@ class TaskController extends Controller
                 }
             }
         }
-        return redirect()->route('delete',
+        return redirect()->route('deleteTask',
             [
                 'id' => $id,
                 'link' => $link,

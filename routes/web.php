@@ -26,7 +26,7 @@ Route::group(['middleware' => 'auth'], function () {
 //Роуты для админов
     Route::group(['middleware' => 'admin'], function () {
 
-        //Роуты для работы с тасками и пользователями
+        //Роуты для работы с тасками
         Route::get('/create', [TaskController::class, 'create'])
             ->name('create');
 
@@ -58,11 +58,11 @@ Route::group(['middleware' => 'auth'], function () {
             ->where('filter', '\d+')
             ->name('back');
 
-        Route::get('delete/{id}/{link}/{filter}', [TaskController::class, 'delete'])
+        Route::get('deleteTask/{id}/{link}/{filter}', [TaskController::class, 'deleteTask'])
             ->where('id', '\d+')
             ->where('link', '\d+')
             ->where('filter', '\d+')
-            ->name('delete');
+            ->name('deleteTask');
 
         Route::put('taskEdit/{id}/{link}/{filter}', [TaskController::class, 'taskEdit'])
             ->where('id', '\d+')
@@ -80,9 +80,6 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/parsing', ParserController::class)
             ->name('parsing');;
 
-        Route::get('parserIndex', [GoodController::class, 'parserIndex'])
-            ->name('parserIndex');
-
         //Роуты для товаров
         Route::get('goods', [GoodController::class, 'index'])
             ->name('goods');
@@ -91,9 +88,9 @@ Route::group(['middleware' => 'auth'], function () {
             ->where('id', '\d+')
             ->name('showGood');
 
-        Route::get('showGood/delete/{id}', [GoodController::class, 'delete'])
+        Route::get('deleteGood/{id}', [GoodController::class, 'deleteGood'])
             ->where('id', '\d+')
-            ->name('delete');
+            ->name('deleteGood');
 
         Route::get('edit/{id}', [GoodController::class, 'edit'])
             ->where('id', '\d+')

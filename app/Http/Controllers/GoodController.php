@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\GoodRequest;
 use App\Models\Good;
 use App\Models\PublishedGood;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class GoodController extends Controller
@@ -17,23 +17,13 @@ class GoodController extends Controller
     public function index(): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
     {
         $goods = Good::select()->get();
-        return view('content/goods', ['goods' => $goods]);
+        return view('content/goods/goods', ['goods' => $goods]);
     }
 
     public function showPublishedGoods(): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
     {
         $publishedGoods = PublishedGood::select()->get();
-        return view('content/publishedGoods', ['publishedGoods' => $publishedGoods]);
-    }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
-     */
-    public function parserIndex(): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
-    {
-        return view('content/parserIndex');
+        return view('content/publishedGoods/publishedGoods', ['publishedGoods' => $publishedGoods]);
     }
 
     /**
@@ -42,12 +32,12 @@ class GoodController extends Controller
      * @param int $id
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function delete(int $id): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
+    public function deleteGood(int $id): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
     {
         $good = Good::findOrFail($id);
         $good->delete();
         $goods = Good::select()->get();
-        return view('content/goods', ['goods' => $goods]);
+        return view('content/goods/goods', ['goods' => $goods]);
     }
 
     /**
@@ -59,7 +49,7 @@ class GoodController extends Controller
     public function showGood(int $id): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
     {
         $good = Good::findOrFail($id);
-        return view('content/show', ['good' => $good]);
+        return view('content/goods/show', ['good' => $good]);
     }
 
     /**
@@ -69,32 +59,39 @@ class GoodController extends Controller
      */
     public function createGood(): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
     {
-        return view('content/create');
+        return view('content/goods/create');
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param GoodRequest $request
+     * @param int $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function storeGood(Request $request): \Illuminate\Http\RedirectResponse
+    public function storeGood(GoodRequest $request): \Illuminate\Http\RedirectResponse
     {
-        $data = $request->only([
-            'table_id',
-            'name',
-            'price',
-            'info',
-            'counter',
-            'category',
-            'brand',
-            'designer',
-            'size',
-            'sale',
-            'img'
-        ]);
-        Good::create($data);
-        return redirect()->route('goods');
+        $data = $request->validated();
+        $data['price'] = $request->get('price');
+        $data['info'] = $request->get('info');
+        $data['counter'] = $request->get('counter');
+        $data['brand'] = $request->get('brand');
+        $data['designer'] = $request->get('designer');
+        $data['img'] = $request->get('img');
+        if ($request->hasFile('img')) {
+            $image = $request->file('img');
+            $originalExt = $image->getClientOriginalExtension();
+            $fileName = uniqid();
+            $fileLink = $image->storeAs('goods', $fileName . '.' . $originalExt, 'public');
+            $data['img'] = $fileLink;
+        }
+        $good = Good::create($data);
+        if ($good) {
+            return redirect()->route('goods')
+                ->with('success', 'Данные о товаре добавлены');
+        }
+        return back()
+            ->with('error', 'Произошла ошибка');
     }
 
     public function publishedGoods()
@@ -132,7 +129,7 @@ class GoodController extends Controller
             }
         }
         $publishedGoods = PublishedGood::select()->get();
-        return view('content/publishedGoods', ['publishedGoods' => $publishedGoods]);
+        return view('content/publishedGoods/publishedGoods', ['publishedGoods' => $publishedGoods]);
 //        return redirect()->route('publishedGoods', ['publishedGoods' => $publishedGoods]);
     }
 
@@ -145,36 +142,40 @@ class GoodController extends Controller
     public function edit(int $id): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
     {
         $good = Good::findOrFail($id);
-        return view('content/edit', ['good' => $good]);
+        return view('content/goods/edit', ['good' => $good]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param GoodRequest $request
      * @param int $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, int $id): \Illuminate\Http\RedirectResponse
+    public function update(GoodRequest $request, int $id): \Illuminate\Http\RedirectResponse
     {
-        $data = $request->only([
-            'table_id',
-            'name',
-            'price',
-            'info',
-            'counter',
-            'category',
-            'brand',
-            'designer',
-            'size',
-            'sale',
-            'img'
-        ]);
+        $data = $request->validated();
+        $data['price'] = $request->get('price');
+        $data['info'] = $request->get('info');
+        $data['counter'] = $request->get('counter');
+        $data['brand'] = $request->get('brand');
+        $data['designer'] = $request->get('designer');
+        $data['img'] = $request->get('img');
+        if ($request->hasFile('img')) {
+            $image = $request->file('img');
+            $originalExt = $image->getClientOriginalExtension();
+            $fileName = uniqid();
+            $fileLink = $image->storeAs('goods', $fileName . '.' . $originalExt, 'public');
+            $data['img'] = $fileLink;
+        }
         $good = Good::findOrFail($id);
         $good = $good->fill($data)->save();
-//        if ($good) {
-            return redirect()->route('showGood', ['id' => $id]);
-//        }
+        if ($good) {
+            return redirect()->route('showGood', ['id' => $id])
+                ->with('success', 'Данные о товаре обновлены');
+        }
+        return back()
+            ->with('error', 'Произошла ошибка');
     }
 
     /**
@@ -185,6 +186,6 @@ class GoodController extends Controller
      */
 //    public function destroy($id): \Illuminate\Http\Response
 //    {
-        //
+    //
 //    }
 }

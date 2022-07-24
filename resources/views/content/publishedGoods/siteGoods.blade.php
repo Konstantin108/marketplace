@@ -1,11 +1,8 @@
-@extends('layouts.main')
+@extends('layouts.site')
 @section('content')
 
     <table class="table table-bordered">
-        <h1>СПИСОК ОПУБЛИКОВАННЫХ ТОВАРОВ</h1>
-{{--        <a href="{{route('parsing')}}">ПАРСИНГ</a>--}}
-{{--        <div style="width: 30px; height: 30px;"></div>--}}
-{{--        <a href="{{route('createGood')}}">Добавить</a>--}}
+        <h1>СПИСОК ТОВАРОВ</h1>
         <thead style="border-bottom: 2px solid black; border-right: 1px solid black">
         <tr style="border: 2px solid black">
             <th style="border: 2px solid black">#ID</th>
@@ -20,7 +17,7 @@
             <th style="border: 2px solid black">designer</th>
             <th style="border: 2px solid black">size</th>
             <th style="border: 2px solid black">sale</th>
-            <th style="border: 2px solid black">img</th>
+            <th style="border: 2px solid black; width: 60px;">img</th>
         </tr>
         </thead>
         <tbody>
@@ -28,7 +25,7 @@
             <tr style="border-bottom: 2px solid black; border-right: 1px solid black">
                 <td style="border-bottom: 2px solid black; border-right: 1px solid black">{{ $publishedGood->id }}</td>
                 <td style="border-bottom: 2px solid black; border-right: 1px solid black">
-                    <a href="{{route('oneGood', ['id' => $publishedGood->id])}}">
+                    <a href="{{route('siteOneGood', ['id' => $publishedGood->id])}}">
                         перейти
                     </a>
                 </td>
@@ -44,7 +41,14 @@
                 <td style="border-bottom: 2px solid black; border-right: 1px solid black">{{ $publishedGood->designer }}</td>
                 <td style="border-bottom: 2px solid black; border-right: 1px solid black">{{ $publishedGood->size }}</td>
                 <td style="border-bottom: 2px solid black; border-right: 1px solid black">{{ $publishedGood->sale }}</td>
-                <td style="border-bottom: 2px solid black; border-right: 1px solid black">{{ $publishedGood->img }}</td>
+                <td style="width: 60px; border-bottom: 2px solid black; border-right: 1px solid black">
+                    @if($publishedGood->img)
+                        <img src="{{ \Storage::disk('public')->url( $publishedGood->img) }}" alt="avatar"
+                             style="width: 50px; border-radius: 50%">
+                    @else
+                        <img src="/img/no_photo.jpg" alt="avatar" style="width: 50px; border-radius: 50%">
+                    @endif
+                </td>
             </tr>
         @empty
             <td colspan="4">данные отсутствуют</td>

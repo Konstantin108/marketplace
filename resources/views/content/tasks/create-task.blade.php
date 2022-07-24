@@ -7,12 +7,13 @@
         @csrf
         @method('POST')
         <h1>Дайте имя новой задаче</h1>
-        <div style="display: flex">
+        <div style="display: flex;">
             <div>
                 <input
                     type="text"
                     id="task_name"
                     name="task_name"
+                    style="width: 560px;"
                     @error('task_name')
                     style="border: red 1px solid;"
                     @enderror
@@ -43,7 +44,6 @@
                 ">
             Сохранить
         </button>
-
     </form>
 
 @endsection

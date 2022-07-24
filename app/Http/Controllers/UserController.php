@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateUserRequest;
+use App\Http\Requests\UpdateUserRequest;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
@@ -16,7 +17,7 @@ class UserController extends Controller
     public function users()
     {
         $users = User::all();
-        return view('content/users', ['users' => $users]);
+        return view('content/users/users', ['users' => $users]);
     }
 
     /**
@@ -26,26 +27,33 @@ class UserController extends Controller
      */
     public function createUser()
     {
-        return view('content/createUser');
+        return view('content/users/createUser');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param CreateUserRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function storeUser(Request $request)
+    public function storeUser(CreateUserRequest $request)
     {
-        $data = $request->only([
-            'name',
-            'password',
-            'email',
-            'is_admin'
-        ]);
+        $data = $request->validated();
         $data['password'] = Hash::make($data['password']);
-        User::create($data);
-        return redirect()->route('users');
+        if ($request->hasFile('avatar')) {
+            $image = $request->file('avatar');
+            $originalExt = $image->getClientOriginalExtension();
+            $fileName = uniqid();
+            $fileLink = $image->storeAs('users', $fileName . '.' . $originalExt, 'public');
+            $data['avatar'] = $fileLink;
+        }
+        $user = User::create($data);
+        if ($user) {
+            return redirect()->route('users')
+                ->with('success', 'Пользователь добавлен');
+        }
+        return back()
+            ->with('error', 'Произошла ошибка');
     }
 
     /**
@@ -57,7 +65,7 @@ class UserController extends Controller
     public function user(int $id)
     {
         $user = User::findOrFail($id);
-        return view('content/user', ['user' => $user]);
+        return view('content/users/user', ['user' => $user]);
     }
 
     /**
@@ -69,28 +77,35 @@ class UserController extends Controller
     public function editUser(int $id)
     {
         $user = User::findOrFail($id);
-        return view('content/editUser', ['user' => $user]);
+        return view('content/users/editUser', ['user' => $user]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param UpdateUserRequest $request
      * @param int $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function updateUser(Request $request, int $id)
+    public function updateUser(UpdateUserRequest $request, int $id)
     {
-        $data = $request->only([
-            'name',
-            'password',
-            'email',
-            'is_admin'
-        ]);
+        $data = $request->validated();
         $data['password'] = Hash::make($data['password']);
+        if ($request->hasFile('avatar')) {
+            $image = $request->file('avatar');
+            $originalExt = $image->getClientOriginalExtension();
+            $fileName = uniqid();
+            $fileLink = $image->storeAs('users', $fileName . '.' . $originalExt, 'public');
+            $data['avatar'] = $fileLink;
+        }
         $user = User::findOrFail($id);
         $user = $user->fill($data)->save();
-        return redirect()->route('user', ['id' => $id]);
+        if ($user) {
+            return redirect()->route('user', ['id' => $id])
+                ->with('success', 'Данные пользователя обновлены');
+        }
+        return back()
+            ->with('error', 'Произошла ошибка');
     }
 
     /**
@@ -104,6 +119,6 @@ class UserController extends Controller
         $user = User::findOrFail($id);
         $user->delete();
         $users = User::select()->get();
-        return view('content/users', ['users' => $users]);
+        return view('content/users/users', ['users' => $users]);
     }
 }

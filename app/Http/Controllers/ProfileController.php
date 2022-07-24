@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ProfileRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -18,7 +19,7 @@ class ProfileController extends Controller
     {
         $id = Auth::user()->id;
         $user = User::findOrFail($id);
-        return view('content/myProfile', ['user' => $user]);
+        return view('content/profile/myProfile', ['user' => $user]);
     }
 
     /**
@@ -63,28 +64,36 @@ class ProfileController extends Controller
     {
         $id = Auth::user()->id;
         $user = User::findOrFail($id);
-        return view('content/editProfile', ['user' => $user]);
+        return view('content/profile/editProfile', ['user' => $user]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param ProfileRequest $request
      * @param int $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function updateProfile(Request $request)
+    public function updateProfile(ProfileRequest $request)
     {
         $id = Auth::user()->id;
-        $data = $request->only([
-            'name',
-            'password',
-            'email'
-        ]);
+        $data = $request->validated();
         $data['password'] = Hash::make($data['password']);
+        if ($request->hasFile('avatar')) {
+            $image = $request->file('avatar');
+            $originalExt = $image->getClientOriginalExtension();
+            $fileName = uniqid();
+            $fileLink = $image->storeAs('users', $fileName . '.' . $originalExt, 'public');
+            $data['avatar'] = $fileLink;
+        }
         $user = User::findOrFail($id);
-        $user = $user->fill($data)->save();
-        return redirect()->route('myProfile', ['id' => $id]);
+        $user->fill($data)->save();
+        if ($user) {
+            return redirect()->route('myProfile', ['id' => $id])
+                ->with('success', 'Данные пользователя обновлены');
+        }
+        return back()
+            ->with('error', 'Произошла ошибка');
     }
 
     /**

@@ -14,7 +14,7 @@ class ParserController extends Controller
     {
         $service->setLink(asset('/assets/data.xml'))->parsing();
         $goods = Good::select()->get();
-        return view('content/goods', ['goods' => $goods]);
+        return view('content/goods/goods', ['goods' => $goods]);
 //        $this->vehicles = $vehicles;
 //        return $this->vehicles;
     }

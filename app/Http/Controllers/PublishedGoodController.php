@@ -10,7 +10,7 @@ class PublishedGoodController extends Controller
     public function siteIndex()
     {
         $publishedGoods = PublishedGood::all();
-        return view('content/siteGoods', ['publishedGoods' => $publishedGoods]);
+        return view('content/publishedGoods/siteGoods', ['publishedGoods' => $publishedGoods]);
     }
 
     public function parserIndex()
@@ -26,13 +26,13 @@ class PublishedGoodController extends Controller
     public function oneGood(int $id)
     {
         $publishedGood = PublishedGood::findOrFail($id);
-        return view('content/oneGood', ['publishedGood' => $publishedGood]);
+        return view('content/publishedGoods/oneGood', ['publishedGood' => $publishedGood]);
     }
 
     public function siteOneGood(int $id)
     {
         $publishedGood = PublishedGood::findOrFail($id);
-        return view('content/siteOneGood', ['publishedGood' => $publishedGood]);
+        return view('content/publishedGoods/siteOneGood', ['publishedGood' => $publishedGood]);
     }
 
     public function createGood()

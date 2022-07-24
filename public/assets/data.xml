@@ -11,7 +11,7 @@
         <designer>Иван Смирнов</designer>
         <size>XXL</size>
         <sale>0</sale>
-        <img>no_img</img>
+        <img>goods/product_content7.jpg</img>
     </good>
     <good>
         <id>12366</id>
@@ -24,7 +24,7 @@
         <designer>Иван Смирнов</designer>
         <size>XL</size>
         <sale>1</sale>
-        <img>no_img</img>
+        <img>goods/product_content8.jpg</img>
     </good>
     <good>
         <id>655</id>
@@ -37,7 +37,7 @@
         <designer>Иван Смирнов</designer>
         <size>L</size>
         <sale>0</sale>
-        <img>no_img</img>
+        <img>goods/photo2.jpg</img>
     </good>
     <good>
         <id>3456</id>
@@ -50,7 +50,7 @@
         <designer>Иван Смирнов</designer>
         <size>L</size>
         <sale>0</sale>
-        <img>no_img</img>
+        <img>goods/photo4.jpg</img>
     </good>
     <good>
         <id>987</id>
@@ -63,7 +63,7 @@
         <designer>Иван Смирнов</designer>
         <size>L</size>
         <sale>0</sale>
-        <img>no_img</img>
+        <img>goods/photo5.jpg</img>
     </good>
     <good>
         <id>3244</id>
@@ -76,7 +76,7 @@
         <designer>Иван Смирнов</designer>
         <size>L</size>
         <sale>0</sale>
-        <img>no_img</img>
+        <img>goods/product__content3.jpg</img>
     </good>
     <good>
         <id>465</id>
@@ -89,7 +89,7 @@
         <designer>Иван Смирнов</designer>
         <size>L</size>
         <sale>0</sale>
-        <img>no_img</img>
+        <img>goods/product_content1.jpg</img>
     </good>
     <good>
         <id>345</id>
@@ -102,6 +102,6 @@
         <designer>Иван Смирнов</designer>
         <size>L</size>
         <sale>0</sale>
-        <img>no_img</img>
+        <img>goods/product_content2.jpg</img>
     </good>
 </goods>

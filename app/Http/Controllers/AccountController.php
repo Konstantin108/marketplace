@@ -21,7 +21,7 @@ class AccountController extends Controller
             ->paginate(10);
         $msg = '';
 
-        return view('content.account', [
+        return view('content/tasks/account', [
             'userId' => $userId,
             'name' => $name,
             'myTasks' => $myTasks,
