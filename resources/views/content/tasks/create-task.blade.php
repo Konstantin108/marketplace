@@ -6,7 +6,7 @@
     >
         @csrf
         @method('POST')
-        <h1>Дайте имя новой задаче</h1>
+        <h1>Задайте имя новой задаче</h1>
         <div style="display: flex;">
             <div>
                 <input

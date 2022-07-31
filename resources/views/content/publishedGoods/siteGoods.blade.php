@@ -2,7 +2,7 @@
 @section('content')
 
     <table class="table table-bordered">
-        <h1>СПИСОК ТОВАРОВ</h1>
+        <h1>Список товаров</h1>
         <thead style="border-bottom: 2px solid black; border-right: 1px solid black">
         <tr style="border: 2px solid black">
             <th style="border: 2px solid black">#ID</th>
@@ -25,7 +25,11 @@
             <tr style="border-bottom: 2px solid black; border-right: 1px solid black">
                 <td style="border-bottom: 2px solid black; border-right: 1px solid black">{{ $publishedGood->id }}</td>
                 <td style="border-bottom: 2px solid black; border-right: 1px solid black">
-                    <a href="{{route('siteOneGood', ['id' => $publishedGood->id])}}">
+                    <a href="{{route('siteOneGood', [
+                                                    'id' => $publishedGood->id,
+                                                    'tableId' => $publishedGood->table_id,
+                                                    'link' => 1
+                                                    ])}}">
                         перейти
                     </a>
                 </td>

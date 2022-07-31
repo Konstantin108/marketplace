@@ -9,7 +9,11 @@ use Illuminate\Support\Facades\Auth;
 
 class TaskController extends Controller
 {
-    public function index($filter): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
+    /**
+     * @param int $filter
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
+     */
+    public function index(int $filter): \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
     {
         if ($filter != 0) {
             switch ($filter) {
@@ -97,9 +101,10 @@ class TaskController extends Controller
      *
      * @param int $id
      * @param string $msg
+     * @param int $filter
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function show(int $id, $link, $filter): \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+    public function show(int $id, int $link, int $filter): \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
     {
         $task = Task::findOrFail($id);
         $msg = '';
@@ -125,7 +130,14 @@ class TaskController extends Controller
             ]);
     }
 
-    public function taskEdit(Request $request, $id, $link, $filter)
+    /**
+     * @param Request $request
+     * @param int $id
+     * @param int $link
+     * @param int $filter
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function taskEdit(Request $request, int $id, int $link, int $filter)
     {
         $task = Task::findOrFail($id);
         $userId = Auth::user()->id;
@@ -134,9 +146,9 @@ class TaskController extends Controller
         {
             if ($request->input('status') == '1') {
                 $data['status'] = 'выполнена';
-            }elseif ($request->input('status') == '2'){
+            } elseif ($request->input('status') == '2') {
                 $data['status'] = 'ошибка';
-            }else {
+            } else {
                 $data['status'] = 'в работе';
             }
         }
@@ -161,7 +173,7 @@ class TaskController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(int $id)
     {
         //
     }
@@ -173,12 +185,18 @@ class TaskController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, int $id)
     {
         //
     }
 
-    public function deleteTask($id, $link, $filter)
+    /**
+     * @param int $id
+     * @param int $link
+     * @param int $filter
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function deleteTask(int $id, int $link, int $filter)
     {
         $task = Task::findOrFail($id);
         return view('content/tasks/deleteTask', [
@@ -188,7 +206,12 @@ class TaskController extends Controller
         ]);
     }
 
-    public function back($link, $filter)
+    /**
+     * @param int $link
+     * @param int $filter
+     * @return \Illuminate\Http\RedirectResponse|void
+     */
+    public function back(int $link, int $filter)
     {
         $userId = Auth::user()->id;
 
@@ -203,9 +226,11 @@ class TaskController extends Controller
      * Remove the specified resource from storage.
      *
      * @param int $id
+     * @param int $filter
+     * @param int $link
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy(int $id, $link, $filter)
+    public function destroy(int $id, int $link, int $filter)
     {
         $userId = Auth::user()->id;
         $task = Task::findOrFail($id);

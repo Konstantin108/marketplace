@@ -1,6 +1,12 @@
 @extends('layouts.site')
 @section('content')
 
+    @if(session()->has('success'))
+        {{session()->get('success')}}
+    @elseif(session()->has('error'))
+        {{session()->get('fail')}}
+    @endif
+
     <table class="table table-bordered">
         <h1>Артикул №{{$publishedGood->table_id}}</h1>
         <thead style="border: 2px solid black">
@@ -28,7 +34,7 @@
             <td style="border-bottom: 2px solid black; border-right: 1px solid black">{{ $publishedGood->name }}</td>
             <td style="border-bottom: 2px solid black; border-right: 1px solid black">{{ $publishedGood->price }}</td>
             <td style="border-bottom: 2px solid black; border-right: 1px solid black">{{ $publishedGood->info }}</td>
-            <td style="border-bottom: 2px solid black; border-right: 1px solid black">{{ $publishedGood->counter }}</td>
+            <td style="border-bottom: 2px solid black; border-right: 1px solid black">{{ $count }}</td>
             <td style="border-bottom: 2px solid black; border-right: 1px solid black">{{ $publishedGood->category }}</td>
             <td style="border-bottom: 2px solid black; border-right: 1px solid black">{{ $publishedGood->brand }}</td>
             <td style="border-bottom: 2px solid black; border-right: 1px solid black">{{ $publishedGood->designer }}</td>
@@ -45,8 +51,20 @@
         </tr>
         </tbody>
     </table>
-    {{--<a href="{{route('edit', ['id' => $publishedGood->id])}}">Редактировать</a>--}}
-    {{--<a href="{{ route('delete', ['id' => $publishedGood->id]) }}">Удалить</a>--}}
-    <a href="{{route('siteIndex')}}">Назад</a>
+    @if(Auth::check())
+    <a href="{{route('addToBasket', [
+                                    'id' => $publishedGood->id,
+                                    'tableId' => $publishedGood->table_id,
+                                    'link' => 1
+                                    ])}}">Добавить в корзину</a>
+    <a href="{{route('delFromBasket', [
+                                    'id' => $publishedGood->id,
+                                    'tableId' => $publishedGood->table_id,
+                                    'link' => 1
+                                    ])}}">Убрать из корзины</a>
+    @else
+        <a href="#">Авторизуйтесь чтобы купить</a>
+    @endif
+    <a href="{{route('backForSite', [ 'link' => $link])}}">Назад</a>
 
 @endsection

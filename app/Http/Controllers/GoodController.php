@@ -66,7 +66,6 @@ class GoodController extends Controller
      * Update the specified resource in storage.
      *
      * @param GoodRequest $request
-     * @param int $id
      * @return \Illuminate\Http\RedirectResponse
      */
     public function storeGood(GoodRequest $request): \Illuminate\Http\RedirectResponse
@@ -129,8 +128,7 @@ class GoodController extends Controller
             }
         }
         $publishedGoods = PublishedGood::select()->get();
-        return view('content/publishedGoods/publishedGoods', ['publishedGoods' => $publishedGoods]);
-//        return redirect()->route('publishedGoods', ['publishedGoods' => $publishedGoods]);
+        return redirect()->route('showPublishedGoods', ['publishedGoods' => $publishedGoods]);
     }
 
     /**
@@ -177,15 +175,4 @@ class GoodController extends Controller
         return back()
             ->with('error', 'Произошла ошибка');
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param int $id
-     * @return \Illuminate\Http\Response
-     */
-//    public function destroy($id): \Illuminate\Http\Response
-//    {
-    //
-//    }
 }

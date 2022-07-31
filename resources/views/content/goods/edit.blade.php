@@ -20,6 +20,7 @@
                             @if($good->img)
                                 <img src="{{ \Storage::disk('public')->url( $good->img) }}" alt="img"
                                      style="width: 200px;">
+                                <input type="hidden" id="img" name="img" value="{{ $good->img }}">
                             @else
                                 <img src="/img/no_photo.jpg" alt="img" style="width: 200px;">
                             @endif
