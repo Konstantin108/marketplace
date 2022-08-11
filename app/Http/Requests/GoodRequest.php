@@ -40,6 +40,9 @@ class GoodRequest extends FormRequest
             'sale' => [
                 'required'
             ],
+            'sex' => [
+                'required'
+            ],
         ];
     }
 

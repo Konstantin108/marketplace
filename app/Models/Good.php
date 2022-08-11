@@ -28,6 +28,8 @@ class Good extends Model
         'designer',
         'size',
         'sale',
-        'img'
+        'img',
+        'price_quantity',
+        'sex'
     ];
 }

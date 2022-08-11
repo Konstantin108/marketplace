@@ -7,17 +7,17 @@
     <thead style="border: 2px solid black">
     <tr style="border: 2px solid black">
         <th style="border: 2px solid black">#ID</th>
-        <th style="border: 2px solid black">table_id</th>
-        <th style="border: 2px solid black">name</th>
-        <th style="border: 2px solid black">price</th>
-        <th style="border: 2px solid black">info</th>
-        <th style="border: 2px solid black">counter</th>
-        <th style="border: 2px solid black">category</th>
-        <th style="border: 2px solid black">brand</th>
-        <th style="border: 2px solid black">designer</th>
-        <th style="border: 2px solid black">size</th>
-        <th style="border: 2px solid black">sale</th>
-        <th style="border: 2px solid black; width: 60px;">img</th>
+        <th style="border: 2px solid black">ID товара</th>
+        <th style="border: 2px solid black">Наименование</th>
+        <th style="border: 2px solid black">Цена</th>
+        <th style="border: 2px solid black">Информация</th>
+        <th style="border: 2px solid black">Пол</th>
+        <th style="border: 2px solid black">Категория</th>
+        <th style="border: 2px solid black">Бренд</th>
+        <th style="border: 2px solid black">Дизайнер</th>
+        <th style="border: 2px solid black">Размер</th>
+        <th style="border: 2px solid black">Акция</th>
+        <th style="border: 2px solid black; width: 60px;">Фото</th>
     </tr>
     </thead>
     <tbody>
@@ -27,9 +27,9 @@
             {{ $publishedGood->table_id }}
         </td>
         <td style="border-bottom: 2px solid black; border-right: 1px solid black">{{ $publishedGood->name }}</td>
-        <td style="border-bottom: 2px solid black; border-right: 1px solid black">{{ $publishedGood->price }}</td>
+        <td style="border-bottom: 2px solid black; border-right: 1px solid black">{{ $publishedGood->price }}&#8381;</td>
         <td style="border-bottom: 2px solid black; border-right: 1px solid black">{{ $publishedGood->info }}</td>
-        <td style="border-bottom: 2px solid black; border-right: 1px solid black">{{ $publishedGood->counter }}</td>
+        <td style="border-bottom: 2px solid black; border-right: 1px solid black">{{ $publishedGood->sex }}</td>
         <td style="border-bottom: 2px solid black; border-right: 1px solid black">{{ $publishedGood->category }}</td>
         <td style="border-bottom: 2px solid black; border-right: 1px solid black">{{ $publishedGood->brand }}</td>
         <td style="border-bottom: 2px solid black; border-right: 1px solid black">{{ $publishedGood->designer }}</td>

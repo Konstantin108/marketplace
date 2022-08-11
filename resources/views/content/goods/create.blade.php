@@ -11,12 +11,12 @@
                 <form method="post" action="{{ route('storeGood') }}" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
-                        <label for="img">img</label>
+                        <label for="img">Изображение товара</label>
                         <input type="file" id="img" name="img" class="form-control" style="width: 500px;">
                     </div>
                     <div
                         style="display: flex; justify-content: space-between; width: 400px; border-bottom: 2px solid grey; margin-bottom: 2px;">
-                        <label for="table_id">table_id</label>
+                        <label for="table_id">ID товара</label>
                         <input type="number"
                                id="table_id"
                                name="table_id"
@@ -31,7 +31,7 @@
                     </div>
                     <div
                         style="display: flex; justify-content: space-between; width: 400px; border-bottom: 2px solid grey; margin-bottom: 2px;">
-                        <label for="name">name</label>
+                        <label for="name">Наименование товара</label>
                         <input type="text"
                                id="name"
                                name="name"
@@ -45,7 +45,7 @@
                         @endif
                     </div>
                     <div class="form-group">
-                        <label for="category">category</label>
+                        <label for="category">Категория товара</label>
                         <br>
                         <select
                             class="form-control"
@@ -106,7 +106,7 @@
                     </div>
                     <div
                         style="display: flex; justify-content: space-between; width: 400px; border-bottom: 2px solid grey; margin-bottom: 2px;">
-                        <label for="price">price</label>
+                        <label for="price">Цена в рублях</label>
                         <input type="text"
                                id="price"
                                name="price"
@@ -115,25 +115,45 @@
                     </div>
                     <div
                         style="display: flex; justify-content: space-between; width: 400px; border-bottom: 2px solid grey; margin-bottom: 2px;">
-                        <label for="info">info</label>
+                        <label for="info">Информация о товаре</label>
                         <input type="text"
                                id="info"
                                name="info"
                                class="form-control"
                                value="{{old('info')}}">
                     </div>
-                    <div
-                        style="display: flex; justify-content: space-between; width: 400px; border-bottom: 2px solid grey; margin-bottom: 2px;">
-                        <label for="counter">counter</label>
-                        <input type="text"
-                               id="counter"
-                               name="counter"
-                               class="form-control"
-                               value="{{old('counter')}}">
+                    <div class="form-group">
+                        <label for="sex">Пол</label>
+                        <br>
+                        <select
+                            class="form-control"
+                            id="sex"
+                            @error('sex')
+                            style="border: red 1px solid;"
+                            @enderror
+                            name="sex"
+                        >
+                            <option value="М">
+                                Для мужчин
+                            </option>
+                            <option value="Ж">
+                                Для женщин
+                            </option>
+                        </select>
+                        @if($errors->has('sex'))
+                            @foreach($errors->get('sex') as $error)
+                                <span
+                                    style="color: red;
+                                    height: 2px;width: 150px;
+                                    margin-left: 20px;">
+                                    {{ $error }}
+                                </span>
+                            @endforeach
+                        @endif
                     </div>
                     <div
                         style="display: flex; justify-content: space-between; width: 400px; border-bottom: 2px solid grey; margin-bottom: 2px;">
-                        <label for="brand">brand</label>
+                        <label for="brand">Бренд</label>
                         <input type="text"
                                id="brand"
                                name="brand"
@@ -142,7 +162,7 @@
                     </div>
                     <div
                         style="display: flex; justify-content: space-between; width: 400px; border-bottom: 2px solid grey; margin-bottom: 2px;">
-                        <label for="designer">designer</label>
+                        <label for="designer">Дизайнер</label>
                         <input type="text"
                                id="designer"
                                name="designer"
@@ -150,7 +170,7 @@
                                value="{{old('designer')}}">
                     </div>
                     <div class="form-group">
-                        <label for="size">size</label>
+                        <label for="size">Размер</label>
                         <br>
                         <select
                             class="form-control"
@@ -195,7 +215,7 @@
                         @endif
                     </div>
                     <div class="form-group">
-                        <label for="sale">sale</label>
+                        <label for="sale">Акция</label>
                         <br>
                         <select
                             class="form-control"

@@ -13,17 +13,19 @@
         <tr style="border: 2px solid black">
             <th style="border: 2px solid black">#ID</th>
             <th style="border: 2px solid black; color: blue">LINK</th>
-            <th style="border: 2px solid black">table_id</th>
-            <th style="border: 2px solid black">name</th>
-            <th style="border: 2px solid black">price</th>
-            <th style="border: 2px solid black">info</th>
-            <th style="border: 2px solid black">counter</th>
-            <th style="border: 2px solid black">category</th>
-            <th style="border: 2px solid black">brand</th>
-            <th style="border: 2px solid black">designer</th>
-            <th style="border: 2px solid black">size</th>
-            <th style="border: 2px solid black">sale</th>
-            <th style="border: 2px solid black; width: 60px;">img</th>
+            <th style="border: 2px solid black">ID товара</th>
+            <th style="border: 2px solid black">Наименование</th>
+            <th style="border: 2px solid black">Цена</th>
+            <th style="border: 2px solid black">Количество</th>
+            <th style="border: 2px solid black">Общая стоимость</th>
+            <th style="border: 2px solid black">Информация</th>
+            <th style="border: 2px solid black">Пол</th>
+            <th style="border: 2px solid black">Категория</th>
+            <th style="border: 2px solid black">Бренд</th>
+            <th style="border: 2px solid black">Дизайнер</th>
+            <th style="border: 2px solid black">Размер</th>
+            <th style="border: 2px solid black">Акция</th>
+            <th style="border: 2px solid black; width: 60px;">Фото</th>
         </tr>
         </thead>
         <tbody>
@@ -43,8 +45,9 @@
                     {{ $goodInBasket->table_id }}
                 </td>
                 <td style="border-bottom: 2px solid black; border-right: 1px solid black">{{ $goodInBasket->name }}</td>
-                <td style="border-bottom: 2px solid black; border-right: 1px solid black">{{ $goodInBasket->price }}</td>
-                <td style="border-bottom: 2px solid black; border-right: 1px solid black">{{ $goodInBasket->info }}</td>
+                <td style="border-bottom: 2px solid black; border-right: 1px solid black">{{ $goodInBasket->price }}
+                    &#8381;
+                </td>
                 <td style="border-bottom: 2px solid black; border-right: 1px solid black">
                     <a href="{{route('delFromBasket',[
                                                       'id' => $goodInBasket->id,
@@ -53,7 +56,7 @@
                                                       ])}}">
                         <i class="fas fa-minus" style="cursor: pointer"></i>
                     </a>
-                    {{ $goodInBasket->counter }}
+                    {{ $goodInBasket->counter }}шт.
                     <a href="{{route('addToBasket', [
                                                      'id' => $goodInBasket->id,
                                                      'tableId' => $goodInBasket->table_id,
@@ -62,6 +65,11 @@
                         <i class="fas fa-plus" style="cursor: pointer"></i>
                     </a>
                 </td>
+                <td style="border-bottom: 2px solid black; border-right: 1px solid black">{{ $goodInBasket->price_quantity }}
+                    &#8381;
+                </td>
+                <td style="border-bottom: 2px solid black; border-right: 1px solid black">{{ $goodInBasket->info }}</td>
+                <td style="border-bottom: 2px solid black; border-right: 1px solid black">{{ $goodInBasket->sex }}</td>
                 <td style="border-bottom: 2px solid black; border-right: 1px solid black">{{ $goodInBasket->category }}</td>
                 <td style="border-bottom: 2px solid black; border-right: 1px solid black">{{ $goodInBasket->brand }}</td>
                 <td style="border-bottom: 2px solid black; border-right: 1px solid black">{{ $goodInBasket->designer }}</td>
@@ -81,5 +89,6 @@
         @endforelse
         </tbody>
     </table>
+    <h2>Всего товаров {{ $totalGoods }} на общую сумму {{ $sumOfBasket }}&#8381;</h2>
 
 @endsection

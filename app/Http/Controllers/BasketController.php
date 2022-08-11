@@ -98,6 +98,8 @@ class BasketController extends Controller
         $userId = Auth::user()->id;
         $arr = [];
         $goodsInBasket = [];
+        $sumOfBasket = [];
+        $totalGoods = [];
         $actualGoods = PublishedGood::all();
         foreach ($actualGoods as $actualGood) {
             $arr[] = $actualGood->table_id;
@@ -111,12 +113,22 @@ class BasketController extends Controller
                         ->value('id');
                     $thisGood = PublishedGood::findOrFail($idOFGood);
                     $thisGood->counter = count($item);
+                    $totalGoods[] = count($item);
+                    $sum = $thisGood->price * $thisGood->counter;
+                    $thisGood->price_quantity = $sum;
                     $goodsInBasket[] = $thisGood;
+                    $sumOfBasket[] = $sum;
                 }
             }
         }
+        $totalGoods = array_sum($totalGoods);
+        $sumOfBasket = array_sum($sumOfBasket);
         sort($goodsInBasket);
-        return view('content/publishedGoods/basket', ['goodsInBasket' => $goodsInBasket]);
+        return view('content/publishedGoods/basket', [
+            'goodsInBasket' => $goodsInBasket,
+            'sumOfBasket' => $sumOfBasket,
+            'totalGoods' => $totalGoods
+        ]);
     }
 
     /**
