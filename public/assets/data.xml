@@ -41,7 +41,7 @@
     </good>
     <good>
         <id>3456</id>
-        <name>Товар 1</name>
+        <name>Блузка мужская</name>
         <price>7990</price>
         <info>Отличная сумка, кожа, Италия</info>
         <counter>1</counter>
@@ -54,7 +54,7 @@
     </good>
     <good>
         <id>987</id>
-        <name>Товар 2</name>
+        <name>Рубашка женская</name>
         <price>7990</price>
         <info>Отличная сумка, кожа, Италия</info>
         <counter>1</counter>
@@ -67,8 +67,8 @@
     </good>
     <good>
         <id>3244</id>
-        <name>Большая сумка из кожи</name>
-        <price>7990</price>
+        <name>Большая сумка</name>
+        <price>2000</price>
         <info>Отличная сумка, кожа, Италия</info>
         <counter>1</counter>
         <category>Сумки</category>
@@ -81,7 +81,7 @@
     <good>
         <id>465</id>
         <name>Большая сумка из кожи</name>
-        <price>7990</price>
+        <price>5000</price>
         <info>Отличная сумка, кожа, Италия</info>
         <counter>1</counter>
         <category>Сумки</category>
