@@ -1,6 +1,12 @@
 @extends('layouts.site')
 @section('content')
 
+    @if(session()->has('success'))
+        {{session()->get('success')}}
+    @elseif(session()->has('error'))
+        {{session()->get('fail')}}
+    @endif
+
     <table class="table table-bordered">
         <h1>Список товаров</h1>
         <thead style="border-bottom: 2px solid black; border-right: 1px solid black">
@@ -37,7 +43,9 @@
                     {{ $publishedGood->table_id }}
                 </td>
                 <td style="border-bottom: 2px solid black; border-right: 1px solid black">{{ $publishedGood->name }}</td>
-                <td style="border-bottom: 2px solid black; border-right: 1px solid black">{{ $publishedGood->price }}&#8381;</td>
+                <td style="border-bottom: 2px solid black; border-right: 1px solid black">{{ $publishedGood->price }}
+                    &#8381;
+                </td>
                 <td style="border-bottom: 2px solid black; border-right: 1px solid black">{{ $publishedGood->info }}</td>
                 <td style="border-bottom: 2px solid black; border-right: 1px solid black">{{ $publishedGood->sex }}</td>
                 <td style="border-bottom: 2px solid black; border-right: 1px solid black">{{ $publishedGood->category }}</td>

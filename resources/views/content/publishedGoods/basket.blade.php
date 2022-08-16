@@ -90,5 +90,9 @@
         </tbody>
     </table>
     <h2>Всего товаров {{ $totalGoods }} на общую сумму {{ $sumOfBasket }}&#8381;</h2>
+    <a href="{{ route('sendOrder', [
+                                    'count' => $totalGoods,
+                                    'sum' => $sumOfBasket
+                                    ]) }}">оформить заказ</a>
 
 @endsection

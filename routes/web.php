@@ -171,6 +171,15 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('myBasket', [BasketController::class, 'myBasket'])
         ->name('myBasket');
+
+    Route::get('sendOrder/{count}/{sum}', [BasketController::class, 'sendOrder'])
+        ->where('count', '\d+')
+        ->where('sum', '\d+')
+        ->name('sendOrder');
+
+    Route::get('getOrder/{id}', [BasketController::class, 'getOrder'])
+        ->where('id', '\d+')
+        ->name('getOrder');
 });
 
 //Роуты для неавторизованных посетителей

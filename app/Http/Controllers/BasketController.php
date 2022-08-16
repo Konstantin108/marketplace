@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Order;
 use App\Models\PublishedGood;
+use App\Models\TestJsonOrder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -31,7 +33,6 @@ class BasketController extends Controller
                 return redirect()->route('myBasket')
                     ->with('success', 'Товар добавлен в корзину');
             }
-
         }
         return back()
             ->with('error', 'Произошла ошибка');
@@ -129,6 +130,43 @@ class BasketController extends Controller
             'sumOfBasket' => $sumOfBasket,
             'totalGoods' => $totalGoods
         ]);
+    }
+
+    /**
+     * @param Request $request
+     * @param Int $count
+     * @param Int $sum
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function sendOrder(Request $request, int $count, int $sum)
+    {
+        $userId = Auth::user()->id;
+        $goods = $request->session()->get(" $userId");
+        $request->session()->forget(" $userId");
+        $goods = json_encode($goods);
+        $data['user_id'] = $userId;
+        $data['count'] = $count;
+        $data['sum'] = $sum;
+        $data['goods'] = $goods;
+        Order::create($data);
+        if ($data) {
+            return redirect()->route('siteIndex')
+                ->with('success', 'Заказ оформлен');
+        }
+        return back()
+            ->with('error', 'Произошла ошибка');
+    }
+
+    /**
+     * @param int $id
+     * @return void
+     */
+    public function getOrder(int $id)
+    {
+        $id = 1;
+        $getOrder = TestJsonOrder::findOrFail($id);
+        $goodsInOrder = json_decode($getOrder['json_data']);
+        dd($goodsInOrder);
     }
 
     /**
