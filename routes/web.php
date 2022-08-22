@@ -3,6 +3,7 @@
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\BasketController;
 use App\Http\Controllers\GoodController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ParserController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PublishedGoodController;
@@ -172,28 +173,38 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('myBasket', [BasketController::class, 'myBasket'])
         ->name('myBasket');
 
+    //Роуты пользователя для работы с заказами
     Route::get('sendOrder/{count}/{sum}', [BasketController::class, 'sendOrder'])
         ->where('count', '\d+')
         ->where('sum', '\d+')
         ->name('sendOrder');
 
-    Route::get('getOrder/{id}', [BasketController::class, 'getOrder'])
+    Route::get('getThisOrder/{id}', [OrderController::class, 'getThisOrder'])
         ->where('id', '\d+')
-        ->name('getOrder');
+        ->name('getThisOrder');
+
+    Route::get('allMyOrders', [OrderController::class, 'allMyOrders'])
+        ->name('allMyOrders');
+
+    Route::post('updateOrderStatus/{id}', [OrderController::class, 'updateOrderStatus'])
+        ->where('id', '\d+')
+        ->name('updateOrderStatus');
 });
 
 //Роуты для неавторизованных посетителей
 Route::get('/', [PublishedGoodController::class, 'siteIndex'])
     ->name('siteIndex');
 
-Route::get('siteOneGood/{id}/{tableId}/{link}', [PublishedGoodController::class, 'siteOneGood'])
+Route::get('siteOneGood/{id}/{tableId}/{link}/{orderId}', [PublishedGoodController::class, 'siteOneGood'])
     ->where('id', '\d+')
     ->where('tableId', '\d+')
     ->where('link', '\d+')
+    ->where('orderId', '\d+')
     ->name('siteOneGood');
 
-Route::get('backForSite/{link}', [BasketController::class, 'backForSite'])
+Route::get('backForSite/{link}/{orderId}', [BasketController::class, 'backForSite'])
     ->where('link', '\d+')
+    ->where('orderId', '\d+')
     ->name('backForSite');
 
 //Роуты для работы с сессией для удобства пока в контроллере BasketController

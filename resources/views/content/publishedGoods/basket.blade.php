@@ -36,7 +36,8 @@
                     <a href="{{route('siteOneGood', [
                                                     'id' => $goodInBasket->id,
                                                     'tableId' => $goodInBasket->table_id,
-                                                    'link' => 2
+                                                    'link' => 2,
+                                                    'orderId' => 0
                                                     ])}}">
                         перейти
                     </a>

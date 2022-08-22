@@ -72,6 +72,6 @@
                                     'link' => 1
                                     ])}}">Авторизуйтесь чтобы купить</a>
     @endif
-    <a href="{{route('backForSite', [ 'link' => $link])}}">Назад</a>
+    <a href="{{route('backForSite', ['link' => $link, 'orderId' => $orderId])}}">Назад</a>
 
 @endsection

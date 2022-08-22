@@ -3,9 +3,6 @@
 
     <table class="table table-bordered">
         <h1>Список опубликованных товаров</h1>
-{{--        <a href="{{route('parsing')}}">ПАРСИНГ</a>--}}
-{{--        <div style="width: 30px; height: 30px;"></div>--}}
-{{--        <a href="{{route('createGood')}}">Добавить</a>--}}
         <thead style="border-bottom: 2px solid black; border-right: 1px solid black">
         <tr style="border: 2px solid black">
             <th style="border: 2px solid black">#ID</th>

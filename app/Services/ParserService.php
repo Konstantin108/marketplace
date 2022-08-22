@@ -29,7 +29,7 @@ class ParserService
         $xml = XmlParser::load($this->link);
         $data = $xml->parse([
             'goods' => [
-                'uses' => 'good[id,name,price,info,counter,category,brand,designer,size,sale,img]'
+                'uses' => 'good[id,name,price,info,counter,category,brand,designer,size,sale,img,sex]'
 
             ]
         ]);
@@ -54,7 +54,6 @@ class ParserService
         foreach ($numbers as $idOfElem) {
             $numbersIdArr[] = $idOfElem['number_id'];
         }
-
         foreach ($data as $elem) {
             if (is_array($elem)) {
                 foreach ($elem as $newElem) {
@@ -62,10 +61,8 @@ class ParserService
                         foreach ($newElem as $id => $valueId) {
                             if ($id === 'id') {
                                 if (!in_array($valueId, $goodsIdArr)) {
-
                                     foreach ($newElem as $key => $value) {
                                         if ($key === 'id') {
-
                                             $good = new Good();
                                             $good->table_id = $value;
                                         } elseif ($key === 'name') {
@@ -82,6 +79,8 @@ class ParserService
                                             $good->brand = $value;
                                         } elseif ($key === 'designer') {
                                             $good->designer = $value;
+                                        } elseif ($key === 'sex') {
+                                            $good->sex = $value;
                                         } elseif ($key === 'size') {
                                             $good->size = $value;
                                         } elseif ($key === 'sale') {
@@ -113,6 +112,8 @@ class ParserService
                                             $good->brand = $value;
                                         } elseif ($key === 'designer') {
                                             $good->designer = $value;
+                                        } elseif ($key === 'sex') {
+                                            $good->sex = $value;
                                         } elseif ($key === 'size') {
                                             $good->size = $value;
                                         } elseif ($key === 'sale') {

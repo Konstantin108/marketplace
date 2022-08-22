@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use App\Models\PublishedGood;
-use App\Models\TestJsonOrder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -27,7 +26,8 @@ class BasketController extends Controller
                 return redirect()->route('siteOneGood', [
                     'id' => $id,
                     'tableId' => $tableId,
-                    'link' => 1
+                    'link' => 1,
+                    'orderId' => 0
                 ])->with('success', 'Товар добавлен в корзину');
             } elseif ($link == 2) {
                 return redirect()->route('myBasket')
@@ -60,7 +60,8 @@ class BasketController extends Controller
                 return redirect()->route('siteOneGood', [
                     'id' => $id,
                     'tableId' => $tableId,
-                    'link' => 1
+                    'link' => 1,
+                    'orderId' => 0
                 ])->with('success', 'Товар удалён');
             } elseif ($link == 2) {
                 return redirect()->route('myBasket')
@@ -150,7 +151,7 @@ class BasketController extends Controller
         $data['goods'] = $goods;
         Order::create($data);
         if ($data) {
-            return redirect()->route('siteIndex')
+            return redirect()->route('allMyOrders')
                 ->with('success', 'Заказ оформлен');
         }
         return back()
@@ -158,27 +159,18 @@ class BasketController extends Controller
     }
 
     /**
-     * @param int $id
-     * @return void
-     */
-    public function getOrder(int $id)
-    {
-        $id = 1;
-        $getOrder = TestJsonOrder::findOrFail($id);
-        $goodsInOrder = json_decode($getOrder['json_data']);
-        dd($goodsInOrder);
-    }
-
-    /**
      * @param int $link
+     * @param int $orderId
      * @return \Illuminate\Http\RedirectResponse|void
      */
-    public function backForSite(int $link)
+    public function backForSite(int $link, int $orderId)
     {
         if ($link == '1') {
             return redirect()->route('siteIndex');
         } elseif ($link == '2') {
             return redirect()->route('myBasket');
+        } elseif ($link == '3') {
+            return redirect()->route('getThisOrder', ['id' => $orderId]);
         }
     }
 

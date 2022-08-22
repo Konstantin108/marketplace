@@ -10,6 +10,7 @@
         <brand>Адидас</brand>
         <designer>Иван Смирнов</designer>
         <size>XXL</size>
+        <sex>Ж</sex>
         <sale>0</sale>
         <img>goods/product_content7.jpg</img>
     </good>
@@ -23,6 +24,7 @@
         <brand>Лакост</brand>
         <designer>Иван Смирнов</designer>
         <size>XL</size>
+        <sex>Ж</sex>
         <sale>1</sale>
         <img>goods/product_content8.jpg</img>
     </good>
@@ -36,6 +38,7 @@
         <brand>Рибок</brand>
         <designer>Иван Смирнов</designer>
         <size>L</size>
+        <sex>Ж</sex>
         <sale>0</sale>
         <img>goods/photo2.jpg</img>
     </good>
@@ -49,6 +52,7 @@
         <brand>Адидас</brand>
         <designer>Иван Смирнов</designer>
         <size>L</size>
+        <sex>Ж</sex>
         <sale>0</sale>
         <img>goods/photo4.jpg</img>
     </good>
@@ -62,19 +66,21 @@
         <brand>Адидас</brand>
         <designer>Иван Смирнов</designer>
         <size>L</size>
+        <sex>М</sex>
         <sale>0</sale>
         <img>goods/photo5.jpg</img>
     </good>
     <good>
         <id>3244</id>
         <name>Большая сумка</name>
-        <price>2000</price>
+        <price>1000</price>
         <info>Отличная сумка, кожа, Италия</info>
         <counter>1</counter>
         <category>Сумки</category>
         <brand>Адидас</brand>
         <designer>Иван Смирнов</designer>
         <size>L</size>
+        <sex>Ж</sex>
         <sale>0</sale>
         <img>goods/product__content3.jpg</img>
     </good>
@@ -88,6 +94,7 @@
         <brand>Адидас</brand>
         <designer>Иван Смирнов</designer>
         <size>L</size>
+        <sex>М</sex>
         <sale>0</sale>
         <img>goods/product_content1.jpg</img>
     </good>
@@ -101,6 +108,7 @@
         <brand>Адидас</brand>
         <designer>Иван Смирнов</designer>
         <size>L</size>
+        <sex>М</sex>
         <sale>0</sale>
         <img>goods/product_content2.jpg</img>
     </good>

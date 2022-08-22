@@ -104,6 +104,7 @@ class GoodController extends Controller
             'counter',
             'category',
             'brand',
+            'sex',
             'designer',
             'size',
             'sale',
@@ -122,6 +123,7 @@ class GoodController extends Controller
                 $publishedGood->brand = $item->brand;
                 $publishedGood->designer = $item->designer;
                 $publishedGood->size = $item->size;
+                $publishedGood->sex = $item->sex;
                 $publishedGood->sale = $item->sale;
                 $publishedGood->img = $item->img;
                 $publishedGood->save();

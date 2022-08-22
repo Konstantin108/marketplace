@@ -40,9 +40,10 @@ class PublishedGoodController extends Controller
      * @param int $id
      * @param int $tableId
      * @param int $link
+     * @param int $orderId
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function siteOneGood(Request $request, int $id, int $tableId, int $link)
+    public function siteOneGood(Request $request, int $id, int $tableId, int $link, int $orderId)
     {
         if (Auth::check()) {
             $userId = Auth::user()->id;
@@ -52,14 +53,15 @@ class PublishedGoodController extends Controller
             } else {
                 $count = 0;
             }
-        }else{
+        } else {
             $count = 0;
         }
         $publishedGood = PublishedGood::findOrFail($id);
         return view('content/publishedGoods/siteOneGood', [
             'publishedGood' => $publishedGood,
             'count' => $count,
-            'link' => $link
+            'link' => $link,
+            'orderId' => $orderId
         ]);
     }
 
