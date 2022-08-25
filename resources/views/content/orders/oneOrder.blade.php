@@ -31,15 +31,25 @@
                 </td>
                 <td style="border-bottom: 2px solid black; border-right: 1px solid black">
                     @forelse($goodsInOrder as $good)
-                        <a href="{{route('siteOneGood', [
+                        <div style="display: flex; margin-bottom: 3px;">
+                            @if($good->img)
+                                <img src="{{ \Storage::disk('public')->url( $good->img) }}" alt="avatar"
+                                     style="width: 50px; border-radius: 50%">
+                            @else
+                                <img src="/img/no_photo.jpg" alt="avatar" style="width: 50px; border-radius: 50%">
+                            @endif
+                            <div style="display: flex; flex-direction: column">
+                                <a href="{{route('siteOneGood', [
                                                     'id' => $good->id,
                                                     'tableId' => $good->table_id,
                                                     'link' => 3,
                                                     'orderId' => $order->id
                                                     ])}}">
-                            {{ $good->name }}
-                        </a>
-                        {{ $good->price }}&#8381; {{$good->counter }}шт.<br>
+                                    {{ $good->name }}
+                                </a>
+                                {{ $good->price }}&#8381; {{$good->counter }}шт.<br>
+                            </div>
+                        </div>
                     @empty
                         <p>нет данных</p>
                     @endforelse

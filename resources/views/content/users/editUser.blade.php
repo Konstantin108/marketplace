@@ -7,7 +7,7 @@
                             @if($errors->any())
                                 <div class="alert alert-danger">Необходимо заполнить все поля</div>
                             @endif
-                <form method="post" action="{{ route('updateUser', ['id' => $user->id]) }}"  enctype="multipart/form-data">
+                <form method="post" action="{{ route('updateUser', ['id' => $user->id, 'link' => $link]) }}"  enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
                         <label for="avatar">Аватар пользователя</label>
@@ -89,9 +89,9 @@
                     <br>
                     <button type="submit" class="btn btn-success">Сохранить</button>
                 </form>
-                <a href="{{route('user', ['id' => $user->id])}}">Назад</a>
+                <a href="{{route('user', ['id' => $user->id, 'link' => $link])}}">Назад</a>
             </div>
         </div>
     </div>
-
+    <h1>{{$link}}</h1>
 @endsection

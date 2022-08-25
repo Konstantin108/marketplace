@@ -27,6 +27,20 @@ class OrderController extends Controller
     }
 
     /**
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function allOrders()
+    {
+        $orders = Order::select()->get();
+        foreach ($orders as $order) {
+            if ($order['goods'] == 'null') {
+                $order->delete();
+            }
+        }
+        return view('content/orders/allOrders', ['orders' => $orders]);
+    }
+
+    /**
      * @param int $id
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */

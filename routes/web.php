@@ -78,6 +78,10 @@ Route::group(['middleware' => 'auth'], function () {
             ->where('filter', '\d+')
             ->name('destroy');
 
+        //Роуты админа для работы с заказами
+        Route::get('allOrders', [OrderController::class, 'allOrders'])
+            ->name('allOrders');
+
         //Роуты парсинга
         Route::get('/parsing', ParserController::class)
             ->name('parsing');;
@@ -123,23 +127,30 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('users', [UserController::class, 'users'])
             ->name('users');
 
-        Route::get('user/{id}', [UserController::class, 'user'])
+        Route::get('user/{id}/{link}', [UserController::class, 'user'])
             ->where('id', '\d+')
+            ->where('link', '\d+')
             ->name('user');
 
-        Route::get('deleteUser/{id}', [UserController::class, 'deleteUser'])
+        Route::get('backForUser/{link}', [UserController::class, 'backForUser'])
+            ->name('backForUser');
+
+        Route::get('deleteUser/{id}/{link}', [UserController::class, 'deleteUser'])
             ->where('id', '\d+')
+            ->where('link', '\d+')
             ->name('deleteUser');
 
-        Route::get('editUser/{id}', [UserController::class, 'editUser'])
+        Route::get('editUser/{id}/{link}', [UserController::class, 'editUser'])
             ->where('id', '\d+')
+            ->where('link', '\d+')
             ->name('editUser');
 
         Route::get('createUser', [UserController::class, 'createUser'])
             ->name('createUser');
 
-        Route::post('updateUser/{id}', [UserController::class, 'updateUser'])
+        Route::post('updateUser/{id}/{link}', [UserController::class, 'updateUser'])
             ->where('id', '\d+')
+            ->where('link', '\d+')
             ->name('updateUser');
 
         Route::post('storeUser', [UserController::class, 'storeUser'])
