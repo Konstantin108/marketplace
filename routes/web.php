@@ -82,6 +82,18 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('allOrders', [OrderController::class, 'allOrders'])
             ->name('allOrders');
 
+        Route::get('getOrder/{id}', [OrderController::class, 'getOrder'])
+            ->where('id', '\d+')
+            ->name('getOrder');
+
+        Route::get('deleteOrder/{id}', [OrderController::class, 'deleteOrder'])
+            ->where('id', '\d+')
+            ->name('deleteOrder');
+
+        Route::post('updateOrderStatusByAdmin/{id}', [OrderController::class, 'updateOrderStatusByAdmin'])
+            ->where('id', '\d+')
+            ->name('updateOrderStatusByAdmin');
+
         //Роуты парсинга
         Route::get('/parsing', ParserController::class)
             ->name('parsing');;
@@ -119,20 +131,30 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('showPublishedGoods', [GoodController::class, 'showPublishedGoods'])
             ->name('showPublishedGoods');
 
-        Route::get('oneGood/{id}', [PublishedGoodController::class, 'oneGood'])
+        Route::get('backForGood/{link}/{order_id}', [PublishedGoodController::class, 'backForGood'])
+            ->where('link', '\d+')
+            ->where('order_id', '\d+')
+            ->name('backForGood');
+
+        Route::get('oneGood/{id}/{link}/{order_id}', [PublishedGoodController::class, 'oneGood'])
             ->where('id', '\d+')
+            ->where('link', '\d+')
+            ->where('order_id', '\d+')
             ->name('oneGood');
 
         //Роуты для работы с пользователями
         Route::get('users', [UserController::class, 'users'])
             ->name('users');
 
-        Route::get('user/{id}/{link}', [UserController::class, 'user'])
+        Route::get('user/{id}/{link}/{order_id}', [UserController::class, 'user'])
             ->where('id', '\d+')
             ->where('link', '\d+')
+            ->where('order_id', '\d+')
             ->name('user');
 
-        Route::get('backForUser/{link}', [UserController::class, 'backForUser'])
+        Route::get('backForUser/{link}/{order_id}', [UserController::class, 'backForUser'])
+            ->where('link', '\d+')
+            ->where('order_id', '\d+')
             ->name('backForUser');
 
         Route::get('deleteUser/{id}/{link}', [UserController::class, 'deleteUser'])
@@ -140,17 +162,19 @@ Route::group(['middleware' => 'auth'], function () {
             ->where('link', '\d+')
             ->name('deleteUser');
 
-        Route::get('editUser/{id}/{link}', [UserController::class, 'editUser'])
+        Route::get('editUser/{id}/{link}/{order_id}', [UserController::class, 'editUser'])
             ->where('id', '\d+')
             ->where('link', '\d+')
+            ->where('order_id', '\d+')
             ->name('editUser');
 
         Route::get('createUser', [UserController::class, 'createUser'])
             ->name('createUser');
 
-        Route::post('updateUser/{id}/{link}', [UserController::class, 'updateUser'])
+        Route::post('updateUser/{id}/{link}/{order_id}', [UserController::class, 'updateUser'])
             ->where('id', '\d+')
             ->where('link', '\d+')
+            ->where('order_id', '\d+')
             ->name('updateUser');
 
         Route::post('storeUser', [UserController::class, 'storeUser'])

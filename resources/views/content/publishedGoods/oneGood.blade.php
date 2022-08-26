@@ -1,7 +1,6 @@
 @extends('layouts.main')
 @section('content')
 
-
     <table class="table table-bordered">
         <h1>Артикул №{{$publishedGood->table_id}}</h1>
         <thead style="border: 2px solid black">
@@ -49,6 +48,6 @@
         </tbody>
     </table>
 
-    <a href="{{route('showPublishedGoods')}}">Назад</a>
+    <a href="{{route('backForGood', ['link' => $link, 'order_id' => $order_id])}}">Назад</a>
 
 @endsection

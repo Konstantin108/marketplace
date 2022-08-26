@@ -29,10 +29,20 @@ class PublishedGoodController extends Controller
         //
     }
 
-    public function oneGood(int $id)
+    /**
+     * @param int $id
+     * @param int $link
+     * @param int $order_id
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function oneGood(int $id, int $link, int $order_id)
     {
         $publishedGood = PublishedGood::findOrFail($id);
-        return view('content/publishedGoods/oneGood', ['publishedGood' => $publishedGood]);
+        return view('content/publishedGoods/oneGood', [
+            'publishedGood' => $publishedGood,
+            'link' => $link,
+            'order_id' => $order_id
+        ]);
     }
 
     /**
@@ -63,6 +73,20 @@ class PublishedGoodController extends Controller
             'link' => $link,
             'orderId' => $orderId
         ]);
+    }
+
+    /**
+     * @param int $link
+     * @param int $order_id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function backForGood(int $link, int $order_id)
+    {
+        if ($link == '1') {
+            return redirect()->route('publishedGoods');
+        } elseif ($link == '2') {
+            return redirect()->route('getOrder', ['id' => $order_id]);
+        }
     }
 
     public function createGood()

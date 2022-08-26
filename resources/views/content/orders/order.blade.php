@@ -1,4 +1,4 @@
-@extends('layouts.site')
+@extends('layouts.main')
 @section('content')
 
     @if(session()->has('success'))
@@ -8,7 +8,7 @@
     @endif
 
     <form method="post"
-          action="{{ route('updateOrderStatus', ['id' => $order->id])}}"
+          action="{{ route('updateOrderStatusByAdmin', ['id' => $order->id])}}"
           enctype="multipart/form-data">
         @csrf
         <table class="table table-bordered">
@@ -16,6 +16,7 @@
             <thead style="border-bottom: 2px solid black; border-right: 1px solid black">
             <tr style="border: 2px solid black">
                 <th style="border: 2px solid black">#ID</th>
+                <th style="border: 2px solid black; color: blue">ID/ИМЯ пользователя</th>
                 <th style="border: 2px solid black">Количество товаров</th>
                 <th style="border: 2px solid black">Товары</th>
                 <th style="border: 2px solid black">Сумма</th>
@@ -26,6 +27,11 @@
             <tbody>
             <tr style="border-bottom: 2px solid black; border-right: 1px solid black">
                 <td style="border-bottom: 2px solid black; border-right: 1px solid black">{{ $order->id }}</td>
+                <td style="border-bottom: 2px solid black; border-right: 1px solid black">
+                    <a href="{{route('user', ['id' => $order->user_id, 'link' => 3, 'order_id' => $order->id])}}">
+                        {{ $order->id }} {{ \App\Models\User::findOrFail($order->user_id)->name }}
+                    </a>
+                </td>
                 <td style="border-bottom: 2px solid black; border-right: 1px solid black">
                     {{ $order->count }}
                 </td>
@@ -39,11 +45,10 @@
                                 <img src="/img/no_photo.jpg" alt="avatar" style="width: 50px; border-radius: 50%">
                             @endif
                             <div style="display: flex; flex-direction: column">
-                                <a href="{{route('siteOneGood', [
+                                <a href="{{route('oneGood', [
                                                     'id' => $good->id,
-                                                    'tableId' => $good->table_id,
-                                                    'link' => 3,
-                                                    'orderId' => $order->id
+                                                    'link' => 2,
+                                                    'order_id' => $order->id
                                                     ])}}">
                                     {{ $good->name }}
                                 </a>
@@ -56,23 +61,35 @@
                 </td>
                 <td style="border-bottom: 2px solid black; border-right: 1px solid black">{{ $order->sum }}&#8381;</td>
                 <td style="border-bottom: 2px solid black; border-right: 1px solid black">
-                    @if($order->status != 'заказ отменён')
-                        <select id="status" name="status">
-                            <option value="{{ $order->status }}">{{ $order->status }}</option>
-                            <option value="заказ отменён">
-                                отменить заказ
-                            </option>
-                        </select>
-                        <button type="submit" class="btn btn-success">сохранить</button>
-                    @else
-                        {{ $order->status }}
-                    @endif
+                    <select id="status" name="status">
+                        <option value="{{ $order->status }}">{{ $order->status }}</option>
+                        <option value="ожидает подтверждения">
+                            ожидает подтверждения
+                        </option>
+                        <option value="сборка заказа">
+                            сборка заказа
+                        </option>
+                        <option value="заказ в пути">
+                            заказ в пути
+                        </option>
+                        <option value="заказ ожидает выдачи">
+                            заказ ожидает выдачи
+                        </option>
+                        <option value="заказ выполнен">
+                            заказ выполнен
+                        </option>
+                        <option value="заказ отменён">
+                            заказ отменён
+                        </option>
+                    </select>
+                    <button type="submit" class="btn btn-success">сохранить</button>
+                    <a href="{{route('deleteOrder', ['id' => $order->id])}}">Удалить</a>
                 </td>
                 <td style="border-bottom: 2px solid black; border-right: 1px solid black">{{ $order->created_at->format('Y:m:d') }}</td>
             </tr>
             </tbody>
         </table>
     </form>
-    <a href="{{route('allMyOrders')}}">Назад</a>
+    <a href="{{route('allOrders')}}">Назад</a>
 
 @endsection

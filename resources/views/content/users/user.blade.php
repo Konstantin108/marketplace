@@ -45,9 +45,8 @@
         </tbody>
     </table>
     @if(!$user->is_admin)
-        <a href="{{ route('editUser', ['id' => $user->id, 'link' => $link]) }}">Редактировать</a>
+        <a href="{{ route('editUser', ['id' => $user->id, 'link' => $link, 'order_id' => $order_id]) }}">Редактировать</a>
         <a href="{{route('deleteUser', ['id' => $user->id, 'link' => $link])}}">Удалить</a>
     @endif
-    <a href="{{route('backForUser', ['link' => $link])}}">Назад</a>
-<h1>{{$link}}</h1>
+    <a href="{{route('backForUser', ['link' => $link, 'order_id' => $order_id])}}">Назад</a>
 @endsection

@@ -65,7 +65,7 @@ class BasketController extends Controller
                 ])->with('success', 'Товар удалён');
             } elseif ($link == 2) {
                 return redirect()->route('myBasket')
-                    ->with('success', 'Товар добавлен в корзину');
+                    ->with('success', 'Товар удалён');
             }
         }
         return back()

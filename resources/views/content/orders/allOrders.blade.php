@@ -25,12 +25,12 @@
             <tr style="border-bottom: 2px solid black; border-right: 1px solid black">
                 <td style="border-bottom: 2px solid black; border-right: 1px solid black">{{ $order->id }}</td>
                 <td style="border-bottom: 2px solid black; border-right: 1px solid black">
-                    <a href="{{route('getThisOrder', ['id' => $order->id])}}">
+                    <a href="{{route('getOrder', ['id' => $order->id])}}">
                         перейти
                     </a>
                 </td>
                 <td style="border-bottom: 2px solid black; border-right: 1px solid black">
-                    <a href="{{route('user', ['id' => $order->user_id, 'link' => 2])}}">
+                    <a href="{{route('user', ['id' => $order->user_id, 'link' => 2, 'order_id' => 0])}}">
                         {{ $order->id }} {{ \App\Models\User::findOrFail($order->user_id)->name }}
                     </a>
                 </td>

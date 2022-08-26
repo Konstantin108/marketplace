@@ -34,7 +34,7 @@
                     @endif
                 </td>
                 <td style="border-bottom: 2px solid black; border-right: 1px solid black">
-                    <a href="{{route('user', ['id' => $user->id, 'link' => 1])}}">
+                    <a href="{{route('user', ['id' => $user->id, 'link' => 1, 'order_id' => 0])}}">
                         перейти
                     </a>
                 </td>

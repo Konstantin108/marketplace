@@ -48,6 +48,9 @@ class UserController extends Controller
             $fileLink = $image->storeAs('users', $fileName . '.' . $originalExt, 'public');
             $data['avatar'] = $fileLink;
         }
+        if ($request->post('is_admin')) {
+            $data['is_admin'] = $request->post('is_admin');
+        }
         $user = User::create($data);
         if ($user) {
             return redirect()->route('users')
@@ -62,27 +65,35 @@ class UserController extends Controller
      *
      * @param int $id
      * @param int $link
+     * @param int $order_id
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function user(int $id, int $link)
+    public function user(int $id, int $link, int $order_id)
     {
         $user = User::findOrFail($id);
+        if ($link == 1) {
+            $order_id = 0;
+        }
         return view('content/users/user', [
             'user' => $user,
-            'link' => $link
+            'link' => $link,
+            'order_id' => $order_id
         ]);
     }
 
     /**
      * @param int $link
+     * @param int $order_id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function backForUser(int $link)
+    public function backForUser(int $link, int $order_id)
     {
         if ($link == '1') {
             return redirect()->route('users');
         } elseif ($link == '2') {
             return redirect()->route('allOrders');
+        } elseif ($link == '3') {
+            return redirect()->route('getOrder', ['id' => $order_id]);
         }
     }
 
@@ -91,14 +102,19 @@ class UserController extends Controller
      *
      * @param int $id
      * @param int $link
+     * @param int $order_id
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
-    public function editUser(int $id, int $link)
+    public function editUser(int $id, int $link, int $order_id)
     {
         $user = User::findOrFail($id);
+        if ($link == 1) {
+            $order_id = 0;
+        }
         return view('content/users/editUser', [
             'user' => $user,
-            'link' => $link
+            'link' => $link,
+            'order_id' => $order_id
         ]);
     }
 
@@ -108,9 +124,10 @@ class UserController extends Controller
      * @param UpdateUserRequest $request
      * @param int $id
      * @param int $link
+     * @param int $order_id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function updateUser(UpdateUserRequest $request, int $id, int $link)
+    public function updateUser(UpdateUserRequest $request, int $id, int $link, int $order_id)
     {
         $data = $request->validated();
         $data['password'] = Hash::make($data['password']);
@@ -121,12 +138,16 @@ class UserController extends Controller
             $fileLink = $image->storeAs('users', $fileName . '.' . $originalExt, 'public');
             $data['avatar'] = $fileLink;
         }
+        if ($request->post('is_admin')) {
+            $data['is_admin'] = $request->post('is_admin');
+        }
         $user = User::findOrFail($id);
         $user = $user->fill($data)->save();
         if ($user) {
             return redirect()->route('user', [
                 'id' => $id,
-                'link' => $link
+                'link' => $link,
+                'order_id' => $order_id
             ])->with('success', 'Данные пользователя обновлены');
         }
         return back()
@@ -139,7 +160,7 @@ class UserController extends Controller
      * @param int $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function deleteUser(int $id, int $link): \Illuminate\Http\RedirectResponse
+    public function deleteUser(int $id, int $link)
     {
         $user = User::findOrFail($id);
         $user->delete();
@@ -157,7 +178,7 @@ class UserController extends Controller
             }
             return back()
                 ->with('error', 'Произошла ошибка');
-        } elseif ($link == '2') {
+        } elseif ($link == '2' or $link == '3') {
             if ($user) {
                 return redirect()->route('allOrders', ['orders' => $orders])
                     ->with('success', 'Пользователь и заказы пользователя удалены');

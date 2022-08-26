@@ -65,6 +65,29 @@ class OrderController extends Controller
 
     /**
      * @param int $id
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function getOrder(int $id)
+    {
+        $order = Order::findOrFail($id);
+        $goodsInOrderJSON = json_decode($order['goods']);
+        $goodsInOrder = [];
+        foreach ($goodsInOrderJSON as $key => $item) {
+            $idOFGood = DB::table('publishedGoods')
+                ->where('table_id', $key)
+                ->value('id');
+            $good = PublishedGood::findOrFail($idOFGood);
+            $good->counter = count($item);
+            $goodsInOrder[] = $good;
+        }
+        return view('content/orders/order', [
+            'order' => $order,
+            'goodsInOrder' => $goodsInOrder
+        ]);
+    }
+
+    /**
+     * @param int $id
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
@@ -76,6 +99,41 @@ class OrderController extends Controller
         if ($order) {
             return redirect()->route('getThisOrder', ['id' => $id])
                 ->with('success', 'Статус заказа обновлён');
+        }
+        return back()
+            ->with('error', 'Произошла ошибка');
+    }
+
+    /**
+     * @param Request $request
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function updateOrderStatusByAdmin(Request $request, int $id)
+    {
+        $data['status'] = $request->post('status');
+        $order = Order::findOrFail($id);
+        $order = $order->fill($data)->save();
+        if ($order) {
+            return redirect()->route('getOrder', ['id' => $id])
+                ->with('success', 'Статус заказа обновлён');
+        }
+        return back()
+            ->with('error', 'Произошла ошибка');
+    }
+
+    /**
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function deleteOrder(int $id)
+    {
+        $order = Order::findOrFail($id);
+        $orders = Order::select()->get();
+        $order->delete();
+        if ($order) {
+            return redirect()->route('allOrders', ['orders' => $orders])
+                ->with('success', 'Заказ удалён');
         }
         return back()
             ->with('error', 'Произошла ошибка');
