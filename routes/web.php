@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\BasketController;
+use App\Http\Controllers\ChartController;
 use App\Http\Controllers\GoodController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ParserController;
@@ -27,6 +28,10 @@ Route::group(['middleware' => 'auth'], function () {
 
 //Роуты для админов
     Route::group(['middleware' => 'admin'], function () {
+
+        //Роуты для работы с графиками
+        Route::get('showCharts', [ChartController::class, 'showCharts'])
+            ->name('showCharts');
 
         //Роуты для работы с тасками
         Route::get('/create', [TaskController::class, 'create'])

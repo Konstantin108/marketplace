@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Good;
 use App\Models\Order;
 use App\Models\PublishedGood;
 use Illuminate\Http\Request;
@@ -46,10 +47,45 @@ class OrderController extends Controller
      */
     public function getThisOrder(int $id)
     {
+        $actualGoodsId = PublishedGood::select()->get();
         $order = Order::findOrFail($id);
         $goodsInOrderJSON = json_decode($order['goods']);
         $goodsInOrder = [];
+        $actualKeys = [];
+        $actualGoodsIdArr = [];
+        $actualCount = [];
+        $actualTotalPrice = [];
+        foreach ($actualGoodsId as $actualGoodId) {
+            $actualGoodsIdArr[] = $actualGoodId->table_id;
+        }
         foreach ($goodsInOrderJSON as $key => $item) {
+            if (in_array($key, $actualGoodsIdArr)) {
+                $actualKeys[$key] = $item;
+                $price = DB::table('publishedGoods')
+                    ->where('table_id', $key)
+                    ->value('price');
+                $actualCount[] = count($item);
+                $actualTotalPrice[] = $price * count($item);
+            }else {
+                $good = new Good();
+                $good->img = '';
+                $good->id = '0';
+                $good->name = 'Товар отсутствует';
+                $good->price = '0';
+                $good->counter = '0';
+                $goodsInOrder[] = $good;
+            }
+        }
+        $actualCount = array_sum($actualCount);
+        $actualTotalPrice = array_sum($actualTotalPrice);
+//        $data['goods'] = $actualKeys;
+        $data['count'] = $actualCount;
+        $data['sum'] = $actualTotalPrice;
+        $order->fill($data)->save();
+        $order->goods = $actualKeys;
+        $order->count = $actualCount;
+        $order->sum = $actualTotalPrice;
+        foreach ($actualKeys as $key => $item) {
             $idOFGood = DB::table('publishedGoods')
                 ->where('table_id', $key)
                 ->value('id');
@@ -69,10 +105,45 @@ class OrderController extends Controller
      */
     public function getOrder(int $id)
     {
+        $actualGoodsId = PublishedGood::select()->get();
         $order = Order::findOrFail($id);
         $goodsInOrderJSON = json_decode($order['goods']);
         $goodsInOrder = [];
+        $actualKeys = [];
+        $actualGoodsIdArr = [];
+        $actualCount = [];
+        $actualTotalPrice = [];
+        foreach ($actualGoodsId as $actualGoodId) {
+            $actualGoodsIdArr[] = $actualGoodId->table_id;
+        }
         foreach ($goodsInOrderJSON as $key => $item) {
+            if (in_array($key, $actualGoodsIdArr)) {
+                $actualKeys[$key] = $item;
+                $price = DB::table('publishedGoods')
+                    ->where('table_id', $key)
+                    ->value('price');
+                $actualCount[] = count($item);
+                $actualTotalPrice[] = $price * count($item);
+            } else {
+                $good = new Good();
+                $good->img = '';
+                $good->id = '0';
+                $good->name = 'Товар отсутствует';
+                $good->price = '0';
+                $good->counter = '0';
+                $goodsInOrder[] = $good;
+            }
+        }
+        $actualCount = array_sum($actualCount);
+        $actualTotalPrice = array_sum($actualTotalPrice);
+//        $data['goods'] = $actualKeys;         //<--при обновлении модели корзины так же обновит состояние в БД
+        $data['count'] = $actualCount;        //то есть вместо пометки в заказе, что товар сейчас отсутствует,
+        $data['sum'] = $actualTotalPrice;     //он будет удален из заказа. Оставил обновление в БД суммы заказа и количества товаров,
+        $order->fill($data)->save();           //но столбец goods не обновляю
+        $order->goods = $actualKeys;
+        $order->count = $actualCount;
+        $order->sum = $actualTotalPrice;
+        foreach ($actualKeys as $key => $item) {
             $idOFGood = DB::table('publishedGoods')
                 ->where('table_id', $key)
                 ->value('id');

@@ -2,114 +2,184 @@
 <goods>
     <good>
         <id>1323</id>
-        <name>Красная блузка</name>
-        <price>4990</price>
-        <info>Отличная блузка из легкой ткани</info>
+        <name>Толстовка Ellesse SGI11014-BLACK</name>
+        <price>9490</price>
+        <info>Отличная толстовка из тёплой ткани</info>
         <counter>1</counter>
-        <category>Футболки</category>
-        <brand>Адидас</brand>
-        <designer>Иван Смирнов</designer>
-        <size>XXL</size>
+        <category>Толстовки с капюшоном и свитера</category>
+        <brand>Ellesse</brand>
+        <designer>Кристиан Диор</designer>
+        <size>XS</size>
         <sex>Ж</sex>
         <sale>0</sale>
-        <img>goods/product_content7.jpg</img>
+        <img>goods/good001.jpg</img>
     </good>
     <good>
         <id>12366</id>
-        <name>Серый свитер с начесом</name>
-        <price>5200</price>
-        <info>Свитер из шерсти</info>
+        <name>Сарафан BE YOU 7221-30030</name>
+        <price>3970</price>
+        <info>Хорошее яркое платье</info>
         <counter>1</counter>
         <category>Свитера и трикотаж</category>
-        <brand>Лакост</brand>
-        <designer>Иван Смирнов</designer>
+        <brand>BE YOU</brand>
+        <designer>Кристиан Диор</designer>
         <size>XL</size>
         <sex>Ж</sex>
         <sale>1</sale>
-        <img>goods/product_content8.jpg</img>
+        <img>goods/good002.png</img>
     </good>
     <good>
         <id>655</id>
-        <name>Большая сумка</name>
-        <price>7980</price>
-        <info>Отличная сумка, кожа, Италия</info>
+        <name>Худи PUMA 84711404</name>
+        <price>5571</price>
+        <info>Отлично подходит для занятий спортом</info>
         <counter>1</counter>
-        <category>Сумки</category>
-        <brand>Рибок</brand>
-        <designer>Иван Смирнов</designer>
+        <category>Толстовки с капюшоном и свитера</category>
+        <brand>PUMA</brand>
+        <designer>Кристиан Диор</designer>
         <size>L</size>
         <sex>Ж</sex>
         <sale>0</sale>
-        <img>goods/photo2.jpg</img>
+        <img>goods/good003.jpg</img>
     </good>
     <good>
         <id>3456</id>
-        <name>Блузка мужская</name>
-        <price>7990</price>
-        <info>Отличная сумка, кожа, Италия</info>
+        <name>Солнцезащитные очки FABRETTI N21059</name>
+        <price>1890</price>
+        <info>Солнцезащитные очки, Италия</info>
         <counter>1</counter>
-        <category>Сумки</category>
-        <brand>Адидас</brand>
-        <designer>Иван Смирнов</designer>
+        <category>Аксессуары</category>
+        <brand>FABRETTI</brand>
+        <designer>Кристиан Диор</designer>
         <size>L</size>
         <sex>Ж</sex>
         <sale>0</sale>
-        <img>goods/photo4.jpg</img>
+        <img>goods/good004.jpeg</img>
     </good>
     <good>
         <id>987</id>
-        <name>Рубашка женская</name>
-        <price>7990</price>
-        <info>Отличная сумка, кожа, Италия</info>
+        <name>Сумка кросс-боди Eleganzza Z8009-7469D</name>
+        <price>27930</price>
+        <info>Женская сумка торговой марки Eleganzza из натуральной кожи. Модель закрывается на металлическую молнию и содержит внутри одно отделение с карманом на молнии и одним открытым карманом. Высота ручки - 10 см. Длина наплечного ремня из натуральной кожи - 118 см., ширина - 1,5 см. Модель имеет ножки на дне. Не вмещает формат А4.</info>
         <counter>1</counter>
         <category>Сумки</category>
-        <brand>Адидас</brand>
-        <designer>Иван Смирнов</designer>
+        <brand>Eleganzza</brand>
+        <designer>Джорджио Армани</designer>
         <size>L</size>
-        <sex>М</sex>
-        <sale>0</sale>
-        <img>goods/photo5.jpg</img>
+        <sex>Ж</sex>
+        <sale>1</sale>
+        <img>goods/good005.jpeg</img>
     </good>
     <good>
         <id>3244</id>
-        <name>Большая сумка</name>
-        <price>1000</price>
-        <info>Отличная сумка, кожа, Италия</info>
+        <name>Джинсы A passion play 172TR0053WH синие</name>
+        <price>4499</price>
+        <info>Удобные плотные джинсы для повседневной носки</info>
         <counter>1</counter>
-        <category>Сумки</category>
-        <brand>Адидас</brand>
-        <designer>Иван Смирнов</designer>
+        <category>Джинсовая ткань</category>
+        <brand>A passion play</brand>
+        <designer>Джорджио Армани</designer>
         <size>L</size>
-        <sex>Ж</sex>
+        <sex>М</sex>
         <sale>0</sale>
-        <img>goods/product__content3.jpg</img>
+        <img>goods/good006.jpg</img>
     </good>
     <good>
         <id>465</id>
-        <name>Большая сумка из кожи</name>
-        <price>5000</price>
-        <info>Отличная сумка, кожа, Италия</info>
+        <name>Пальто Каляев 57426 серое</name>
+        <price>14299</price>
+        <info>Пальто на осенний и весенний сезоны</info>
         <counter>1</counter>
-        <category>Сумки</category>
-        <brand>Адидас</brand>
-        <designer>Иван Смирнов</designer>
+        <category>Куртки и пальто</category>
+        <brand>Каляев</brand>
+        <designer>Иван Каляев</designer>
         <size>L</size>
-        <sex>М</sex>
-        <sale>0</sale>
-        <img>goods/product_content1.jpg</img>
+        <sex>Ж</sex>
+        <sale>1</sale>
+        <img>goods/good007.jpg</img>
     </good>
     <good>
         <id>345</id>
-        <name>Большая сумка из кожи</name>
-        <price>7990</price>
-        <info>Отличная сумка, кожа, Италия</info>
+        <name>Брюки Kanzler 2S-231BB-0707-14 синие</name>
+        <price>11549</price>
+        <info>Брюки, Италия</info>
         <counter>1</counter>
-        <category>Сумки</category>
-        <brand>Адидас</brand>
-        <designer>Иван Смирнов</designer>
+        <category>Брюки</category>
+        <brand>Kanzler</brand>
+        <designer>Джорджио Армани</designer>
         <size>L</size>
         <sex>М</sex>
         <sale>0</sale>
-        <img>goods/product_content2.jpg</img>
+        <img>goods/good008.jpg</img>
+    </good>
+    <good>
+        <id>34115</id>
+        <name>Футболка Не Готов к Труду и Обороне Dream Shirts черная</name>
+        <price>1368</price>
+        <info>Чёрная футболка с забавной надписью</info>
+        <counter>1</counter>
+        <category>Футболки</category>
+        <brand>Dream Shirts</brand>
+        <designer>Иван Каляев</designer>
+        <size>L</size>
+        <sex>М</sex>
+        <sale>0</sale>
+        <img>goods/good009.jpeg</img>
+    </good>
+    <good>
+        <id>3411145</id>
+        <name>Шорты Bossa Nova серый</name>
+        <price>849</price>
+        <info>Шорты детские</info>
+        <counter>1</counter>
+        <category>Шорты</category>
+        <brand>Bossa Nova</brand>
+        <designer>Джорджио Армани</designer>
+        <size>L</size>
+        <sex>М</sex>
+        <sale>0</sale>
+        <img>goods/good010.jpg</img>
+    </good>
+    <good>
+        <id>34516</id>
+        <name>Мембранная обувь Котофей 754956</name>
+        <price>11549</price>
+        <info>Мембранная обувь, Россия</info>
+        <counter>1</counter>
+        <category>Обувь</category>
+        <brand>Котофей</brand>
+        <designer>Валентин Юдашкин</designer>
+        <size>L</size>
+        <sex>М</sex>
+        <sale>0</sale>
+        <img>goods/good011.jpg</img>
+    </good>
+    <good>
+        <id>345363</id>
+        <name>Купальник раздельный Charmante WP</name>
+        <price>3790</price>
+        <info>Купальник, Германия</info>
+        <counter>1</counter>
+        <category>Футболки</category>
+        <brand>Charmante</brand>
+        <designer>Джорджио Армани</designer>
+        <size>L</size>
+        <sex>Ж</sex>
+        <sale>0</sale>
+        <img>goods/good012.jpeg</img>
+    </good>
+    <good>
+        <id>32245</id>
+        <name>Купальник раздельный Concept Club 31204710248</name>
+        <price>999</price>
+        <info>Купальник, Германия</info>
+        <counter>1</counter>
+        <category>Брюки</category>
+        <brand>Футболки</brand>
+        <designer>Джорджио Армани</designer>
+        <size>L</size>
+        <sex>Ж</sex>
+        <sale>0</sale>
+        <img>goods/good013.jpg</img>
     </good>
 </goods>

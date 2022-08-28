@@ -35,11 +35,11 @@
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Вход') }}
                                 </button>
-{{--                                @if (Route::has('password.request'))--}}
-{{--                                    <a class="btn btn-link" href="{{ route('password.request') }}">--}}
-{{--                                        {{ __('Forgot Your Password?') }}--}}
-{{--                                    </a>--}}
-{{--                                @endif--}}
+                                @if (Route::has('password.request'))
+                                    <a class="btn btn-link" href="{{ route('password.request') }}">
+                                        {{ __('Забыли пароль?') }}
+                                    </a>
+                                @endif
                             </div>
                         </div>
                     </form>

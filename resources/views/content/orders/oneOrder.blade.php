@@ -38,6 +38,7 @@
                             @else
                                 <img src="/img/no_photo.jpg" alt="avatar" style="width: 50px; border-radius: 50%">
                             @endif
+                                @if($good->name != 'Товар отсутствует')
                             <div style="display: flex; flex-direction: column">
                                 <a href="{{route('siteOneGood', [
                                                     'id' => $good->id,
@@ -49,6 +50,14 @@
                                 </a>
                                 {{ $good->price }}&#8381; {{$good->counter }}шт.<br>
                             </div>
+                                @else
+                                    <div style="display: flex; flex-direction: column">
+                                        <p>
+                                            {{ $good->name }}
+                                        </p>
+                                        {{ $good->price }}&#8381; {{$good->counter }}шт.<br>
+                                    </div>
+                                @endif
                         </div>
                     @empty
                         <p>нет данных</p>

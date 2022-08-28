@@ -44,16 +44,25 @@
                             @else
                                 <img src="/img/no_photo.jpg" alt="avatar" style="width: 50px; border-radius: 50%">
                             @endif
-                            <div style="display: flex; flex-direction: column">
-                                <a href="{{route('oneGood', [
+                            @if($good->name != 'Товар отсутствует')
+                                <div style="display: flex; flex-direction: column">
+                                    <a href="{{route('oneGood', [
                                                     'id' => $good->id,
                                                     'link' => 2,
                                                     'order_id' => $order->id
                                                     ])}}">
-                                    {{ $good->name }}
-                                </a>
-                                {{ $good->price }}&#8381; {{$good->counter }}шт.<br>
-                            </div>
+                                        {{ $good->name }}
+                                    </a>
+                                    {{ $good->price }}&#8381; {{$good->counter }}шт.<br>
+                                </div>
+                            @else
+                                <div style="display: flex; flex-direction: column">
+                                    <p>
+                                        {{ $good->name }}
+                                    </p>
+                                    {{ $good->price }}&#8381; {{$good->counter }}шт.<br>
+                                </div>
+                            @endif
                         </div>
                     @empty
                         <p>нет данных</p>
