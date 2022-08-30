@@ -49,8 +49,8 @@ class GoodRequest extends FormRequest
     public function messages()
     {
         return [
-            'required' => 'Не оставляйте это поле пустым',
-            'max' => 'Максимум 9 символов'
+            'required' => 'Не оставляйте это поле пустым.',
+            'max' => 'Максимум 9 символов.'
         ];
     }
 }

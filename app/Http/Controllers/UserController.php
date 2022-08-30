@@ -40,7 +40,8 @@ class UserController extends Controller
     public function storeUser(CreateUserRequest $request)
     {
         $data = $request->validated();
-        $data['password'] = Hash::make($data['password']);
+        $pass = $request->post('password');
+        $data['password'] = Hash::make($pass);
         if ($request->hasFile('avatar')) {
             $image = $request->file('avatar');
             $originalExt = $image->getClientOriginalExtension();
@@ -130,7 +131,8 @@ class UserController extends Controller
     public function updateUser(UpdateUserRequest $request, int $id, int $link, int $order_id)
     {
         $data = $request->validated();
-        $data['password'] = Hash::make($data['password']);
+        $user = User::findOrFail($id);
+//        $data['password'] = Hash::make($data['password']);
         if ($request->hasFile('avatar')) {
             $image = $request->file('avatar');
             $originalExt = $image->getClientOriginalExtension();
@@ -141,7 +143,25 @@ class UserController extends Controller
         if ($request->post('is_admin')) {
             $data['is_admin'] = $request->post('is_admin');
         }
-        $user = User::findOrFail($id);
+        $oldPassIsTrue = false;
+        if ($request->post('old_password')) {
+            if (Hash::check($request->post('old_password'), $user->password)) {
+                $oldPassIsTrue = true;
+            } else {
+                return back()
+                    ->with('errorOldPass', 'Старый пароль введён неверно.');
+            }
+        }
+        if ($request->post('new_password') && !$oldPassIsTrue ||
+            $request->post('new_password_confirmation') && !$oldPassIsTrue) {
+            return back()
+                ->with('errorNewPass', 'Старый пароль введён неверно.');
+        } elseif (!$request->post('new_password') && $request->post('new_password_confirmation')) {
+            return back()
+                ->with('errorNewPass', 'Пароли не совпадают.');
+        } elseif ($request->post('new_password') && $request->post('new_password_confirmation') && $oldPassIsTrue) {
+            $data['password'] = Hash::make($request->post('new_password'));
+        }
         $user = $user->fill($data)->save();
         if ($user) {
             return redirect()->route('user', [

@@ -50,10 +50,27 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
+            'name' => ['required', 'string', 'max:30'],
+            'surname' => ['required', 'string', 'max:30'],
+            'email' => ['required', 'string', 'email', 'max:30', 'unique:users'],
+            'password' => [
+                'required',
+                'string',
+                'confirmed',
+                'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^\w\s]).{8,}/',
+            ]
+        ], $this->messages());
+    }
+
+    public function messages()
+    {
+        return [
+            'unique' => 'Пользователь с таким email адресом уже зарегистрирован.',
+            'required' => 'Не оставляйте это поле пустым.',
+            'max' => 'Превышено максимальное значение.',
+            'regex' => 'Пароль должен быть не короче 8 символов, содержать строчные и заглавные буквы латинского алфавита, цифры и спец. символы.',
+            'confirmed' => 'Пароли не совпадают.'
+        ];
     }
 
     /**
@@ -66,6 +83,7 @@ class RegisterController extends Controller
     {
         return User::create([
             'name' => $data['name'],
+            'surname' => $data['surname'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);

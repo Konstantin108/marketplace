@@ -28,6 +28,7 @@ class TaskRequest extends FormRequest
                 'required',
                 'string',
                 'min:1',
+                'max:30',
                 'unique:tasks,task_name'
             ],
         ];
@@ -36,8 +37,8 @@ class TaskRequest extends FormRequest
     public function messages()
     {
         return [
-            'required' => 'Не оставляйте это поле пустым',
-            'unique' => 'Задача с таким именем уже существует'
+            'required' => 'Не оставляйте это поле пустым.',
+            'unique' => 'Задача с таким именем уже существует.'
         ];
     }
 }

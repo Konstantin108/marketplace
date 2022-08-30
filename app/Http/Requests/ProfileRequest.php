@@ -26,10 +26,19 @@ class ProfileRequest extends FormRequest
         return [
             'name' => [
                 'required',
+                'string',
+                'max:30'
             ],
-            'password' => [
+            'surname' => [
                 'required',
-                'min:8',
+                'string',
+                'max:30'
+            ],
+            'new_password' => [
+                'confirmed',
+                'string',
+                'nullable',
+                'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^\w\s]).{8,}/',
             ]
         ];
     }
@@ -37,8 +46,10 @@ class ProfileRequest extends FormRequest
     public function messages()
     {
         return [
-            'required' => 'Не оставляйте это поле пустым',
-            'min' => 'Пароль должен состоять минимум из 8 символов'
+            'required' => 'Не оставляйте это поле пустым.',
+            'max' => 'Превышено максимальное значение.',
+            'new_password.regex' => 'Пароль должен быть не короче 8 символов, содержать строчные и заглавные буквы латинского алфавита, цифры и спец. символы.',
+            'confirmed' => 'Пароли не совпадают.'
         ];
     }
 }
