@@ -15,6 +15,7 @@
             <th style="border: 2px solid black">#ID</th>
             <th style="border: 2px solid black; width: 60px;">Аватар</th>
             <th style="border: 2px solid black">Имя</th>
+            <th style="border: 2px solid black">Фамилия</th>
             <th style="border: 2px solid black">Почта</th>
             <th style="border: 2px solid black">Права админа</th>
         </tr>
@@ -32,6 +33,9 @@
             </td>
             <td style="border-bottom: 2px solid black; border-right: 1px solid black">
                 {{ $user->name }}
+            </td>
+            <td style="border-bottom: 2px solid black; border-right: 1px solid black">
+                {{ $user->surname }}
             </td>
             <td style="border-bottom: 2px solid black; border-right: 1px solid black">{{ $user->email }}</td>
             <td style="border-bottom: 2px solid black; border-right: 1px solid black">

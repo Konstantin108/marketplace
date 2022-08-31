@@ -12,122 +12,127 @@
                 @elseif(session()->has('error'))
                     <div class="alert alert-danger">{{session()->get('error')}}</div>
                 @endif
-                <form method="post" action="{{ route('updateProfile') }}" enctype="multipart/form-data">
-                    @csrf
-                    <div class="form-group" style="position: relative; max-width: 494px;">
-                        <label for="avatar">Аватар пользователя</label>
-                        <div style="width: 300px;
+                <div class="form-group" style="position: relative; max-width: 494px;">
+                    <label for="avatar">Аватар пользователя</label>
+                    <div style="width: 300px;
                                 display:flex;
                                 justify-content: flex-start;
                                 margin-bottom: 20px;"
-                        >
-                            @if($user->avatar)
+                    >
+                        @if($user->avatar)
+                            <form action="{{route('delMyAvatar')}}" method="post">
+                                @csrf
                                 <img src="{{ \Storage::disk('public')->url( $user->avatar) }}" alt="avatar"
                                      style="width: 200px;">
-                            @else
-                                <img src="/img/no_photo.jpg" alt="avatar" style="width: 200px;">
-                            @endif
-                        </div>
+                                <button type="submit" style="border: none; background-color: white">
+                                    <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                </button>
+                        @else
+                            <img src="/img/no_photo.jpg" alt="avatar" style="width: 200px;">
+                        @endif
+                    </div>
+                    <form method="post" action="{{ route('updateProfile') }}" enctype="multipart/form-data">
+                        @csrf
                         <input type="file" id="avatar" name="avatar" class="form-control" style="width: 500px;">
                         <input type="button"
                                id="clear"
                                class="delete_icon"
                                style="position: absolute; top: 252px;"
                         >
-                    </div>
-                    <script>
-                        let control = document.querySelector("#avatar"),
-                            clearBn = document.querySelector("#clear");
-                        clearBn.addEventListener("click", function () {
-                            control.value = '';
-                            let newControl = control.cloneNode(true)
-                            control.replaceWith(newControl);
-                            control = newControl;
-                        });
-                    </script>
-                    <div
-                        style="display: flex; justify-content: space-between; width: 400px; border-bottom: 2px solid grey; margin-bottom: 2px;">
-                        <label for="name">Имя пользователя</label>
-                        <input type="text"
-                               id="name"
-                               name="name"
-                               @error('name') style="border: red 1px solid;" @enderror
-                               class="form-control"
-                               value="{{$user->name}}">
-                        @if($errors->has('name'))
-                            @foreach($errors->get('name') as $error)
-                                {{ $error }}
-                            @endforeach
-                        @endif
-                    </div>
-                    <div
-                        style="display: flex; justify-content: space-between; width: 400px; border-bottom: 2px solid grey; margin-bottom: 2px;">
-                        <label for="surname">Фамилия пользователя</label>
-                        <input type="text"
-                               id="surname"
-                               name="surname"
-                               @error('surname') style="border: red 1px solid;" @enderror
-                               class="form-control"
-                               value="{{$user->surname}}">
-                        @if($errors->has('surname'))
-                            @foreach($errors->get('surname') as $error)
-                                {{ $error }}
-                            @endforeach
-                        @endif
-                    </div>
-                    <div class="form-group" style="position: relative">
-                        <label for="old_password">Старый пароль</label>
-                        <input type="text"
-                               class="form-control password_hide hidden_text"
-                               id="old_password"
-                               onpaste="return false;"
-                               oncopy="return false;"
-                               name="old_password"
-                               autocomplete="off">
-                        <a href="#" class="password_show" tabindex="-1"
-                           onclick="return show_old_password(this);"></a>
-                        @if(session()->has('errorOldPass'))
-                            <span class="form-txt-danger">{{session()->get('errorOldPass')}}</span>
-                        @endif
-                    </div>
-                    <div class="form-group" style="position: relative">
-                        <label for="new_password">Новый пароль</label>
-                        <input type="text"
-                               class="form-control password_hide hidden_text"
-                               id="new_password"
-                               onpaste="return false;"
-                               oncopy="return false;"
-                               name="new_password"
-                               autocomplete="off">
-                        <a href="#" class="password_show" tabindex="-1"
-                           onclick="return show_new_password(this);"></a>
-                    </div>
-                    <div class=" form-group" style="position: relative">
-                        <label for="new_password_confirmation">Подтвердите пароль</label>
-                        <input type="text"
-                               class="form-control
+                        <script>
+                            let control = document.querySelector("#avatar"),
+                                clearBn = document.querySelector("#clear");
+                            clearBn.addEventListener("click", function () {
+                                control.value = '';
+                                let newControl = control.cloneNode(true)
+                                control.replaceWith(newControl);
+                                control = newControl;
+                            });
+                        </script>
+                        <div
+                            style="display: flex; justify-content: space-between; width: 400px; border-bottom: 2px solid grey; margin-bottom: 2px;">
+                            <label for="name">Имя пользователя</label>
+                            <input type="text"
+                                   id="name"
+                                   name="name"
+                                   @error('name') style="border: red 1px solid;" @enderror
+                                   class="form-control"
+                                   value="{{$user->name}}">
+                            @if($errors->has('name'))
+                                @foreach($errors->get('name') as $error)
+                                    {{ $error }}
+                                @endforeach
+                            @endif
+                        </div>
+                        <div
+                            style="display: flex; justify-content: space-between; width: 400px; border-bottom: 2px solid grey; margin-bottom: 2px;">
+                            <label for="surname">Фамилия пользователя</label>
+                            <input type="text"
+                                   id="surname"
+                                   name="surname"
+                                   @error('surname') style="border: red 1px solid;" @enderror
+                                   class="form-control"
+                                   value="{{$user->surname}}">
+                            @if($errors->has('surname'))
+                                @foreach($errors->get('surname') as $error)
+                                    {{ $error }}
+                                @endforeach
+                            @endif
+                        </div>
+                        <div class="form-group" style="position: relative">
+                            <label for="old_password">Старый пароль</label>
+                            <input type="text"
+                                   class="form-control password_hide hidden_text"
+                                   id="old_password"
+                                   onpaste="return false;"
+                                   oncopy="return false;"
+                                   name="old_password"
+                                   autocomplete="off">
+                            <a href="#" class="password_show" tabindex="-1"
+                               onclick="return show_old_password(this);"></a>
+                            @if(session()->has('errorOldPass'))
+                                <span class="form-txt-danger">{{session()->get('errorOldPass')}}</span>
+                            @endif
+                        </div>
+                        <div class="form-group" style="position: relative">
+                            <label for="new_password">Новый пароль</label>
+                            <input type="text"
+                                   class="form-control password_hide hidden_text"
+                                   id="new_password"
+                                   onpaste="return false;"
+                                   oncopy="return false;"
+                                   name="new_password"
+                                   autocomplete="off">
+                            <a href="#" class="password_show" tabindex="-1"
+                               onclick="return show_new_password(this);"></a>
+                        </div>
+                        <div class=" form-group" style="position: relative">
+                            <label for="new_password_confirmation">Подтвердите пароль</label>
+                            <input type="text"
+                                   class="form-control
                                                       password_hide
                                                       hidden_text
                                                       @error('new_password_confirmation') form-control-danger @enderror"
-                               id="new_password_confirmation"
-                               onpaste="return false;"
-                               oncopy="return false;"
-                               name="new_password_confirmation"
-                               autocomplete="off">
-                        @if($errors->has('new_password'))
-                            @foreach($errors->get('new_password') as $error)
-                                <span class="form-txt-danger">{{ $error }}</span>
-                            @endforeach
-                        @endif
-                        <a href="#" class="password_show" tabindex="-1"
-                           onclick="return show_new_password_confirmation(this);"></a>
-                        @if(session()->has('errorNewPass'))
-                            <span class="form-txt-danger">{{session()->get('errorNewPass')}}</span>
-                        @endif
-                    </div>
-                    <br>
-                    <button type="submit" class="btn btn-success">Сохранить</button>
-                </form>
+                                   id="new_password_confirmation"
+                                   onpaste="return false;"
+                                   oncopy="return false;"
+                                   name="new_password_confirmation"
+                                   autocomplete="off">
+                            @if($errors->has('new_password'))
+                                @foreach($errors->get('new_password') as $error)
+                                    <span class="form-txt-danger">{{ $error }}</span>
+                                @endforeach
+                            @endif
+                            <a href="#" class="password_show" tabindex="-1"
+                               onclick="return show_new_password_confirmation(this);"></a>
+                            @if(session()->has('errorNewPass'))
+                                <span class="form-txt-danger">{{session()->get('errorNewPass')}}</span>
+                            @endif
+                        </div>
+                        <br>
+                        <button type="submit" class="btn btn-success">Сохранить</button>
+                    </form>
+                </div>
                 <a href="{{ route('myProfile') }}">Назад</a>
             </div>
         </div>

@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateUserRequest;
 use App\Models\Order;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
@@ -117,6 +118,29 @@ class UserController extends Controller
             'link' => $link,
             'order_id' => $order_id
         ]);
+    }
+
+    /**
+     * @param $id
+     * @param $link
+     * @param $order_id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function delAvatar($id, $link, $order_id)
+    {
+        $user = User::findOrFail($id);
+        Storage::disk('public')->delete($user->avatar);
+        $data['avatar'] = '';
+        $user->fill($data)->save();
+        if ($user) {
+            return redirect()->route('editUser', [
+                'id' => $id,
+                'link' => $link,
+                'order_id' => $order_id
+            ])->with('success', 'Данные успешно обновлены.');
+        }
+        return back()
+            ->with('error', 'Произошла ошибка!');
     }
 
     /**

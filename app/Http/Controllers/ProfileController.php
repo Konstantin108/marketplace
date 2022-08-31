@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
@@ -113,7 +114,6 @@ class ProfileController extends Controller
         return back()
             ->with('error', 'Произошла ошибка');
     }
-
     /**
      * Remove the specified resource from storage.
      *
@@ -123,5 +123,23 @@ class ProfileController extends Controller
     public function destroy(int $id)
     {
         //
+    }
+
+    /**
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function delMyAvatar()
+    {
+        $id = Auth::user()->id;
+        $user = User::findOrFail($id);
+        Storage::disk('public')->delete($user->avatar);
+        $data['avatar'] = '';
+        $user->fill($data)->save();
+        if ($user) {
+            return redirect()->route('editProfile')
+                ->with('success', 'Данные успешно обновлены.');
+        }
+        return back()
+            ->with('error', 'Произошла ошибка!');
     }
 }
