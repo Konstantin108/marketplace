@@ -56,10 +56,10 @@ class UserController extends Controller
         $user = User::create($data);
         if ($user) {
             return redirect()->route('users')
-                ->with('success', 'Пользователь добавлен');
+                ->with('success', 'Пользователь добавлен.');
         }
         return back()
-            ->with('error', 'Произошла ошибка');
+            ->with('error', 'Произошла ошибка!');
     }
 
     /**
@@ -121,29 +121,6 @@ class UserController extends Controller
     }
 
     /**
-     * @param $id
-     * @param $link
-     * @param $order_id
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function delAvatar($id, $link, $order_id)
-    {
-        $user = User::findOrFail($id);
-        Storage::disk('public')->delete($user->avatar);
-        $data['avatar'] = '';
-        $user->fill($data)->save();
-        if ($user) {
-            return redirect()->route('editUser', [
-                'id' => $id,
-                'link' => $link,
-                'order_id' => $order_id
-            ])->with('success', 'Данные успешно обновлены.');
-        }
-        return back()
-            ->with('error', 'Произошла ошибка!');
-    }
-
-    /**
      * Update the specified resource in storage.
      *
      * @param UpdateUserRequest $request
@@ -163,6 +140,10 @@ class UserController extends Controller
             $fileName = uniqid();
             $fileLink = $image->storeAs('users', $fileName . '.' . $originalExt, 'public');
             $data['avatar'] = $fileLink;
+        }
+        if (!$request->hasFile('avatar') && $request->post('no_photo')) {
+            Storage::disk('public')->delete($user->avatar);
+            $data['avatar'] = '';
         }
         if ($request->post('is_admin')) {
             $data['is_admin'] = $request->post('is_admin');
@@ -186,16 +167,17 @@ class UserController extends Controller
         } elseif ($request->post('new_password') && $request->post('new_password_confirmation') && $oldPassIsTrue) {
             $data['password'] = Hash::make($request->post('new_password'));
         }
+
         $user = $user->fill($data)->save();
         if ($user) {
             return redirect()->route('user', [
                 'id' => $id,
                 'link' => $link,
                 'order_id' => $order_id
-            ])->with('success', 'Данные пользователя обновлены');
+            ])->with('success', 'Данные пользователя обновлены.');
         }
         return back()
-            ->with('error', 'Произошла ошибка');
+            ->with('error', 'Произошла ошибка!');
     }
 
     /**
@@ -218,17 +200,17 @@ class UserController extends Controller
         if ($link == '1') {
             if ($user) {
                 return redirect()->route('users', ['users' => $users])
-                    ->with('success', 'Пользователь и заказы пользователя удалены');
+                    ->with('success', 'Пользователь и заказы пользователя удалены!');
             }
             return back()
-                ->with('error', 'Произошла ошибка');
+                ->with('error', 'Произошла ошибка!');
         } elseif ($link == '2' or $link == '3') {
             if ($user) {
                 return redirect()->route('allOrders', ['orders' => $orders])
-                    ->with('success', 'Пользователь и заказы пользователя удалены');
+                    ->with('success', 'Пользователь и заказы пользователя удалены!');
             }
             return back()
-                ->with('error', 'Произошла ошибка');
+                ->with('error', 'Произошла ошибка!');
         }
     }
 }

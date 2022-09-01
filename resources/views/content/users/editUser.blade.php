@@ -12,44 +12,54 @@
                 @elseif(session()->has('error'))
                     <div class="alert alert-danger">{{session()->get('error')}}</div>
                 @endif
-
-                <div class="form-group" style="position: relative; max-width: 494px;">
-                    <label for="avatar">Аватар пользователя</label>
-                    <div style="width: 300px;
-                                display:flex;
-                                justify-content: flex-start;
-                                margin-bottom: 20px;"
-                    >
-                        @if($user->avatar)
-                            <form action="{{route('delAvatar', [
-                                                      'id' => $user->id,
-                                                     'link' => $link,
-                                                     'order_id' => $order_id
-    ]                                           )}}" method="post">
-                                @csrf
-                                <img src="{{ \Storage::disk('public')->url( $user->avatar) }}" alt="avatar"
-                                     style="width: 200px;">
-                                <button type="submit" style="border: none; background-color: white">
-                                    <i class="fa fa-trash-o" aria-hidden="true"></i>
-                                </button>
-                            </form>
-                        @else
-                            <img src="/img/no_photo.jpg" alt="avatar" style="width: 200px;">
-                        @endif
-                    </div>
-                    <form method="post" action="{{ route('updateUser', [
+                <form method="post" action="{{ route('updateUser', [
                                                         'id' => $user->id,
                                                         'link' => $link,
                                                         'order_id' => $order_id
                                                     ]) }}" enctype="multipart/form-data">
-                        @csrf
+                    @csrf
+                    <div class="form-group" style=" width: 494px; position: relative">
+                        <label for="avatar">Аватар пользователя</label>
+                        <div style="width: 300px;
+                                display:flex;
+                                justify-content: flex-start;
+                                margin-bottom: 20px;"
+                        >
+                            @if($user->avatar)
+
+                                <img src="{{ \Storage::disk('public')->url( $user->avatar) }}" alt="avatar"
+                                     class="avatar-img"
+                                     style="width: 200px;">
+                                <input type="button"
+                                       id="clearImg"
+                                       class="delete_icon_img"
+                                       style="position: absolute; left: 204px; top: 200px;"
+                                >
+                                <input type="hidden" value="" id="no_photo" name="no_photo">
+                                <script>
+                                    let controlImg = document.querySelector(".avatar-img"),
+                                        noPhoto = document.querySelector("#no_photo"),
+                                        clearBnImg = document.querySelector("#clearImg");
+                                    clearBnImg.addEventListener("click", function () {
+                                        noPhoto.value = 'no_photo';
+                                        controlImg.src = '/img/no_photo.jpg';
+                                        control.value = '';
+                                        let newControlImg = controlImg.cloneNode(true)
+                                        controlImg.replaceWith(newControl);
+                                        controlImg = newControlImg;
+                                    });
+                                </script>
+                            @else
+                                <img src="/img/no_photo.jpg" alt="avatar" style="width: 200px;">
+                            @endif
+                        </div>
+
                         <input type="file" id="avatar" name="avatar" class="form-control" style="width: 500px;">
                         <input type="button"
                                id="clear"
                                class="delete_icon"
-                               style="position: absolute; top: 252px"
+                               style="position: absolute; left: 470px; top: 252px;"
                         >
-
                         <script>
                             let control = document.querySelector("#avatar"),
                                 clearBn = document.querySelector("#clear");
@@ -158,78 +168,87 @@
                         </div>
                         <br>
                         <button type="submit" class="btn btn-success">Сохранить</button>
-                    </form>
-                    <a href="{{route('user', ['id' => $user->id, 'link' => $link, 'order_id' => $order_id])}}">Назад</a>
-                </div>
+                    </div>
+                </form>
+                <a href="{{route('user', ['id' => $user->id, 'link' => $link, 'order_id' => $order_id])}}">Назад</a>
             </div>
         </div>
-        <style>
-            .password_show {
-                position: absolute;
-                top: 35px;
-                right: 6px;
-                display: inline-block;
-                width: 20px;
-                height: 20px;
-                background: url({{ asset('assets/guest-layout/img/view.svg') }}) 0 0 no-repeat;
-            }
+    </div>
+    <style>
+        .password_show {
+            position: absolute;
+            top: 35px;
+            right: 6px;
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            background: url({{ asset('assets/guest-layout/img/view.svg') }}) 0 0 no-repeat;
+        }
 
-            .password_show.view {
-                background: url({{ asset('assets/guest-layout/img/no-view.svg') }}) 0 0 no-repeat;
-            }
+        .password_show.view {
+            background: url({{ asset('assets/guest-layout/img/no-view.svg') }}) 0 0 no-repeat;
+        }
 
-            .delete_icon {
-                position: absolute;
-                top: 37px;
-                right: 6px;
-                display: inline-block;
-                width: 20px;
-                height: 20px;
-                border-style: none;
-                background: url({{ asset('assets/guest-layout/img/delete_icon.svg') }}) 0 0 no-repeat;
-            }
+        .delete_icon {
+            position: absolute;
+            top: 37px;
+            right: 6px;
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border-style: none;
+            background: url({{ asset('assets/guest-layout/img/delete_icon.svg') }}) 0 0 no-repeat;
+        }
 
-            .hidden_text {
-                text-security: disc;
-                -webkit-text-security: disc;
-            }
-        </style>
-        <script>
-            function show_old_password(target) {
-                var input = document.getElementById('old_password');
-                if (!target.classList.contains('view')) {
-                    target.classList.add('view');
-                    input.classList.remove('hidden_text');
-                } else {
-                    target.classList.remove('view');
-                    input.classList.add('hidden_text');
-                }
-                return false;
-            }
+        .delete_icon_img {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border-style: none;
+            background: url({{ asset('assets/guest-layout/img/delete_icon.svg') }}) 0 0 no-repeat;
+        }
 
-            function show_new_password(target) {
-                var input = document.getElementById('new_password');
-                if (!target.classList.contains('view')) {
-                    target.classList.add('view');
-                    input.classList.remove('hidden_text');
-                } else {
-                    target.classList.remove('view');
-                    input.classList.add('hidden_text');
-                }
-                return false;
+        .hidden_text {
+            text-security: disc;
+            -webkit-text-security: disc;
+        }
+    </style>
+    <script>
+        function show_old_password(target) {
+            var input = document.getElementById('old_password');
+            if (!target.classList.contains('view')) {
+                target.classList.add('view');
+                input.classList.remove('hidden_text');
+            } else {
+                target.classList.remove('view');
+                input.classList.add('hidden_text');
             }
+            return false;
+        }
 
-            function show_new_password_confirmation(target) {
-                var input = document.getElementById('new_password_confirmation');
-                if (!target.classList.contains('view')) {
-                    target.classList.add('view');
-                    input.classList.remove('hidden_text');
-                } else {
-                    target.classList.remove('view');
-                    input.classList.add('hidden_text');
-                }
-                return false;
+        function show_new_password(target) {
+            var input = document.getElementById('new_password');
+            if (!target.classList.contains('view')) {
+                target.classList.add('view');
+                input.classList.remove('hidden_text');
+            } else {
+                target.classList.remove('view');
+                input.classList.add('hidden_text');
             }
-        </script>
+            return false;
+        }
+
+        function show_new_password_confirmation(target) {
+            var input = document.getElementById('new_password_confirmation');
+            if (!target.classList.contains('view')) {
+                target.classList.add('view');
+                input.classList.remove('hidden_text');
+            } else {
+                target.classList.remove('view');
+                input.classList.add('hidden_text');
+            }
+            return false;
+        }
+    </script>
 
 @endsection

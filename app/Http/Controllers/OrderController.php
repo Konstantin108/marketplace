@@ -169,10 +169,10 @@ class OrderController extends Controller
         $order = $order->fill($data)->save();
         if ($order) {
             return redirect()->route('getThisOrder', ['id' => $id])
-                ->with('success', 'Статус заказа обновлён');
+                ->with('success', 'Статус заказа обновлён.');
         }
         return back()
-            ->with('error', 'Произошла ошибка');
+            ->with('error', 'Произошла ошибка!');
     }
 
     /**
@@ -187,10 +187,10 @@ class OrderController extends Controller
         $order = $order->fill($data)->save();
         if ($order) {
             return redirect()->route('getOrder', ['id' => $id])
-                ->with('success', 'Статус заказа обновлён');
+                ->with('success', 'Статус заказа обновлён.');
         }
         return back()
-            ->with('error', 'Произошла ошибка');
+            ->with('error', 'Произошла ошибка!');
     }
 
     /**
@@ -204,9 +204,9 @@ class OrderController extends Controller
         $order->delete();
         if ($order) {
             return redirect()->route('allOrders', ['orders' => $orders])
-                ->with('success', 'Заказ удалён');
+                ->with('success', 'Заказ удалён!');
         }
         return back()
-            ->with('error', 'Произошла ошибка');
+            ->with('error', 'Произошла ошибка!');
     }
 }

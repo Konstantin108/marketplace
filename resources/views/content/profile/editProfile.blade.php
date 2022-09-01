@@ -12,32 +12,49 @@
                 @elseif(session()->has('error'))
                     <div class="alert alert-danger">{{session()->get('error')}}</div>
                 @endif
-                <div class="form-group" style="position: relative; max-width: 494px;">
-                    <label for="avatar">Аватар пользователя</label>
-                    <div style="width: 300px;
+                <form method="post" action="{{ route('updateProfile') }}" enctype="multipart/form-data">
+                    @csrf
+                    <div class="form-group" style=" width: 494px; position: relative">
+                        <label for="avatar">Аватар пользователя</label>
+                        <div style="width: 300px;
                                 display:flex;
                                 justify-content: flex-start;
-                                margin-bottom: 20px;"
-                    >
-                        @if($user->avatar)
-                            <form action="{{route('delMyAvatar')}}" method="post">
-                                @csrf
-                                <img src="{{ \Storage::disk('public')->url( $user->avatar) }}" alt="avatar"
+                                margin-bottom: 20px;
+                                "
+                        >
+                            @if($user->avatar)
+                                <img src="{{ \Storage::disk('public')->url( $user->avatar) }}" class="avatar-img"
+                                     alt="avatar"
                                      style="width: 200px;">
-                                <button type="submit" style="border: none; background-color: white">
-                                    <i class="fa fa-trash-o" aria-hidden="true"></i>
-                                </button>
-                        @else
-                            <img src="/img/no_photo.jpg" alt="avatar" style="width: 200px;">
-                        @endif
-                    </div>
-                    <form method="post" action="{{ route('updateProfile') }}" enctype="multipart/form-data">
-                        @csrf
+                                <input type="button"
+                                       id="clearImg"
+                                       class="delete_icon_img"
+                                       style="position: absolute; left: 204px; top: 200px;"
+                                >
+                                <input type="hidden" value="" id="no_photo" name="no_photo">
+                                <script>
+                                    let controlImg = document.querySelector(".avatar-img"),
+                                        noPhoto = document.querySelector("#no_photo"),
+                                        clearBnImg = document.querySelector("#clearImg");
+                                    clearBnImg.addEventListener("click", function () {
+                                        noPhoto.value = 'no_photo';
+                                        controlImg.src = '/img/no_photo.jpg';
+                                        control.value = '';
+                                        let newControlImg = controlImg.cloneNode(true)
+                                        controlImg.replaceWith(newControl);
+                                        controlImg = newControlImg;
+                                    });
+                                </script>
+                            @else
+                                <img src="/img/no_photo.jpg" alt="avatar" style="width: 200px;">
+                            @endif
+                        </div>
+
                         <input type="file" id="avatar" name="avatar" class="form-control" style="width: 500px;">
                         <input type="button"
                                id="clear"
                                class="delete_icon"
-                               style="position: absolute; top: 252px;"
+                               style="position: absolute; left: 470px; top: 252px;"
                         >
                         <script>
                             let control = document.querySelector("#avatar"),
@@ -130,13 +147,17 @@
                             @endif
                         </div>
                         <br>
-                        <button type="submit" class="btn btn-success">Сохранить</button>
-                    </form>
-                </div>
-                <a href="{{ route('myProfile') }}">Назад</a>
+                        <button type="submit" name="updateProfile" id="updateProfile" class="btn btn-success">
+                            Сохранить
+                        </button>
+                    </div>
+                </form>
+                    <a href="{{ route('myProfile') }}">Назад</a>
             </div>
+
         </div>
     </div>
+
     <style>
         .password_show {
             position: absolute;
@@ -153,9 +174,14 @@
         }
 
         .delete_icon {
-            position: absolute;
-            top: 37px;
-            right: 6px;
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border-style: none;
+            background: url({{ asset('assets/guest-layout/img/delete_icon.svg') }}) 0 0 no-repeat;
+        }
+
+        .delete_icon_img {
             display: inline-block;
             width: 20px;
             height: 20px;

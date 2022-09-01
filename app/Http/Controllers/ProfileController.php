@@ -87,6 +87,10 @@ class ProfileController extends Controller
             $fileLink = $image->storeAs('users', $fileName . '.' . $originalExt, 'public');
             $data['avatar'] = $fileLink;
         }
+        if (!$request->hasFile('avatar') && $request->post('no_photo')) {
+            Storage::disk('public')->delete($user->avatar);
+            $data['avatar'] = '';
+        }
         $oldPassIsTrue = false;
         if ($request->post('old_password')) {
             if (Hash::check($request->post('old_password'), $user->password)) {
@@ -109,10 +113,10 @@ class ProfileController extends Controller
         $user->fill($data)->save();
         if ($user) {
             return redirect()->route('myProfile', ['id' => $id])
-                ->with('success', 'Данные пользователя обновлены');
+                ->with('success', 'Данные пользователя обновлены.');
         }
         return back()
-            ->with('error', 'Произошла ошибка');
+            ->with('error', 'Произошла ошибка!');
     }
     /**
      * Remove the specified resource from storage.
@@ -123,23 +127,5 @@ class ProfileController extends Controller
     public function destroy(int $id)
     {
         //
-    }
-
-    /**
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function delMyAvatar()
-    {
-        $id = Auth::user()->id;
-        $user = User::findOrFail($id);
-        Storage::disk('public')->delete($user->avatar);
-        $data['avatar'] = '';
-        $user->fill($data)->save();
-        if ($user) {
-            return redirect()->route('editProfile')
-                ->with('success', 'Данные успешно обновлены.');
-        }
-        return back()
-            ->with('error', 'Произошла ошибка!');
     }
 }

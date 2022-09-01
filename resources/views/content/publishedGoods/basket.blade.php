@@ -2,9 +2,9 @@
 @section('content')
 
     @if(session()->has('success'))
-        {{session()->get('success')}}
+        <div class="alert alert-success">{{session()->get('success')}}</div>
     @elseif(session()->has('error'))
-        {{session()->get('fail')}}
+        <div class="alert alert-danger">{{session()->get('error')}}</div>
     @endif
 
     <table class="table table-bordered">

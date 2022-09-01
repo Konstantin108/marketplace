@@ -167,12 +167,6 @@ Route::group(['middleware' => 'auth'], function () {
             ->where('link', '\d+')
             ->name('deleteUser');
 
-        Route::post('delAvatar/{id}/{link}/{order_id}', [UserController::class, 'delAvatar'])
-            ->where('id', '\d+')
-            ->where('link', '\d+')
-            ->where('order_id', '\d+')
-            ->name('delAvatar');
-
         Route::get('editUser/{id}/{link}/{order_id}', [UserController::class, 'editUser'])
             ->where('id', '\d+')
             ->where('link', '\d+')
@@ -202,9 +196,6 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::post('updateProfile', [ProfileController::class, 'updateProfile'])
         ->name('updateProfile');
-
-    Route::post('delMyAvatar', [ProfileController::class, 'delMyAvatar'])
-        ->name('delMyAvatar');
 
     //Для работы с товарами и корзиной
     Route::get('addToBasket/{id}/{tableId}{link}', [BasketController::class, 'addToBasket'])
