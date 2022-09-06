@@ -12,7 +12,7 @@
         <size>XS</size>
         <sex>Ж</sex>
         <sale>0</sale>
-        <img>goods/good001.jpg</img>
+        <img>goods/good01.jpg</img>
     </good>
     <good>
         <id>12366</id>
@@ -26,7 +26,7 @@
         <size>XL</size>
         <sex>Ж</sex>
         <sale>1</sale>
-        <img>goods/good002.png</img>
+        <img>goods/good02.jpg</img>
     </good>
     <good>
         <id>655</id>
@@ -40,7 +40,7 @@
         <size>L</size>
         <sex>Ж</sex>
         <sale>0</sale>
-        <img>goods/good003.jpg</img>
+        <img>goods/good03.jpg</img>
     </good>
     <good>
         <id>3456</id>
@@ -54,7 +54,7 @@
         <size>L</size>
         <sex>Ж</sex>
         <sale>0</sale>
-        <img>goods/good004.jpeg</img>
+        <img>goods/good04.jpg</img>
     </good>
     <good>
         <id>987</id>
@@ -68,7 +68,7 @@
         <size>L</size>
         <sex>Ж</sex>
         <sale>1</sale>
-        <img>goods/good005.jpeg</img>
+        <img>goods/good05.jpg</img>
     </good>
     <good>
         <id>3244</id>
@@ -82,7 +82,7 @@
         <size>L</size>
         <sex>М</sex>
         <sale>0</sale>
-        <img>goods/good006.jpg</img>
+        <img>goods/good06.jpg</img>
     </good>
     <good>
         <id>465</id>
@@ -96,7 +96,7 @@
         <size>L</size>
         <sex>Ж</sex>
         <sale>1</sale>
-        <img>goods/good007.jpg</img>
+        <img>goods/good07-1.jpg</img>
     </good>
     <good>
         <id>345</id>
@@ -110,7 +110,7 @@
         <size>L</size>
         <sex>М</sex>
         <sale>0</sale>
-        <img>goods/good008.jpg</img>
+        <img>goods/good08.jpg</img>
     </good>
     <good>
         <id>34115</id>
@@ -124,7 +124,7 @@
         <size>L</size>
         <sex>М</sex>
         <sale>0</sale>
-        <img>goods/good009.jpeg</img>
+        <img>goods/good09.jpg</img>
     </good>
     <good>
         <id>3411145</id>
@@ -138,7 +138,7 @@
         <size>L</size>
         <sex>М</sex>
         <sale>0</sale>
-        <img>goods/good010.jpg</img>
+        <img>goods/good10.jpg</img>
     </good>
     <good>
         <id>34516</id>
@@ -152,7 +152,7 @@
         <size>L</size>
         <sex>М</sex>
         <sale>0</sale>
-        <img>goods/good011.jpg</img>
+        <img>goods/good11.jpg</img>
     </good>
     <good>
         <id>345363</id>
@@ -166,7 +166,7 @@
         <size>L</size>
         <sex>Ж</sex>
         <sale>0</sale>
-        <img>goods/good012.jpeg</img>
+        <img>goods/good12.jpg</img>
     </good>
     <good>
         <id>32245</id>
@@ -180,6 +180,6 @@
         <size>L</size>
         <sex>Ж</sex>
         <sale>0</sale>
-        <img>goods/good013.jpg</img>
+        <img>goods/good13.jpg</img>
     </good>
 </goods>

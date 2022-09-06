@@ -89,6 +89,14 @@ class PublishedGoodController extends Controller
         }
     }
 
+    /**
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    public function getPromo()
+    {
+        return view('content.goods.promo');
+    }
+
     public function createGood()
     {
         //

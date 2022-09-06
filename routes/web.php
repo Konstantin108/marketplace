@@ -247,6 +247,9 @@ Route::get('backForSite/{link}/{orderId}', [BasketController::class, 'backForSit
     ->where('orderId', '\d+')
     ->name('backForSite');
 
+Route::get('getPromo', [PublishedGoodController::class, 'getPromo'])
+    ->name('getPromo');
+
 //Роуты для работы с сессией для удобства пока в контроллере BasketController
 Route::get('showSession', [BasketController::class, 'showSession'])
     ->name('showSession');
