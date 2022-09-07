@@ -94,7 +94,7 @@ class PublishedGoodController extends Controller
      */
     public function getPromo()
     {
-        return view('content.goods.promo');
+        return view('content.publishedGoods.promo');
     }
 
     public function createGood()

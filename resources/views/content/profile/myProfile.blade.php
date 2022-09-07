@@ -11,42 +11,32 @@
     </nav>
 
 
-
-
-
-
-
-    <div class="main_content center">
-
+    <div class="main_content center" style="padding-left: 36%">
         <div style="display: flex; flex-direction: column; justify-content: center">
-            <div style="width: 300px;
-             display:flex;
-             justify-content: flex-start;
-             margin-bottom: 20px;"
-            >
+            <div style="display:flex;
+                        justify-content: flex-start;
+                        margin-bottom: 20px;">
                 @if($user->avatar)
                     <img src="{{ \Storage::disk('public')->url( $user->avatar) }}" alt="avatar"
                          style="width: 200px;">
                 @else
                     <img src="/img/no_photo.jpg" alt="avatar" style="width: 200px;">
                 @endif
-
-
                 <div style="width: 300px;">
-                    <h3>Имя</h3>
-                   <p style="margin-left: 50px;"> {{ $user->name }}</p>
-                    <h3>Фамилия</h3>
-                   <p style="margin-left: 50px;"> {{ $user->surname }}</p>
-                    <h3>Email-адрес</h3>
-                   <p style="margin-left: 50px;"> {{ $user->email }}</p>
+                    <h4>Имя</h4>
+                    <p style="margin-left: 50px;"> {{ $user->name }}</p>
+                    <h4>Фамилия</h4>
+                    <p style="margin-left: 50px;"> {{ $user->surname }}</p>
+                    <h4>Email-адрес</h4>
+                    <p style="margin-left: 50px;"> {{ $user->email }}</p>
                 </div>
-
             </div>
             <div style="display: flex">
-                <a class="button" style="padding-bottom: 10px; text-align: center; vertical-align: center" href="{{ route('editProfile') }}">Редактировать</a>
-                <a class="button" style="padding-bottom: 10px; text-align: center; vertical-align: center" href="{{route('siteIndex')}}">Назад</a>
+                <a class="button" style="padding-bottom: 40px; text-align: center; vertical-align: center"
+                   href="{{ route('editProfile') }}">Редактировать</a>
+                <a class="button" style="padding-bottom: 40px; text-align: center; vertical-align: center"
+                   href="{{route('siteIndex')}}">Назад</a>
             </div>
-
         </div>
 
 @endsection

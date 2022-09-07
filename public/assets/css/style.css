@@ -2539,7 +2539,7 @@ input[type=radio] {
     display: flex;
     background-color: #f7f7f7;
     justify-content: center;
-    height: 777px;
+    height: 650px;
 }
 
 .women_slider_element {
@@ -2590,7 +2590,7 @@ input[type=radio] {
 }
 
 .women__space {
-    height: 663px;
+    height: 790px;
 }
 
 .bottom__w {
@@ -2680,7 +2680,7 @@ input[type=radio] {
 }
 
 .add__bottom_cart {
-    width: 537px;
+    width: 300px;
     height: 55px;
     background-color: #ffffff;
     color: black;
@@ -2705,12 +2705,20 @@ input[type=radio] {
     margin-right: 15px;
 }
 
+.fa-arrow-left {
+    margin-right: 15px;
+}
+
 .add__bottom_cart:hover {
     border: 1px solid #ef5b70;
     cursor: pointer;
 }
 
 .add__bottom_cart:active .cart__bottom {
+    color: white;
+}
+
+.add__bottom_cart:active  .fa-arrow-left {
     color: white;
 }
 

@@ -12,5 +12,13 @@
         <li class="menu__list">
             <a href="{{ route('allMyOrders') }}" class="menu__link">Мои заказы</a>
         </li>
+        @if(Auth::check() && Auth::user()->is_admin)
+            <li class="menu__list">
+                <a href="{{ route('myTasks', ['userId' => Auth::user()->id]) }}"
+                   class="button" style="background-color: #0a53be">
+                    Пульт админа
+                </a>
+            </li>
+        @endif
     </ul>
 </nav>
