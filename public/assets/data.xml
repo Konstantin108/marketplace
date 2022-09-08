@@ -2,12 +2,12 @@
 <goods>
     <good>
         <id>1323</id>
-        <name>Толстовка Ellesse SGI11014-BLACK</name>
-        <price>9490</price>
-        <info>Отличная толстовка из тёплой ткани</info>
+        <name>Кофта красная</name>
+        <price>1185</price>
+        <info>Состав: вискоза 68%, нейлон 27%, спандекс 5%</info>
         <counter>1</counter>
-        <category>Толстовки с капюшоном и свитера</category>
-        <brand>Ellesse</brand>
+        <category>Свитера и трикотаж</category>
+        <brand>AVAGURA</brand>
         <designer>Кристиан Диор</designer>
         <size>XS</size>
         <sex>Ж</sex>
@@ -16,12 +16,12 @@
     </good>
     <good>
         <id>12366</id>
-        <name>Сарафан BE YOU 7221-30030</name>
+        <name>Женская блузка</name>
         <price>3970</price>
-        <info>Хорошее яркое платье</info>
+        <info>Состав: акрил 100%</info>
         <counter>1</counter>
         <category>Свитера и трикотаж</category>
-        <brand>BE YOU</brand>
+        <brand>VOMNE</brand>
         <designer>Кристиан Диор</designer>
         <size>XL</size>
         <sex>Ж</sex>
@@ -30,12 +30,14 @@
     </good>
     <good>
         <id>655</id>
-        <name>Худи PUMA 84711404</name>
-        <price>5571</price>
-        <info>Отлично подходит для занятий спортом</info>
+        <name>Кофта женская в полоску</name>
+        <price>2181</price>
+        <info>Полоска актуальна и в сезон ВЕСНА ЛЕТО Мы создали для Вас новинку кофту женскую в полоску в самых
+            трендовых цветах классическом чернои и модном ярком синем или цвете электрик
+        </info>
         <counter>1</counter>
-        <category>Толстовки с капюшоном и свитера</category>
-        <brand>PUMA</brand>
+        <category>Свитера и трикотаж</category>
+        <brand>Delin</brand>
         <designer>Кристиан Диор</designer>
         <size>L</size>
         <sex>Ж</sex>
@@ -44,40 +46,43 @@
     </good>
     <good>
         <id>3456</id>
-        <name>Солнцезащитные очки FABRETTI N21059</name>
-        <price>1890</price>
-        <info>Солнцезащитные очки, Италия</info>
+        <name>Пиджак мужской классический</name>
+        <price>6633</price>
+        <info>Состав: вискоза 28%, полиэстер 34%, шерсть 35%, лайкра 3%</info>
         <counter>1</counter>
-        <category>Аксессуары</category>
-        <brand>FABRETTI</brand>
+        <category>Свитера и трикотаж</category>
+        <brand>Daniel Diaz</brand>
         <designer>Кристиан Диор</designer>
         <size>L</size>
-        <sex>Ж</sex>
+        <sex>М</sex>
         <sale>0</sale>
         <img>goods/good04.jpg</img>
     </good>
     <good>
         <id>987</id>
-        <name>Сумка кросс-боди Eleganzza Z8009-7469D</name>
-        <price>27930</price>
-        <info>Женская сумка торговой марки Eleganzza из натуральной кожи. Модель закрывается на металлическую молнию и содержит внутри одно отделение с карманом на молнии и одним открытым карманом. Высота ручки - 10 см. Длина наплечного ремня из натуральной кожи - 118 см., ширина - 1,5 см. Модель имеет ножки на дне. Не вмещает формат А4.</info>
+        <name>Мужские штаны карго</name>
+        <price>2573</price>
+        <info>Состав: полиэстер 65%, твил-хлопок 35%</info>
         <counter>1</counter>
-        <category>Сумки</category>
-        <brand>Eleganzza</brand>
+        <category>Брюки</category>
+        <brand>Jogger Street</brand>
         <designer>Джорджио Армани</designer>
         <size>L</size>
-        <sex>Ж</sex>
+        <sex>М</sex>
         <sale>1</sale>
         <img>goods/good05.jpg</img>
     </good>
     <good>
         <id>3244</id>
-        <name>Джинсы A passion play 172TR0053WH синие</name>
-        <price>4499</price>
-        <info>Удобные плотные джинсы для повседневной носки</info>
+        <name>Толстовка мужская с капюшоном</name>
+        <price>2090</price>
+        <info>Толстовка на молнии мужская и женские (унисекс) оверсайз Sella ST утепленная толстовка есть больших
+            размеров. Теплая изнанка с начесом делает ее идеальным решением для повседневной носки, двухслойный капюшон
+            на шнурке и карманом кенгуру толстовка большого размера толстовки с начесом
+        </info>
         <counter>1</counter>
-        <category>Джинсовая ткань</category>
-        <brand>A passion play</brand>
+        <category>Толстовки с капюшоном и свитера</category>
+        <brand>STELLA ST</brand>
         <designer>Джорджио Армани</designer>
         <size>L</size>
         <sex>М</sex>
@@ -86,26 +91,28 @@
     </good>
     <good>
         <id>465</id>
-        <name>Пальто Каляев 57426 серое</name>
-        <price>14299</price>
-        <info>Пальто на осенний и весенний сезоны</info>
+        <name>Толстовка мужская женская флисовая</name>
+        <price>3379</price>
+        <info>Флисовая толстовка в свободном стиле!Мягкая,комфортнаяи стильная!Такая одежда всегда в тренде и моде,тк
+            это отличная и удобная одежда на каждый день!
+        </info>
         <counter>1</counter>
-        <category>Куртки и пальто</category>
-        <brand>Каляев</brand>
+        <category>Толстовки с капюшоном и свитера</category>
+        <brand>21problem</brand>
         <designer>Иван Каляев</designer>
         <size>L</size>
-        <sex>Ж</sex>
+        <sex>М</sex>
         <sale>1</sale>
         <img>goods/good07-1.jpg</img>
     </good>
     <good>
         <id>345</id>
-        <name>Брюки Kanzler 2S-231BB-0707-14 синие</name>
-        <price>11549</price>
-        <info>Брюки, Италия</info>
+        <name>Пиджак мужской</name>
+        <price>7355</price>
+        <info>Состав: вискоза 30%, полиэстер 50%, акрил 20%</info>
         <counter>1</counter>
-        <category>Брюки</category>
-        <brand>Kanzler</brand>
+        <category>Куртки и пальто</category>
+        <brand>ROYALSPIRIT</brand>
         <designer>Джорджио Армани</designer>
         <size>L</size>
         <sex>М</sex>
@@ -114,12 +121,12 @@
     </good>
     <good>
         <id>34115</id>
-        <name>Футболка Не Готов к Труду и Обороне Dream Shirts черная</name>
-        <price>1368</price>
-        <info>Чёрная футболка с забавной надписью</info>
+        <name>Куртка мужская демисезонная</name>
+        <price>5516</price>
+        <info>Тёплая куртка из плотного материала</info>
         <counter>1</counter>
-        <category>Футболки</category>
-        <brand>Dream Shirts</brand>
+        <category>Куртки и пальто</category>
+        <brand>STARK MEN</brand>
         <designer>Иван Каляев</designer>
         <size>L</size>
         <sex>М</sex>
@@ -128,11 +135,14 @@
     </good>
     <good>
         <id>3411145</id>
-        <name>Шорты Bossa Nova серый</name>
+        <name>Футболка мужская хлопок</name>
         <price>849</price>
-        <info>Шорты детские</info>
+        <info>Мужская футболка из натурального хлопка прямого кроя, выполнена из качественного дышащего трикотажа
+            приятного к телу. За счет свободного кроя отлично подойдет как для занятий спортом, прогулок, поездок, так и
+            в качестве домашней одежды.
+        </info>
         <counter>1</counter>
-        <category>Шорты</category>
+        <category>Футболки</category>
         <brand>Bossa Nova</brand>
         <designer>Джорджио Армани</designer>
         <size>L</size>
@@ -142,12 +152,14 @@
     </good>
     <good>
         <id>34516</id>
-        <name>Мембранная обувь Котофей 754956</name>
-        <price>11549</price>
-        <info>Мембранная обувь, Россия</info>
+        <name>Бомбер мужской</name>
+        <price>4399</price>
+        <info>Куртка бомбер мужская отличный вариант верхней одежды на лето и осень 2022 года. Бомбер Hector выполнена
+            из высококачественных материалов
+        </info>
         <counter>1</counter>
-        <category>Обувь</category>
-        <brand>Котофей</brand>
+        <category>Куртки и пальто</category>
+        <brand>Hector</brand>
         <designer>Валентин Юдашкин</designer>
         <size>L</size>
         <sex>М</sex>
@@ -156,29 +168,29 @@
     </good>
     <good>
         <id>345363</id>
-        <name>Купальник раздельный Charmante WP</name>
-        <price>3790</price>
-        <info>Купальник, Германия</info>
+        <name>Футболка белая</name>
+        <price>259</price>
+        <info>Состав: Хлопок - 100%, плотность 180 гр./м2, производство: Россия</info>
         <counter>1</counter>
         <category>Футболки</category>
-        <brand>Charmante</brand>
+        <brand>UZcotton</brand>
         <designer>Джорджио Армани</designer>
         <size>L</size>
-        <sex>Ж</sex>
-        <sale>0</sale>
+        <sex>М</sex>
+        <sale>1</sale>
         <img>goods/good12.jpg</img>
     </good>
     <good>
         <id>32245</id>
-        <name>Купальник раздельный Concept Club 31204710248</name>
-        <price>999</price>
-        <info>Купальник, Германия</info>
+        <name>Футболка серая, хлопок</name>
+        <price>930</price>
+        <info>Состав: хлопок, лайкра</info>
         <counter>1</counter>
-        <category>Брюки</category>
-        <brand>Футболки</brand>
+        <category>Футболки</category>
+        <brand>WinSport</brand>
         <designer>Джорджио Армани</designer>
         <size>L</size>
-        <sex>Ж</sex>
+        <sex>М</sex>
         <sale>0</sale>
         <img>goods/good13.jpg</img>
     </good>

@@ -61,7 +61,7 @@
                     </div>
                     <div class="quanity__subblock">
                         <h3 class="summares__titles">КОЛИЧЕСТВО</h3>
-                        <div class="choose__size_summary_drop">{{ $count }}</div>
+                        <div class="choose__size_summary_drop">{{ $count }}шт.</div>
                     </div>
                 </div>
                 <div style="display: flex; justify-content: space-around">

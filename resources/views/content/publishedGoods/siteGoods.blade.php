@@ -46,7 +46,10 @@
                 </div>
 
             @empty
-                <td colspan="4">данные отсутствуют</td>
+                <div class="main_content center"
+                     style="width: 1px;height: 120px;">
+                    <div>данные отсутствуют</div>
+                </div>
             @endforelse
 
         </div>

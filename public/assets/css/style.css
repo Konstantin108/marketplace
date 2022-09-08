@@ -2675,7 +2675,7 @@ input[type=radio] {
 
 .material_and_designer {
     display: flex;
-    width: 334px;
+    width: 400px;
     justify-content: space-between;
 }
 
@@ -3029,6 +3029,10 @@ input[type=radio] {
     width: 130px;
 }
 
+.proba_standart_parameter2 {
+    width: 130px;
+}
+
 .proba_standart_parameter_top {
     display: flex;
     justify-content: center;
@@ -3051,6 +3055,15 @@ input[type=radio] {
 
 .line__shopping_other {
     height: 162px;
+    font-family: Lato;
+    font-size: 13px;
+    line-height: 20px;
+    font-weight: 400;
+    color: #656565;
+}
+
+.line__shopping_other2 {
+    padding-top: 10px;
     font-family: Lato;
     font-size: 13px;
     line-height: 20px;

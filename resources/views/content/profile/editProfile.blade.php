@@ -9,6 +9,7 @@
             <div class="alert alert-danger">{{session()->get('error')}}</div>
         @endif
     </nav>
+
     <div class="center" style="padding-left: 36%">
         <form method="post" action="{{ route('updateProfile') }}" enctype="multipart/form-data">
             @csrf

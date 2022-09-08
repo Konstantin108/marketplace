@@ -47,7 +47,6 @@
         </tr>
         </tbody>
     </table>
-
     <a href="{{route('backForGood', ['link' => $link, 'order_id' => $order_id])}}">Назад</a>
 
 @endsection

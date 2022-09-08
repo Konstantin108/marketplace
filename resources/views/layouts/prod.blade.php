@@ -9,19 +9,15 @@
     <script src="https://kit.fontawesome.com/4bd251a57a.js" crossorigin="anonymous"></script>
 </head>
 <body>
-<div class="wrapper">
-    <div class="top">
 
-        <x-header></x-header>
-        <x-prod-navigation></x-prod-navigation>
-        
-        <!-- Page content-->
-        @yield('content')
+<x-header></x-header>
+<x-prod-navigation></x-prod-navigation>
 
-    </div>
+<!-- Page content-->
+@yield('content')
 
-    <x-footer></x-footer>
-</div>
+<x-footer></x-footer>
+
 </body>
 </html>
 

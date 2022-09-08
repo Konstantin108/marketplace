@@ -10,8 +10,7 @@
         @endif
     </nav>
 
-
-    <div class="main_content center" style="padding-left: 36%">
+    <div class="main_content center" style="padding-left: 36%; margin-top: 30px;">
         <div style="display: flex; flex-direction: column; justify-content: center">
             <div style="display:flex;
                         justify-content: flex-start;
@@ -22,7 +21,7 @@
                 @else
                     <img src="/img/no_photo.jpg" alt="avatar" style="width: 200px;">
                 @endif
-                <div style="width: 300px;">
+                <div style="width: 300px; margin-left: 20px;">
                     <h4>Имя</h4>
                     <p style="margin-left: 50px;"> {{ $user->name }}</p>
                     <h4>Фамилия</h4>
@@ -38,5 +37,6 @@
                    href="{{route('siteIndex')}}">Назад</a>
             </div>
         </div>
+    </div>
 
 @endsection
