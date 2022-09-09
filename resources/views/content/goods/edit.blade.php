@@ -32,7 +32,7 @@
                                 <input type="button"
                                        id="clearImg"
                                        class="delete_icon_img"
-                                       style="position: absolute; left: 204px; top: 200px;"
+                                       style="position: absolute; left: 204px; top: 216px;"
                                 >
                                 <input type="hidden" value="" id="no_photo" name="no_photo">
                                 <script>
@@ -60,7 +60,7 @@
                         <input type="button"
                                id="clear"
                                class="delete_icon"
-                               style="position: absolute; left: 470px; top: 252px;"
+                               style="position: absolute; left: 470px; top: 266px;"
                         >
                         <script>
                             let control = document.querySelector(".img-file"),

@@ -2,7 +2,7 @@
 @section('content')
 
     <nav class="arrivals_product center">
-        <h2 class="arrivals_title">Мои заказы</h2>
+        <h2 class="arrivals_title">Заказ #{{ $order->id }}</h2>
         @if(session()->has('success'))
             <div class="alert alert-success">{{session()->get('success')}}</div>
         @elseif(session()->has('error'))
