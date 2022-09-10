@@ -809,7 +809,7 @@ button {
 }
 
 .block_beach {
-    background-image: url(img/bcg-beach.jpg);
+    background-image: url(../prod-images/bcg-beach.jpg);
     background-size: cover;
     background-repeat: no-repeat;
     min-height: 438px;
