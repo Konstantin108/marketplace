@@ -28,14 +28,14 @@ class BasketController extends Controller
                     'tableId' => $tableId,
                     'link' => 1,
                     'orderId' => 0
-                ])->with('success', 'Товар добавлен в корзину');
+                ])->with('success', 'Товар добавлен в корзину.');
             } elseif ($link == 2) {
                 return redirect()->route('myBasket')
-                    ->with('success', 'Товар добавлен в корзину');
+                    ->with('success', 'Товар добавлен в корзину.');
             }
         }
         return back()
-            ->with('error', 'Произошла ошибка');
+            ->with('error', 'Произошла ошибка!');
     }
 
     /**
@@ -62,14 +62,14 @@ class BasketController extends Controller
                     'tableId' => $tableId,
                     'link' => 1,
                     'orderId' => 0
-                ])->with('success', 'Товар удалён');
+                ])->with('success', 'Товар удалён!');
             } elseif ($link == 2) {
                 return redirect()->route('myBasket')
-                    ->with('success', 'Товар добавлен в корзину');
+                    ->with('success', 'Товар удалён!');
             }
         }
         return back()
-            ->with('error', 'Произошла ошибка');
+            ->with('error', 'Произошла ошибка!');
     }
 
     /**
@@ -152,10 +152,10 @@ class BasketController extends Controller
         Order::create($data);
         if ($data) {
             return redirect()->route('allMyOrders')
-                ->with('success', 'Заказ оформлен');
+                ->with('success', 'Заказ оформлен.');
         }
         return back()
-            ->with('error', 'Произошла ошибка');
+            ->with('error', 'Произошла ошибка!');
     }
 
     /**

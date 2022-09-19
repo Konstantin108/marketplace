@@ -93,7 +93,7 @@ class TaskController extends Controller
                 ->with('success', "Задача \"${data['task_name']}\" создана! Присвоен уникальный ключ: ${key}");
         }
         return back(['userId' => $userId])
-            ->with('error', 'Произошла ошибка');
+            ->with('error', 'Произошла ошибка!');
     }
 
     /**
@@ -112,7 +112,7 @@ class TaskController extends Controller
             $task['status'] = 'в работе';
             $task->save();
             $date = now();
-            $msg = "${date} - задача принята в работу, статус обновлён";
+            $msg = "${date} - задача принята в работу, статус обновлён.";
             return view('content/tasks/oneTask',
                 [
                     'task' => $task,
@@ -164,7 +164,7 @@ class TaskController extends Controller
             }
         }
         return back()
-            ->with('error', 'Произошла ошибка');
+            ->with('error', 'Произошла ошибка!');
     }
 
     /**
@@ -240,16 +240,16 @@ class TaskController extends Controller
             if ($link == '1') {
                 if (true) {
                     return redirect()->route('index', ['filter' => $filter])
-                        ->with('success', "Задача c ключом {$task['key']} удалена");
+                        ->with('success', "Задача c ключом {$task['key']} удалена!");
                 } else {
-                    return back()->with('error', 'Произошла ошибка');
+                    return back()->with('error', 'Произошла ошибка!');
                 }
             } elseif ($link == '2') {
                 if (true) {
                     return redirect()->route('myTasks', ['userId' => $userId])
-                        ->with('success', "Задача c ключом {$task['key']} удалена");
+                        ->with('success', "Задача c ключом {$task['key']} удалена!");
                 } else {
-                    return back()->with('error', 'Произошла ошибка');
+                    return back()->with('error', 'Произошла ошибка!');
                 }
             }
         }
@@ -259,6 +259,6 @@ class TaskController extends Controller
                 'link' => $link,
                 'filter' => $filter
             ])
-            ->with('success', 'ОШИБКА! удаление невозможно - задача имеет статус отличный от "новая" и/или создана другим пользователем');
+            ->with('success', 'ОШИБКА! удаление невозможно - задача имеет статус отличный от "новая" и/или создана другим пользователем.');
     }
 }

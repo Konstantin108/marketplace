@@ -1,72 +1,57 @@
-@extends('layouts.site')
+@extends('layouts.prod')
 @section('content')
 
-    @if(session()->has('success'))
-        {{session()->get('success')}}
-    @elseif(session()->has('error'))
-        {{session()->get('fail')}}
-    @endif
+    <nav class="arrivals_product center">
+        <h2 class="arrivals_title">каталог товаров</h2>
+        @if(session()->has('success'))
+            <div class="alert alert-success">{{session()->get('success')}}</div>
+        @elseif(session()->has('error'))
+            <div class="alert alert-danger">{{session()->get('error')}}</div>
+        @endif
+    </nav>
 
-    <table class="table table-bordered">
-        <h1>Список товаров</h1>
-        <thead style="border-bottom: 2px solid black; border-right: 1px solid black">
-        <tr style="border: 2px solid black">
-            <th style="border: 2px solid black">#ID</th>
-            <th style="border: 2px solid black; color: blue">LINK</th>
-            <th style="border: 2px solid black">ID товара</th>
-            <th style="border: 2px solid black">Наименование</th>
-            <th style="border: 2px solid black">Цена</th>
-            <th style="border: 2px solid black">Информация</th>
-            <th style="border: 2px solid black">Пол</th>
-            <th style="border: 2px solid black">Категория</th>
-            <th style="border: 2px solid black">Бренд</th>
-            <th style="border: 2px solid black">Дизайнер</th>
-            <th style="border: 2px solid black">Размер</th>
-            <th style="border: 2px solid black">Акция</th>
-            <th style="border: 2px solid black; width: 60px;">Фото</th>
-        </tr>
-        </thead>
-        <tbody>
-        @forelse($publishedGoods as $publishedGood)
-            <tr style="border-bottom: 2px solid black; border-right: 1px solid black">
-                <td style="border-bottom: 2px solid black; border-right: 1px solid black">{{ $publishedGood->id }}</td>
-                <td style="border-bottom: 2px solid black; border-right: 1px solid black">
-                    <a href="{{route('siteOneGood', [
+    <div class="main_content center">
+        <div class="products_sort ">
+
+            @forelse($publishedGoods as $publishedGood)
+                <div class="featured_link product_link">
+                    <div class="block__featured">
+                        <div class="block__self1">
+                            @if($publishedGood->img)
+                                <img src="{{ \Storage::disk('public')->url( $publishedGood->img) }}"
+                                     alt="img"
+                                     class="photo___1 product__photo"
+                                >
+                            @else
+                                <img src="img/no_photo.jpg"
+                                     alt="img"
+                                     class="photo___1 product__photo"
+                            @endif
+                            <a href="{{route('siteOneGood', [
                                                     'id' => $publishedGood->id,
                                                     'tableId' => $publishedGood->table_id,
                                                     'link' => 1,
                                                     'orderId' => 0
-                                                    ])}}">
-                        перейти
-                    </a>
-                </td>
-                <td style="border-bottom: 2px solid black; border-right: 1px solid black">
-                    {{ $publishedGood->table_id }}
-                </td>
-                <td style="border-bottom: 2px solid black; border-right: 1px solid black">{{ $publishedGood->name }}</td>
-                <td style="border-bottom: 2px solid black; border-right: 1px solid black">{{ $publishedGood->price }}
-                    &#8381;
-                </td>
-                <td style="border-bottom: 2px solid black; border-right: 1px solid black">{{ $publishedGood->info }}</td>
-                <td style="border-bottom: 2px solid black; border-right: 1px solid black">{{ $publishedGood->sex }}</td>
-                <td style="border-bottom: 2px solid black; border-right: 1px solid black">{{ $publishedGood->category }}</td>
-                <td style="border-bottom: 2px solid black; border-right: 1px solid black">{{ $publishedGood->brand }}</td>
-                <td style="border-bottom: 2px solid black; border-right: 1px solid black">{{ $publishedGood->designer }}</td>
-                <td style="border-bottom: 2px solid black; border-right: 1px solid black">{{ $publishedGood->size }}</td>
-                <td style="border-bottom: 2px solid black; border-right: 1px solid black">{{ $publishedGood->sale }}</td>
-                <td style="width: 60px; border-bottom: 2px solid black; border-right: 1px solid black">
-                    @if($publishedGood->img)
-                        <img src="{{ \Storage::disk('public')->url( $publishedGood->img) }}" alt="avatar"
-                             style="width: 50px; border-radius: 50%">
-                    @else
-                        <img src="/img/no_photo.jpg" alt="avatar" style="width: 50px; border-radius: 50%">
-                    @endif
-                </td>
-            </tr>
-        @empty
-            <td colspan="4">данные отсутствуют</td>
-        @endforelse
-        </tbody>
-    </table>
+                                                    ])}}" class="cart__hover">
+                                <img src="{{asset('assets/prod-images/cart_hover.svg')}}"
+                                     alt="cart_hover_img"
+                                     class="cart_hover_img"
+                                >
+                                <p class="hover_text">Перейти</p>
+                            </a>
+                        </div>
+                        <p class="featured_text">{{ $publishedGood->name }}</p>
+                        <p class="featured_text2">{{ $publishedGood->price }}&#8381;</p>
+                    </div>
+                </div>
 
+            @empty
+                <div class="main_content center"
+                     style="width: 1px;height: 120px;">
+                    <div>данные отсутствуют</div>
+                </div>
+            @endforelse
+
+        </div>
+    </div>
 @endsection

@@ -1,6 +1,12 @@
 @extends('layouts.main')
 @section('content')
 
+    @if(session()->has('success'))
+        <div class="alert alert-success">{{session()->get('success')}}</div>
+    @elseif(session()->has('error'))
+        <div class="alert alert-danger">{{session()->get('error')}}</div>
+    @endif
+
     <table class="table table-bordered">
         <h1>Список опубликованных товаров</h1>
         <thead style="border-bottom: 2px solid black; border-right: 1px solid black">
@@ -25,7 +31,11 @@
             <tr style="border-bottom: 2px solid black; border-right: 1px solid black">
                 <td style="border-bottom: 2px solid black; border-right: 1px solid black">{{ $publishedGood->id }}</td>
                 <td style="border-bottom: 2px solid black; border-right: 1px solid black">
-                    <a href="{{route('oneGood', ['id' => $publishedGood->id])}}">
+                    <a href="{{route('oneGood', [
+                            'id' => $publishedGood->id,
+                            'link' => 1,
+                            'order_id' => 0
+                            ])}}">
                         перейти
                     </a>
                 </td>
@@ -33,7 +43,9 @@
                     {{ $publishedGood->table_id }}
                 </td>
                 <td style="border-bottom: 2px solid black; border-right: 1px solid black">{{ $publishedGood->name }}</td>
-                <td style="border-bottom: 2px solid black; border-right: 1px solid black">{{ $publishedGood->price }}&#8381;</td>
+                <td style="border-bottom: 2px solid black; border-right: 1px solid black">{{ $publishedGood->price }}
+                    &#8381;
+                </td>
                 <td style="border-bottom: 2px solid black; border-right: 1px solid black">{{ $publishedGood->info }}</td>
                 <td style="border-bottom: 2px solid black; border-right: 1px solid black">{{ $publishedGood->sex }}</td>
                 <td style="border-bottom: 2px solid black; border-right: 1px solid black">{{ $publishedGood->category }}</td>

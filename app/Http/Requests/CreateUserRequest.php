@@ -26,14 +26,26 @@ class CreateUserRequest extends FormRequest
         return [
             'name' => [
                 'required',
+                'string',
+                'max:30'
             ],
-            'password' => [
+            'surname' => [
                 'required',
-                'min:8',
+                'string',
+                'max:30'
             ],
             'email' => [
                 'required',
-                'unique:users,email'
+                'unique:users',
+                'string',
+                'email',
+                'max:30'
+            ],
+            'password' => [
+                'confirmed',
+                'string',
+                'nullable',
+                'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^\w\s]).{8,}/',
             ]
         ];
     }
@@ -41,9 +53,11 @@ class CreateUserRequest extends FormRequest
     public function messages()
     {
         return [
-            'required' => 'Не оставляйте это поле пустым',
-            'min' => 'Пароль должен состоять минимум из 8 символов',
-            'unique' => 'Этот электронный адрес уже занят'
+            'required' => 'Не оставляйте это поле пустым.',
+            'unique' => 'Пользователь с таким email адресом уже зарегистрирован.',
+            'max' => 'Превышено максимальное значение.',
+            'password.regex' => 'Пароль должен быть не короче 8 символов, содержать строчные и заглавные буквы латинского алфавита, цифры и спец. символы.',
+            'confirmed' => 'Пароли не совпадают.'
         ];
     }
 }

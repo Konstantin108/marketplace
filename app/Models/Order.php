@@ -21,6 +21,11 @@ class Order extends Model
     ];
 
     /**
+     * @var string
+     */
+    protected $dateFormat = 'Y-m-d';
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function user(){

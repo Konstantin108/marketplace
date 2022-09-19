@@ -30,14 +30,19 @@ class GoodController extends Controller
      * Display the specified resource.
      *
      * @param int $id
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function deleteGood(int $id): \Illuminate\Contracts\View\View|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\Foundation\Application
+    public function deleteGood(int $id): \Illuminate\Http\RedirectResponse
     {
         $good = Good::findOrFail($id);
         $good->delete();
         $goods = Good::select()->get();
-        return view('content/goods/goods', ['goods' => $goods]);
+        if ($good) {
+            return redirect()->route('goods', ['goods' => $goods])
+                ->with('success', 'Товар удалён!');
+        }
+        return back()
+            ->with('error', 'Произошла ошибка!');
     }
 
     /**
@@ -87,10 +92,10 @@ class GoodController extends Controller
         $good = Good::create($data);
         if ($good) {
             return redirect()->route('goods')
-                ->with('success', 'Данные о товаре добавлены');
+                ->with('success', 'Данные о товаре добавлены.');
         }
         return back()
-            ->with('error', 'Произошла ошибка');
+            ->with('error', 'Произошла ошибка!');
     }
 
     public function publishedGoods()
@@ -154,13 +159,14 @@ class GoodController extends Controller
      */
     public function update(GoodRequest $request, int $id): \Illuminate\Http\RedirectResponse
     {
+        $good = Good::findOrFail($id);
         $data = $request->validated();
         $data['price'] = $request->get('price');
         $data['info'] = $request->get('info');
         $data['counter'] = $request->get('counter');
         $data['brand'] = $request->get('brand');
         $data['designer'] = $request->get('designer');
-        $data['img'] = $request->get('img');
+
         if ($request->hasFile('img')) {
             $image = $request->file('img');
             $originalExt = $image->getClientOriginalExtension();
@@ -168,13 +174,16 @@ class GoodController extends Controller
             $fileLink = $image->storeAs('goods', $fileName . '.' . $originalExt, 'public');
             $data['img'] = $fileLink;
         }
-        $good = Good::findOrFail($id);
+        if (!$request->hasFile('img') && $request->post('no_photo')) {
+//            Storage::disk('public')->delete($good->img);     //<-- не удаляю фото из папки для товаров, так как эти же фото могут
+            $data['img'] = '';                                  //быть использованы при парсинге
+        }
         $good = $good->fill($data)->save();
         if ($good) {
             return redirect()->route('showGood', ['id' => $id])
-                ->with('success', 'Данные о товаре обновлены');
+                ->with('success', 'Данные о товаре обновлены.');
         }
         return back()
-            ->with('error', 'Произошла ошибка');
+            ->with('error', 'Произошла ошибка!');
     }
 }

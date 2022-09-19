@@ -2,9 +2,9 @@
 @section('content')
 
     @if(session()->has('success'))
-        {{session()->get('success')}}
+        <div class="alert alert-success">{{session()->get('success')}}</div>
     @elseif(session()->has('error'))
-        {{session()->get('fail')}}
+        <div class="alert alert-danger">{{session()->get('error')}}</div>
     @endif
 
     <table class="table table-bordered">
@@ -15,6 +15,7 @@
             <th style="border: 2px solid black">#ID</th>
             <th style="border: 2px solid black; width: 60px;">Аватар</th>
             <th style="border: 2px solid black">Имя</th>
+            <th style="border: 2px solid black">Фамилия</th>
             <th style="border: 2px solid black">Почта</th>
             <th style="border: 2px solid black">Права админа</th>
         </tr>
@@ -33,6 +34,9 @@
             <td style="border-bottom: 2px solid black; border-right: 1px solid black">
                 {{ $user->name }}
             </td>
+            <td style="border-bottom: 2px solid black; border-right: 1px solid black">
+                {{ $user->surname }}
+            </td>
             <td style="border-bottom: 2px solid black; border-right: 1px solid black">{{ $user->email }}</td>
             <td style="border-bottom: 2px solid black; border-right: 1px solid black">
                 @if($user->is_admin)
@@ -45,9 +49,8 @@
         </tbody>
     </table>
     @if(!$user->is_admin)
-        <a href="{{ route('editUser', ['id' => $user->id]) }}">Редактировать</a>
-        <a href="{{route('deleteUser', ['id' => $user->id])}}">Удалить</a>
+        <a href="{{ route('editUser', ['id' => $user->id, 'link' => $link, 'order_id' => $order_id]) }}">Редактировать</a>
+        <a href="{{route('deleteUser', ['id' => $user->id, 'link' => $link])}}">Удалить</a>
     @endif
-    <a href="{{route('users')}}">Назад</a>
-
+    <a href="{{route('backForUser', ['link' => $link, 'order_id' => $order_id])}}">Назад</a>
 @endsection

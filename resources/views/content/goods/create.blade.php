@@ -10,9 +10,24 @@
                 @endif
                 <form method="post" action="{{ route('storeGood') }}" enctype="multipart/form-data">
                     @csrf
-                    <div class="form-group">
+                    <div class="form-group" style=" width: 494px; position: relative">
                         <label for="img">Изображение товара</label>
-                        <input type="file" id="img" name="img" class="form-control" style="width: 500px;">
+                        <input type="file" id="img" name="img" class="form-control img-file" style="width: 500px;">
+                        <input type="button"
+                               id="clear"
+                               class="delete_icon"
+                               style="position: absolute; left: 470px; top: 33px;"
+                        >
+                        <script>
+                            let control = document.querySelector(".img-file"),
+                                clearBn = document.querySelector("#clear");
+                            clearBn.addEventListener("click", function () {
+                                control.value = '';
+                                let newControl = control.cloneNode(true)
+                                control.replaceWith(newControl);
+                                control = newControl;
+                            });
+                        </script>
                     </div>
                     <div
                         style="display: flex; justify-content: space-between; width: 400px; border-bottom: 2px solid grey; margin-bottom: 2px;">
@@ -250,5 +265,14 @@
             </div>
         </div>
     </div>
+    <style>
+        .delete_icon {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border-style: none;
+            background: url({{ asset('assets/guest-layout/img/delete_icon.svg') }}) 0 0 no-repeat;
+        }
+    </style>
 
 @endsection

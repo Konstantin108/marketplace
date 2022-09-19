@@ -1,6 +1,12 @@
 @extends('layouts.main')
 @section('content')
 
+    @if(session()->has('success'))
+        <div class="alert alert-success">{{session()->get('success')}}</div>
+    @elseif(session()->has('error'))
+        <div class="alert alert-danger">{{session()->get('error')}}</div>
+    @endif
+
     <div class="col-12">
         <div class="row">
             <div class="col-6 offset-2">
@@ -8,9 +14,11 @@
                 @if($errors->any())
                     <div class="alert alert-danger">Необходимо заполнить все поля</div>
                 @endif
-                <form method="post" action="{{ route('update', ['id' => $good->id]) }}" enctype="multipart/form-data">
+                <form method="post"
+                      action="{{ route('update', ['id' => $good->id]) }}"
+                      enctype="multipart/form-data">
                     @csrf
-                    <div class="form-group">
+                    <div class="form-group" style=" width: 494px; position: relative">
                         <label for="img">Изображение товара</label>
                         <div style="width: 300px;
                                 display:flex;
@@ -19,13 +27,51 @@
                         >
                             @if($good->img)
                                 <img src="{{ \Storage::disk('public')->url( $good->img) }}" alt="img"
+                                     class="avatar-img"
                                      style="width: 200px;">
-                                <input type="hidden" id="img" name="img" value="{{ $good->img }}">
+                                <input type="button"
+                                       id="clearImg"
+                                       class="delete_icon_img"
+                                       style="position: absolute; left: 204px; top: 216px;"
+                                >
+                                <input type="hidden" value="" id="no_photo" name="no_photo">
+                                <script>
+                                    let controlImg = document.querySelector(".avatar-img"),
+                                        noPhoto = document.querySelector("#no_photo"),
+                                        clearBnImg = document.querySelector("#clearImg");
+                                    clearBnImg.addEventListener("click", function () {
+
+
+
+                                        noPhoto.value = 'no_photo';
+                                        controlImg.src = '/img/no_photo.jpg';
+                                        control.value = '';
+                                        let newControlImg = controlImg.cloneNode(true)
+                                        controlImg.replaceWith(newControl);
+                                        controlImg = newControlImg;
+                                    });
+                                </script>
                             @else
                                 <img src="/img/no_photo.jpg" alt="img" style="width: 200px;">
                             @endif
                         </div>
-                        <input type="file" id="img" name="img" class="form-control" style="width: 500px;">
+
+                        <input type="file" id="img" name="img" class="form-control img-file" style="width: 500px;">
+                        <input type="button"
+                               id="clear"
+                               class="delete_icon"
+                               style="position: absolute; left: 470px; top: 266px;"
+                        >
+                        <script>
+                            let control = document.querySelector(".img-file"),
+                                clearBn = document.querySelector("#clear");
+                            clearBn.addEventListener("click", function () {
+                                control.value = '';
+                                let newControl = control.cloneNode(true)
+                                control.replaceWith(newControl);
+                                control = newControl;
+                            });
+                        </script>
                     </div>
                     <input type="hidden"
                            id="table_id"
@@ -252,5 +298,22 @@
             </div>
         </div>
     </div>
+    <style>
+        .delete_icon {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border-style: none;
+            background: url({{ asset('assets/guest-layout/img/delete_icon.svg') }}) 0 0 no-repeat;
+        }
+
+        .delete_icon_img {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border-style: none;
+            background: url({{ asset('assets/guest-layout/img/delete_icon.svg') }}) 0 0 no-repeat;
+        }
+    </style>
 
 @endsection

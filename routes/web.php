@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\BasketController;
+use App\Http\Controllers\ChartController;
 use App\Http\Controllers\GoodController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ParserController;
@@ -27,6 +28,10 @@ Route::group(['middleware' => 'auth'], function () {
 
 //Роуты для админов
     Route::group(['middleware' => 'admin'], function () {
+
+        //Роуты для работы с графиками
+        Route::get('showCharts', [ChartController::class, 'showCharts'])
+            ->name('showCharts');
 
         //Роуты для работы с тасками
         Route::get('/create', [TaskController::class, 'create'])
@@ -78,6 +83,22 @@ Route::group(['middleware' => 'auth'], function () {
             ->where('filter', '\d+')
             ->name('destroy');
 
+        //Роуты админа для работы с заказами
+        Route::get('allOrders', [OrderController::class, 'allOrders'])
+            ->name('allOrders');
+
+        Route::get('getOrder/{id}', [OrderController::class, 'getOrder'])
+            ->where('id', '\d+')
+            ->name('getOrder');
+
+        Route::get('deleteOrder/{id}', [OrderController::class, 'deleteOrder'])
+            ->where('id', '\d+')
+            ->name('deleteOrder');
+
+        Route::post('updateOrderStatusByAdmin/{id}', [OrderController::class, 'updateOrderStatusByAdmin'])
+            ->where('id', '\d+')
+            ->name('updateOrderStatusByAdmin');
+
         //Роуты парсинга
         Route::get('/parsing', ParserController::class)
             ->name('parsing');;
@@ -115,31 +136,50 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('showPublishedGoods', [GoodController::class, 'showPublishedGoods'])
             ->name('showPublishedGoods');
 
-        Route::get('oneGood/{id}', [PublishedGoodController::class, 'oneGood'])
+        Route::get('backForGood/{link}/{order_id}', [PublishedGoodController::class, 'backForGood'])
+            ->where('link', '\d+')
+            ->where('order_id', '\d+')
+            ->name('backForGood');
+
+        Route::get('oneGood/{id}/{link}/{order_id}', [PublishedGoodController::class, 'oneGood'])
             ->where('id', '\d+')
+            ->where('link', '\d+')
+            ->where('order_id', '\d+')
             ->name('oneGood');
 
         //Роуты для работы с пользователями
         Route::get('users', [UserController::class, 'users'])
             ->name('users');
 
-        Route::get('user/{id}', [UserController::class, 'user'])
+        Route::get('user/{id}/{link}/{order_id}', [UserController::class, 'user'])
             ->where('id', '\d+')
+            ->where('link', '\d+')
+            ->where('order_id', '\d+')
             ->name('user');
 
-        Route::get('deleteUser/{id}', [UserController::class, 'deleteUser'])
+        Route::get('backForUser/{link}/{order_id}', [UserController::class, 'backForUser'])
+            ->where('link', '\d+')
+            ->where('order_id', '\d+')
+            ->name('backForUser');
+
+        Route::get('deleteUser/{id}/{link}', [UserController::class, 'deleteUser'])
             ->where('id', '\d+')
+            ->where('link', '\d+')
             ->name('deleteUser');
 
-        Route::get('editUser/{id}', [UserController::class, 'editUser'])
+        Route::get('editUser/{id}/{link}/{order_id}', [UserController::class, 'editUser'])
             ->where('id', '\d+')
+            ->where('link', '\d+')
+            ->where('order_id', '\d+')
             ->name('editUser');
 
         Route::get('createUser', [UserController::class, 'createUser'])
             ->name('createUser');
 
-        Route::post('updateUser/{id}', [UserController::class, 'updateUser'])
+        Route::post('updateUser/{id}/{link}/{order_id}', [UserController::class, 'updateUser'])
             ->where('id', '\d+')
+            ->where('link', '\d+')
+            ->where('order_id', '\d+')
             ->name('updateUser');
 
         Route::post('storeUser', [UserController::class, 'storeUser'])
@@ -206,6 +246,9 @@ Route::get('backForSite/{link}/{orderId}', [BasketController::class, 'backForSit
     ->where('link', '\d+')
     ->where('orderId', '\d+')
     ->name('backForSite');
+
+Route::get('getPromo', [PublishedGoodController::class, 'getPromo'])
+    ->name('getPromo');
 
 //Роуты для работы с сессией для удобства пока в контроллере BasketController
 Route::get('showSession', [BasketController::class, 'showSession'])

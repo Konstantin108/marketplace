@@ -2,9 +2,9 @@
 @section('content')
 
     @if(session()->has('success'))
-        {{session()->get('success')}}
+        <div class="alert alert-success">{{session()->get('success')}}</div>
     @elseif(session()->has('error'))
-        {{session()->get('fail')}}
+        <div class="alert alert-danger">{{session()->get('error')}}</div>
     @endif
 
     <table class="table table-bordered">
@@ -17,6 +17,7 @@
             <th style="border: 2px solid black; width: 60px;">Аватар</th>
             <th style="border: 2px solid black; color: blue">LINK</th>
             <th style="border: 2px solid black">Имя</th>
+            <th style="border: 2px solid black">Фамилия</th>
             <th style="border: 2px solid black">Почта</th>
             <th style="border: 2px solid black">Права админа</th>
         </tr>
@@ -34,12 +35,15 @@
                     @endif
                 </td>
                 <td style="border-bottom: 2px solid black; border-right: 1px solid black">
-                    <a href="{{route('user', ['id' => $user->id])}}">
+                    <a href="{{route('user', ['id' => $user->id, 'link' => 1, 'order_id' => 0])}}">
                         перейти
                     </a>
                 </td>
                 <td style="border-bottom: 2px solid black; border-right: 1px solid black">
                     {{ $user->name }}
+                </td>
+                <td style="border-bottom: 2px solid black; border-right: 1px solid black">
+                    {{ $user->surname }}
                 </td>
                 <td style="border-bottom: 2px solid black; border-right: 1px solid black">{{ $user->email }}</td>
                 <td style="border-bottom: 2px solid black; border-right: 1px solid black">
