@@ -16,36 +16,36 @@
                 </a>
             </li>
         </ul>
-        <span style="position: relative; width: 150px;height: 50px;">
+        <div style="position: relative; width: 150px;height: 50px; cursor: pointer">
             <span class="button" id="accountBtn">
                 @if(Auth::check())
-                 {{ Auth::user()->name }}
+                    {{ Auth::user()->name }}
                 @else
                     Авторизуйтесь
                 @endif
             </span>
             <div class="drop__cart" id="accountDropMenu" style="position: absolute; display: none">
                 @if(Auth::check())
-                <div class="drop__flex">
-                    <ul class="drop__il">
-                        <li class="drop__list drop__list_cart">
-                            <a class="dropdown-item"
-                               href="{{ route('myProfile', ['id' => Auth::user()->id]) }}">
-                                {{ __('Профиль') }}
-                            </a>
-                        </li>
-                        <li class="drop__list drop__list_cart">
-                            <a class="dropdown-item" href="{{ route('logout') }}"
-                               onclick="event.preventDefault();
+                    <div class="drop__flex">
+                        <ul class="drop__il">
+                            <li class="drop__list drop__list_cart">
+                                <a class="dropdown-item"
+                                   href="{{ route('myProfile', ['id' => Auth::user()->id]) }}">
+                                    {{ __('Профиль') }}
+                                </a>
+                            </li>
+                            <li class="drop__list drop__list_cart">
+                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                   onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                {{ __('Выход') }}
-                            </a>
-                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                @csrf
-                            </form>
-                        </li>
-                    </ul>
-                </div>
+                                    {{ __('Выход') }}
+                                </a>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
                 @else
                     <div class="drop__flex">
                         <ul class="drop__il">

@@ -1,13 +1,13 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
     <div class="container-fluid">
-        <button class="btn btn-primary" id="sidebarToggle">Меню</button>
+        <button style="margin-right: 12px;" class="btn btn-primary" id="sidebarToggle">Меню</button>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                 aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span>
         </button>
-        <a href="{{ route('siteIndex') }}">Главная</a>
-        <a href="{{ route('myBasket') }}">Корзина</a>
-        <a href="{{ route('allMyOrders') }}">Мои заказы</a>
+        <a style="margin-right: 12px;" href="{{ route('siteIndex') }}">Главная</a>
+        <a style="margin-right: 12px;" href="{{ route('myBasket') }}">Корзина</a>
+        <a style="margin-right: 12px;" href="{{ route('allMyOrders') }}">Мои заказы</a>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             @if(Auth::check())
                 <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
